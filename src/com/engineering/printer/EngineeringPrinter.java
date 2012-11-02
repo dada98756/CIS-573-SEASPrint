@@ -83,9 +83,9 @@ public class EngineeringPrinter extends Activity {
         InputStream is = null;
         
         try {
-        	System.out.println("Try to get data");
+        	System.out.println("Try to get data initial");
         	if (null != getIntent().getData()) {
-	            System.out.println("Getting data");
+	            System.out.println("Getting data initial");
         		is = getContentResolver().openInputStream(getIntent().getData());
 		        Document.load(is);
 		        Document.setDescriptor(getIntent().getData());
