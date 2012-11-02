@@ -143,12 +143,7 @@ public class PrinterSelectScreen extends Activity{
 	        String printers[] = null;
 	        boolean has_favored = false;
 	        try {
-	            //InputStream is = getContentResolver().openInputStream(getIntent().getData());
 	        	Log.d("Connection", "Start Connecting");
-//	        	if(EngineeringPrinter.connect==null){
-//	        		Intent myIntent = new Intent(this, EngineeringPrinter.class);
-//		             startActivityForResult(myIntent, 0);
-//	        	}
 	            PrintCaller pc = new PrintCaller(new CommandConnection(EngineeringPrinter.connect));
 	            List<String> ps = pc.getPrinters();
 	            printers = new String[ps.size()];

@@ -113,7 +113,7 @@ public class EngineeringPrinter extends Activity {
     	printing.setText(Document.descriptor);
     	
     	//microsoft.setText(type + " " +(Microsoft  ? "Microsoft" : "Not Microsoft") );
-//    	microsoft.setText("Please Log in");
+    	microsoft.setText("Please Log in");
     	//connect.close();
         connect=null;
         /*try {
