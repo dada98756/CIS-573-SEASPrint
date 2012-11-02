@@ -80,6 +80,20 @@ public class EngineeringPrinter extends Activity {
 //        Microsoft = MicrosoftSink.Filter(getIntent().getType());
 //        type = getIntent().getType();
 //        
+        InputStream is = null;
+        try {
+        	if (null != getIntent().getData()) {
+	            is = getContentResolver().openInputStream(getIntent().getData());
+		        Document.load(is);
+		        Document.setDescriptor(getIntent().getData());
+		          EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
+		          EngineeringPrinter.type = getIntent().getType();
+        	}
+
+        }
+        catch  (FileNotFoundException fnf){
+            Log.e("Connection","File Not Found");
+        }
         eb = new ErrorCallback(this);
         
     }
@@ -95,7 +109,8 @@ public class EngineeringPrinter extends Activity {
 
     	printing.setText(Document.descriptor);
     	
-    	microsoft.setText(type + " " +(Microsoft  ? "Microsoft" : "Not Microsoft") );
+    	//microsoft.setText(type + " " +(Microsoft  ? "Microsoft" : "Not Microsoft") );
+    	microsoft.setText("Please Log in");
     	//connect.close();
         connect=null;
         /*try {

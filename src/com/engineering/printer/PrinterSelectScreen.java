@@ -69,63 +69,66 @@ public class PrinterSelectScreen extends Activity{
 	
 	 public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
+	        System.out.println("In onCreate of PrinterSelectScreen");
+//	        InputStream is = null;
+//	        try {
+//	        	if (null != getIntent().getData()) {
+//		            is = getContentResolver().openInputStream(getIntent().getData());
+//			        Document.load(is);
+//			        Document.setDescriptor(getIntent().getData());
+//			          EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
+//			          EngineeringPrinter.type = getIntent().getType();
+//	        	}
+//
+//	        }
+//	        catch  (FileNotFoundException fnf){
+//	            Log.e("Connection","File Not Found");
+//	        }
+
 	        
-	        InputStream is = null;
-	        try {
-	        	if (null != getIntent().getData()) {
-		            is = getContentResolver().openInputStream(getIntent().getData());
-			        Document.load(is);
-			        Document.setDescriptor(getIntent().getData());
-			          EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
-			          EngineeringPrinter.type = getIntent().getType();
-
-	        	}
-
-	        }
-	        catch  (FileNotFoundException fnf){
-	            Log.e("Connection","File Not Found");
-	        }
-
-	        
-	       SharedPreferences settings = getSharedPreferences(PRINTER_PREF, 0);
-	       mFavored = settings.getString(PRINTER_KEY, null);
-	       if (mFavored == null) {
-	           mFavored = "169";
-	       }
-	       
-	       SharedPreferences conn_set = getSharedPreferences(EngineeringPrinter.PREFS_NAME, MODE_PRIVATE);
-	        if (conn_set.contains(EngineeringPrinter.PASSWORD_KEY)) {
-	        	if (conn_set.contains(EngineeringPrinter.KEY_KEY) &&
-	 	    		conn_set.contains(EngineeringPrinter.HOST_KEY) &&
-		    		conn_set.contains(EngineeringPrinter.PORT_KEY)) {
-	        			String key = (new AuthSetup(conn_set.getString(EngineeringPrinter.USER_KEY, ""),
-	    			   conn_set.getString(EngineeringPrinter.PASSWORD_KEY, ""), 
-	    			   conn_set.getString(EngineeringPrinter.HOST_KEY, ""), 
-	    			   Integer.valueOf(conn_set.getString(EngineeringPrinter.PORT_KEY,EngineeringPrinter.PORT_FAIL)))).keyGen();
-	        			conn_set.edit().putString(EngineeringPrinter.KEY_KEY, key).commit();
-	        	}
-	        	conn_set.edit().remove(EngineeringPrinter.PASSWORD_KEY).commit();
-	        }
-	       if (!conn_set.contains(EngineeringPrinter.USER_KEY) ||
-	    		   !conn_set.contains(EngineeringPrinter.KEY_KEY) || 
-	    		   !conn_set.contains(EngineeringPrinter.HOST_KEY) ||
-	    		   !conn_set.contains(EngineeringPrinter.PORT_KEY)){
-	         	 Intent myIntent = new Intent(this, EngineeringPrinter.class);
-	             startActivityForResult(myIntent, 0);
-	       }
-	       else {
-	    	   try {
-	    	   EngineeringPrinter.connect = (new ConnectionFactory()).MakeConnectionKey(
-	    			   conn_set.getString(EngineeringPrinter.USER_KEY, ""),
-	    			   conn_set.getString(EngineeringPrinter.KEY_KEY, ""), 
-	    			   conn_set.getString(EngineeringPrinter.HOST_KEY, ""), 
-	    			   Integer.valueOf(conn_set.getString(EngineeringPrinter.PORT_KEY,EngineeringPrinter.PORT_FAIL)));
-	    	   }
-	    	   catch (IOException e) {
-		         	 Intent myIntent = new Intent(this, EngineeringPrinter.class);
-		             startActivityForResult(myIntent, 0);
-	    	   }
-	       }
+//	       SharedPreferences settings = getSharedPreferences(PRINTER_PREF, 0);
+//	       mFavored = settings.getString(PRINTER_KEY, null);
+//	       if (mFavored == null) {
+//	           mFavored = "169";
+//	       }
+//	       
+//	       SharedPreferences conn_set = getSharedPreferences(EngineeringPrinter.PREFS_NAME, MODE_PRIVATE);
+//	        if (conn_set.contains(EngineeringPrinter.PASSWORD_KEY)) {
+//	        	System.out.println("Password_key exists");
+//	        	if (conn_set.contains(EngineeringPrinter.KEY_KEY) &&
+//	 	    		conn_set.contains(EngineeringPrinter.HOST_KEY) &&
+//		    		conn_set.contains(EngineeringPrinter.PORT_KEY)) {
+//	        			String key = (new AuthSetup(conn_set.getString(EngineeringPrinter.USER_KEY, ""),
+//	    			   conn_set.getString(EngineeringPrinter.PASSWORD_KEY, ""), 
+//	    			   conn_set.getString(EngineeringPrinter.HOST_KEY, ""), 
+//	    			   Integer.valueOf(conn_set.getString(EngineeringPrinter.PORT_KEY,EngineeringPrinter.PORT_FAIL)))).keyGen();
+//	        			Log.d("key", key);
+//	        			conn_set.edit().putString(EngineeringPrinter.KEY_KEY, key).commit();
+//	        	}
+//	        	conn_set.edit().remove(EngineeringPrinter.PASSWORD_KEY).commit();
+//	        }
+//	       if (!conn_set.contains(EngineeringPrinter.USER_KEY) ||
+//	    		   !conn_set.contains(EngineeringPrinter.KEY_KEY) || 
+//	    		   !conn_set.contains(EngineeringPrinter.HOST_KEY) ||
+//	    		   !conn_set.contains(EngineeringPrinter.PORT_KEY)){
+//	    	   System.out.println("Going to take input");
+//	         	 Intent myIntent = new Intent(this, EngineeringPrinter.class);
+//	             startActivity(myIntent);
+//	       }
+//	       else {
+//	    	   try {
+//	    	   EngineeringPrinter.connect = (new ConnectionFactory()).MakeConnectionKey(
+//	    			   conn_set.getString(EngineeringPrinter.USER_KEY, ""),
+//	    			   conn_set.getString(EngineeringPrinter.KEY_KEY, ""), 
+//	    			   conn_set.getString(EngineeringPrinter.HOST_KEY, ""), 
+//	    			   Integer.valueOf(conn_set.getString(EngineeringPrinter.PORT_KEY,EngineeringPrinter.PORT_FAIL)));
+//	    	   System.out.println("12134");
+//	    	   }
+//	    	   catch (IOException e) {
+//		         	 Intent myIntent = new Intent(this, EngineeringPrinter.class);
+//		             startActivityForResult(myIntent, 0);
+//	    	   }
+//	       }
 	 }
 	 
 	 public void onStop() {
@@ -146,6 +149,10 @@ public class PrinterSelectScreen extends Activity{
 	        try {
 	            //InputStream is = getContentResolver().openInputStream(getIntent().getData());
 	        	Log.d("Connection", "Start Connecting");
+//	        	if(EngineeringPrinter.connect==null){
+//	        		Intent myIntent = new Intent(this, EngineeringPrinter.class);
+//		             startActivityForResult(myIntent, 0);
+//	        	}
 	            PrintCaller pc = new PrintCaller(new CommandConnection(EngineeringPrinter.connect));
 	            List<String> ps = pc.getPrinters();
 	            printers = new String[ps.size()];
