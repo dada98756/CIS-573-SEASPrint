@@ -202,7 +202,8 @@ public class EngineeringPrinter extends Activity {
             			new AlertDialog.Builder(v.getContext()).setMessage("Could not connect to server! Verify login information and network status.").create().show();
             			return;
             		}
-            		Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
+            		//Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
+            		Intent myIntent = new Intent(v.getContext(), FilePicker.class);
                     startActivityForResult(myIntent, 0);
             	};
 
