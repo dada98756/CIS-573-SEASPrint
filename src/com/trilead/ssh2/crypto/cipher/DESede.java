@@ -59,6 +59,7 @@ public class DESede extends DES
 	 * @exception IllegalArgumentException
 	 *                if the params argument is inappropriate.
 	 */
+	@Override
 	public void init(boolean encrypting, byte[] key)
 	{
 		key1 = generateWorkingKey(encrypting, key, 0);
@@ -68,16 +69,19 @@ public class DESede extends DES
 		encrypt = encrypting;
 	}
 
+	@Override
 	public String getAlgorithmName()
 	{
 		return "DESede";
 	}
 
+	@Override
 	public int getBlockSize()
 	{
 		return 8;
 	}
 
+	@Override
 	public void transformBlock(byte[] in, int inOff, byte[] out, int outOff)
 	{
 		if (key1 == null)
@@ -99,6 +103,7 @@ public class DESede extends DES
 		}
 	}
 
+	@Override
 	public void reset()
 	{
 	}

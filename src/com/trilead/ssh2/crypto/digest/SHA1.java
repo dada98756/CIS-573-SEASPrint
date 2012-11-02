@@ -23,11 +23,13 @@ public final class SHA1 implements Digest
 		reset();
 	}
 
+	@Override
 	public final int getDigestLength()
 	{
 		return 20;
 	}
 
+	@Override
 	public final void reset()
 	{
 		H0 = 0x67452301;
@@ -43,11 +45,13 @@ public final class SHA1 implements Digest
 		 * information contained in the w[] array */
 	}
 
+	@Override
 	public final void update(byte b[])
 	{
 		update(b, 0, b.length);
 	}
 
+	@Override
 	public final void update(byte b[], int off, int len)
 	{
 		if (len >= 4)
@@ -166,6 +170,7 @@ public final class SHA1 implements Digest
 		}
 	}
 
+	@Override
 	public final void update(byte b)
 	{
 		int idx = currentPos >> 2;
@@ -189,11 +194,13 @@ public final class SHA1 implements Digest
 		b[pos + 3] = (byte) val;
 	}
 
+	@Override
 	public final void digest(byte[] out)
 	{
 		digest(out, 0);
 	}
 
+	@Override
 	public final void digest(byte[] out, int off)
 	{
 		/* Pad with a '1' and 7-31 zero bits... */

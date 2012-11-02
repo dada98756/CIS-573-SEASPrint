@@ -1,11 +1,7 @@
 package com.engineering.printer;
 
 import java.io.IOException;
-import java.io.InputStream;
-
 import com.engineering.printer.PrinterSelectScreen.MyOnItemSelectedListener;
-import com.trilead.ssh2.Connection;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,13 +28,15 @@ public class LoadingStatusScreen extends Activity {
     private int mProgressStatus = 0;
     private Handler mHandler = new Handler();
 
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loadingstatus);
         
     }
     
-	 public void onResume() {
+	 @Override
+	public void onResume() {
 	       super.onResume();
 	        mProgress = (ProgressBar) findViewById(R.id.progress_bar);
 	        mProgress.setProgress(0);
@@ -62,7 +60,8 @@ public class LoadingStatusScreen extends Activity {
 	        //Toast.makeText(LoadingStatusScreen.this, user + " "+ password + " "+ printer + " " + duplex + " "+ number + " "+ pps, Toast.LENGTH_LONG).show();
 	         // Start lengthy operation in a background thread
             new Thread( new Runnable() {
-                 public void run() {
+                 @Override
+				public void run() {
         	        while (mProgressStatus < 100) {
                     	 //DO STUFF
                          try {
@@ -72,7 +71,8 @@ public class LoadingStatusScreen extends Activity {
                         }
                          // Update the progress bar
                         handle.post(new Runnable()  {
-                            public void run() {
+                            @Override
+							public void run() {
                                  int val = upload.PercentComplete();
                                  mProgressStatus = val;
                                  mProgress.setProgress(val);
@@ -83,7 +83,8 @@ public class LoadingStatusScreen extends Activity {
                      }
         	        final String filename = upload.GetResult();
         	        handle.post(new Runnable() {
-        	            public void run() {
+        	            @Override
+						public void run() {
         	                UploadComplete(filename);
         	            }
         	        });
@@ -98,7 +99,8 @@ public class LoadingStatusScreen extends Activity {
 	     mConstantLoading.setVisibility(View.GONE);
 	     
 	     new Thread( new Runnable() {
-	     public void run() {
+	     @Override
+		public void run() {
         	     try {
         	         String local_filename = filename;
         	         String local_printer = printer;

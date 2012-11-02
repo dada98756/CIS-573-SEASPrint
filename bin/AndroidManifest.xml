@@ -9,6 +9,10 @@
     <application  android:debuggable="false" android:icon="@drawable/tf3_icon"  android:label="@string/app_name">
        
         <activity android:name=".EngineeringPrinter">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         	<intent-filter>
         		       <action android:name="android.intent.action.VIEW"></action>
 	                   <category android:name="android.intent.category.DEFAULT"></category>
@@ -68,6 +72,13 @@
         					<category android:name="android.intent.category.DEFAULT" />
        						<data android:mimeType="image/*" />
     					</intent-filter>
+    					
+                        <intent-filter>
+        					<action android:name="android.intent.action.SEND" />
+        					<category android:name="android.intent.category.DEFAULT" />
+       						<data android:mimeType="image/*" />
+    					</intent-filter>
+    					
                         <intent-filter>
                                 <action android:name="android.intent.action.VIEW"></action>
                                 <category android:name="android.intent.category.DEFAULT"></category>

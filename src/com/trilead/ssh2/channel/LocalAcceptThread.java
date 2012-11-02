@@ -41,6 +41,7 @@ public class LocalAcceptThread extends Thread implements IChannelWorkerThread
 		ss.bind(localAddress);
 	}
 
+	@Override
 	public void run()
 	{
 		try
@@ -121,6 +122,7 @@ public class LocalAcceptThread extends Thread implements IChannelWorkerThread
 		}
 	}
 
+	@Override
 	public void stopWorking()
 	{
 		try

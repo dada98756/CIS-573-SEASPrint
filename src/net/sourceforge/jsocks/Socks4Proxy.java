@@ -61,7 +61,8 @@ public class Socks4Proxy extends Proxy implements Cloneable{
     * Creates a clone of this proxy. Changes made to the clone should not
     * affect this object. 
     */
-   public Object clone(){
+   @Override
+public Object clone(){
       Socks4Proxy newProxy = new Socks4Proxy(proxyIP,proxyPort,user);
       newProxy.chainProxy = chainProxy;
       return newProxy;
@@ -75,13 +76,15 @@ public class Socks4Proxy extends Proxy implements Cloneable{
 //Protected Methods
 //=================
 
-   protected Proxy copy(){
+   @Override
+protected Proxy copy(){
        Socks4Proxy copy = new Socks4Proxy(proxyIP,proxyPort,user);
        copy.chainProxy = chainProxy;
        return copy;
     }
 
-   protected ProxyMessage formMessage(int cmd,InetAddress ip,int port){
+   @Override
+protected ProxyMessage formMessage(int cmd,InetAddress ip,int port){
        switch(cmd){
          case SOCKS_CMD_CONNECT:
            cmd = Socks4Message.REQUEST_CONNECT;
@@ -94,11 +97,13 @@ public class Socks4Proxy extends Proxy implements Cloneable{
        }
        return new Socks4Message(cmd,ip,port,user);
    }
-   protected ProxyMessage formMessage(int cmd,String host,int port)
+   @Override
+protected ProxyMessage formMessage(int cmd,String host,int port)
              throws UnknownHostException{
        return formMessage(cmd,InetAddress.getByName(host),port);
    }
-   protected ProxyMessage formMessage(InputStream in)
+   @Override
+protected ProxyMessage formMessage(InputStream in)
              throws SocksException,
                     IOException{
        return new Socks4Message(in,true);

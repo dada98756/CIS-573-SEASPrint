@@ -2,7 +2,6 @@ package com.engineering.printer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Handler;
 
 public class ErrorCallback {
@@ -17,7 +16,8 @@ public class ErrorCallback {
     
     public void error() {
         Runnable r = new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 AlertDialog.Builder altb = new AlertDialog.Builder(mAct);
                 altb.setMessage("Connection interrupted with server.  Try connecting again or verifying your connectivity to the network.");
                 altb.create().show();

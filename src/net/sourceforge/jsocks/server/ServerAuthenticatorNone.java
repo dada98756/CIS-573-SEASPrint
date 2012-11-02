@@ -62,7 +62,8 @@ public class ServerAuthenticatorNone implements ServerAuthenticator{
     the stream, when a SOCKS5 connection is being made, selects an
     authentication NONE.
     */
-   public ServerAuthenticator startSession(Socket s)
+   @Override
+public ServerAuthenticator startSession(Socket s)
                                   throws IOException{
 
      PushbackInputStream in =  new PushbackInputStream(s.getInputStream());
@@ -86,42 +87,48 @@ public class ServerAuthenticatorNone implements ServerAuthenticator{
      Get input stream.
      @return Input stream speciefied in the constructor.
    */
-   public InputStream getInputStream(){
+   @Override
+public InputStream getInputStream(){
       return in;
    }
    /**
      Get output stream.
      @return Output stream speciefied in the constructor.
    */
-   public OutputStream getOutputStream(){
+   @Override
+public OutputStream getOutputStream(){
       return out;
    }
    /**
      Allways returns null.
      @return null
    */
-   public UDPEncapsulation getUdpEncapsulation(){
+   @Override
+public UDPEncapsulation getUdpEncapsulation(){
       return null;
    }
 
    /**
     Allways returns true.
    */
-   public boolean checkRequest(ProxyMessage msg){
+   @Override
+public boolean checkRequest(ProxyMessage msg){
      return true;
    }
 
    /**
     Allways returns true.
    */
-   public boolean checkRequest(java.net.DatagramPacket dp, boolean out){
+   @Override
+public boolean checkRequest(java.net.DatagramPacket dp, boolean out){
      return true;
    }
 
    /**
     Does nothing.
     */
-   public void endSession(){
+   @Override
+public void endSession(){
    }
 
    /**

@@ -1,34 +1,26 @@
 package com.engineering.printer;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
-
-import com.trilead.ssh2.Connection;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnCreateContextMenuListener;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class PrinterSelectScreen extends Activity{
@@ -49,6 +41,7 @@ public class PrinterSelectScreen extends Activity{
 	
 	//public static Integer pps;
 	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater infl = new MenuInflater(this);
 		infl.inflate(R.menu.menu, menu);
@@ -67,7 +60,8 @@ public class PrinterSelectScreen extends Activity{
 		
 	}
 	
-	 public void onCreate(Bundle savedInstanceState) {
+	 @Override
+	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        System.out.println("In onCreate of PrinterSelectScreen");
 //	        InputStream is = null;
@@ -131,12 +125,14 @@ public class PrinterSelectScreen extends Activity{
 //	       }
 	 }
 	 
-	 public void onStop() {
+	 @Override
+	public void onStop() {
 	     super.onStop();
 
 	 }
 	 
-	 public void onResume()
+	 @Override
+	public void onResume()
 	 {
 		 super.onResume();
 		 setContentView(R.layout.printers);
@@ -179,7 +175,8 @@ public class PrinterSelectScreen extends Activity{
 	        
 	        mTogglebutton = (ToggleButton) findViewById(R.id.duplex_togglebutton);
 	        mTogglebutton.setOnClickListener(new OnClickListener() {
-	            public void onClick(View v) {
+	            @Override
+				public void onClick(View v) {
 	                // Perform action on clicks
 	                if (mTogglebutton.isChecked()) {
 	                    dTemp=true;
@@ -204,7 +201,8 @@ public class PrinterSelectScreen extends Activity{
 	        
 	        mPrintbutton = (Button) findViewById(R.id.print_button);
 	        mPrintbutton.setOnClickListener(new View.OnClickListener() {
-	             public void onClick(View v) {
+	             @Override
+				public void onClick(View v) {
 	            	 number=mNumberPicker.value;
 	            	// pps=ppspicker.value;
 	            	 duplex=dTemp;
@@ -225,14 +223,16 @@ public class PrinterSelectScreen extends Activity{
 	 public static class MyOnItemSelectedListener implements OnItemSelectedListener {
 		 public static String printer;
 		 	
-		    public void onItemSelected(AdapterView<?> parent,
+		    @Override
+			public void onItemSelected(AdapterView<?> parent,
 		        View view, int pos, long id) {
 		    	//PRINTER WAS SELECTED
 		    	printer=parent.getItemAtPosition(pos).toString();
 		    	mFavored = printer;
 		    }
 
-		    public void onNothingSelected(AdapterView parent) {
+		    @Override
+			public void onNothingSelected(AdapterView parent) {
 		      // Do nothing.
 		    }
 		}

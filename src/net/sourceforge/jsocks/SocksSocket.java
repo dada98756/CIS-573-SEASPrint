@@ -138,26 +138,30 @@ public class SocksSocket extends Socket{
    /**
     * Same as Socket
     */
-   public void close() throws IOException{
+   @Override
+public void close() throws IOException{
       if(proxy!= null)proxy.endSession();
       proxy = null;
    }
    /**
     * Same as Socket
     */
-   public InputStream getInputStream(){
+   @Override
+public InputStream getInputStream(){
       return proxy.in;
    }
    /**
     * Same as Socket
     */
-   public OutputStream getOutputStream(){
+   @Override
+public OutputStream getOutputStream(){
       return proxy.out;
    }
    /**
     * Same as Socket
     */
-   public int getPort(){
+   @Override
+public int getPort(){
       return remotePort;
    }
    /**
@@ -176,7 +180,8 @@ public class SocksSocket extends Socket{
       if address was returned by the proxy as DOMAINNAME and can't be
       resolved locally.
     */
-   public InetAddress getInetAddress(){
+   @Override
+public InetAddress getInetAddress(){
       if(remoteIP == null){
 	 try{
 	   remoteIP = InetAddress.getByName(remoteHost);
@@ -192,7 +197,8 @@ public class SocksSocket extends Socket{
     * the port on locall machine as in Socket. 
       @return Port of the socket used on the proxy server.
     */
-   public int getLocalPort(){
+   @Override
+public int getLocalPort(){
       return localPort;
    }
 
@@ -203,7 +209,8 @@ public class SocksSocket extends Socket{
     * and it can't be resolved locally, use getLocalHost() then.
       @return Address proxy is using to make a connection.
     */
-   public InetAddress getLocalAddress(){
+   @Override
+public InetAddress getLocalAddress(){
       if(localIP == null){
 	 try{
 	    localIP = InetAddress.getByName(localHost);
@@ -226,7 +233,8 @@ public class SocksSocket extends Socket{
    /**
      Same as socket.
    */
-   public void setSoLinger(boolean on,int val) throws SocketException{
+   @Override
+public void setSoLinger(boolean on,int val) throws SocketException{
       proxy.proxySocket.setSoLinger(on,val);
    }
    /**
@@ -238,7 +246,8 @@ public class SocksSocket extends Socket{
    /**
      Same as socket.
    */
-   public void setSoTimeout(int timeout) throws SocketException{
+   @Override
+public void setSoTimeout(int timeout) throws SocketException{
       proxy.proxySocket.setSoTimeout(timeout);
    }
    /**
@@ -250,20 +259,23 @@ public class SocksSocket extends Socket{
    /**
      Same as socket.
    */
-   public void setTcpNoDelay(boolean on) throws SocketException{
+   @Override
+public void setTcpNoDelay(boolean on) throws SocketException{
      proxy.proxySocket.setTcpNoDelay(on);
    }
    /**
      Same as socket.
    */
-   public boolean getTcpNoDelay() throws SocketException{
+   @Override
+public boolean getTcpNoDelay() throws SocketException{
      return proxy.proxySocket.getTcpNoDelay();
    }
 
    /**
      Get string representation of the socket.
    */
-   public String toString(){
+   @Override
+public String toString(){
       if(directSock!=null) return "Direct connection:"+directSock;
       return ("Proxy:"+proxy+";"+"addr:"+remoteHost+",port:"+remotePort
                                 +",localport:"+localPort);

@@ -81,9 +81,12 @@ public class EngineeringPrinter extends Activity {
 //        type = getIntent().getType();
 //        
         InputStream is = null;
+        
         try {
+        	System.out.println("Try to get data");
         	if (null != getIntent().getData()) {
-	            is = getContentResolver().openInputStream(getIntent().getData());
+	            System.out.println("Getting data");
+        		is = getContentResolver().openInputStream(getIntent().getData());
 		        Document.load(is);
 		        Document.setDescriptor(getIntent().getData());
 		          EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
@@ -161,7 +164,8 @@ public class EngineeringPrinter extends Activity {
         
     	final Button printbutton = (Button) findViewById(R.id.button);
     	printbutton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            @Override
+			public void onClick(View v) {
             	if(connect == null) {
             		// Perform action on key press
             		try {

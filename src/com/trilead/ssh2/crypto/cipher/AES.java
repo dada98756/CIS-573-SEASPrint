@@ -501,6 +501,7 @@ public class AES implements BlockCipher
 	 *                if the params argument is inappropriate.
 	 */
 
+	@Override
 	public final void init(boolean forEncryption, byte[] key)
 	{
 		WorkingKey = generateWorkingKey(key, forEncryption);
@@ -512,6 +513,7 @@ public class AES implements BlockCipher
 		return "AES";
 	}
 
+	@Override
 	public final int getBlockSize()
 	{
 		return BLOCK_SIZE;
@@ -691,6 +693,7 @@ public class AES implements BlockCipher
 				^ (Si[(r0 >> 24) & 255] << 24) ^ KW[0][3];
 	}
 
+	@Override
 	public void transformBlock(byte[] src, int srcoff, byte[] dst, int dstoff)
 	{
 		processBlock(src, srcoff, dst, dstoff);

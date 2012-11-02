@@ -81,7 +81,8 @@ public abstract class Proxy{
        Get string representation of this proxy.
      * @returns string in the form:proxyHost:proxyPort \t Version versionNumber
      */
-    public String toString(){
+    @Override
+	public String toString(){
        return (""+proxyIP.getHostName()+":"+proxyPort+"\tVersion "+version);
     }
 

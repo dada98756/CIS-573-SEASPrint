@@ -48,7 +48,8 @@ public class SocksException extends java.io.IOException{
     Get human readable representation of this exception.
     @return String represntation of this exception.
    */
-   public String toString(){
+   @Override
+public String toString(){
       return errString;
    }
 

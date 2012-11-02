@@ -47,10 +47,12 @@ public class Zlib implements ICompressor {
 		inflated_buf = new byte[DEFAULT_BUF_SIZE];
 	}
 
+	@Override
 	public int getBufferSize() {
 		return DEFAULT_BUF_SIZE;
 	}
 
+	@Override
 	public int compress(byte[] buf, int start, int len, byte[] output) {
 		deflate.next_in = buf;
 		deflate.next_in_index = start;
@@ -79,6 +81,7 @@ public class Zlib implements ICompressor {
 		return outputlen;
 	}
 
+	@Override
 	public byte[] uncompress(byte[] buffer, int start, int[] length) {
 		int inflated_end = 0;
 

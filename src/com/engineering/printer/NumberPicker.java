@@ -80,6 +80,7 @@ public class NumberPicker extends LinearLayout {
 	 *
 	 */
 	class RepetetiveUpdater implements Runnable {
+		@Override
 		public void run() {
 			if( autoIncrement ){
 				increment();
@@ -94,7 +95,7 @@ public class NumberPicker extends LinearLayout {
 	public NumberPicker( Context context, AttributeSet attributeSet ) {
 		super(context, attributeSet);
 		
-		this.setLayoutParams( new LinearLayout.LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT ) );
+		this.setLayoutParams( new LinearLayout.LayoutParams( android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT ) );
 		LayoutParams elementParams = new LinearLayout.LayoutParams( ELEMENT_HEIGHT, ELEMENT_WIDTH );
 		
 		// init the individual elements
@@ -122,7 +123,8 @@ public class NumberPicker extends LinearLayout {
 		
 		// Increment once for a click
 		increment.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            @Override
+			public void onClick(View v) {
             	increment();
             }
         });
@@ -130,6 +132,7 @@ public class NumberPicker extends LinearLayout {
 		// Auto increment for a long click
 		increment.setOnLongClickListener( 
 				new View.OnLongClickListener(){
+					@Override
 					public boolean onLongClick(View arg0) {
 						autoIncrement = true;
 						repeatUpdateHandler.post( new RepetetiveUpdater() );
@@ -140,6 +143,7 @@ public class NumberPicker extends LinearLayout {
 		
 		// When the button is released, if we're auto incrementing, stop
 		increment.setOnTouchListener( new View.OnTouchListener() {
+			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if( event.getAction() == MotionEvent.ACTION_UP && autoIncrement ){
 					autoIncrement = false;
@@ -166,6 +170,7 @@ public class NumberPicker extends LinearLayout {
 		// so we can revert to that in case the text change causes an invalid
 		// number
 		valueText.setOnKeyListener(new View.OnKeyListener() {
+			@Override
 			public boolean onKey(View v, int arg1, KeyEvent event) {
 				int backupValue = value;
 				try {
@@ -179,6 +184,7 @@ public class NumberPicker extends LinearLayout {
 		
 		// Highlight the number when we get focus
 		valueText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				if( hasFocus ){
 					((EditText)v).selectAll();
@@ -198,7 +204,8 @@ public class NumberPicker extends LinearLayout {
 
 		// Decrement once for a click
 		decrement.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            @Override
+			public void onClick(View v) {
             	decrement();
             }
         });
@@ -207,6 +214,7 @@ public class NumberPicker extends LinearLayout {
 		// Auto Decrement for a long click
 		decrement.setOnLongClickListener( 
 				new View.OnLongClickListener(){
+					@Override
 					public boolean onLongClick(View arg0) {
 						autoDecrement = true;
 						repeatUpdateHandler.post( new RepetetiveUpdater() );
@@ -217,6 +225,7 @@ public class NumberPicker extends LinearLayout {
 		
 		// When the button is released, if we're auto decrementing, stop
 		decrement.setOnTouchListener( new View.OnTouchListener() {
+			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if( event.getAction() == MotionEvent.ACTION_UP && autoDecrement ){
 					autoDecrement = false;

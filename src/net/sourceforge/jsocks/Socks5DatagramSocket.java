@@ -145,7 +145,8 @@ public class Socks5DatagramSocket extends DatagramSocket{
      @param dp Datagram to send.
      @throws IOException If error happens with I/O.
     */
-   public void send(DatagramPacket dp) throws IOException{
+   @Override
+public void send(DatagramPacket dp) throws IOException{
      //If the host should be accessed directly, send it as is.
      if(!server_mode){
         super.send(dp);
@@ -196,7 +197,8 @@ public class Socks5DatagramSocket extends DatagramSocket{
     * For hostnames and IPV6 it is even more.
       @param dp Datagram in which all relevent information will be copied.
     */
-   public void receive(DatagramPacket dp) throws IOException{
+   @Override
+public void receive(DatagramPacket dp) throws IOException{
       super.receive(dp);
 
       if(server_mode){
@@ -266,7 +268,8 @@ public class Socks5DatagramSocket extends DatagramSocket{
       @return Port assigned by socks server to which datagrams are send
       for association.
     */
-   public int getLocalPort(){
+   @Override
+public int getLocalPort(){
      if(server_mode) return super.getLocalPort();
      return relayPort;
    }
@@ -276,7 +279,8 @@ public class Socks5DatagramSocket extends DatagramSocket{
     * datagrams.
       @return Address to which datagrams are send for association.
     */
-   public InetAddress getLocalAddress(){
+   @Override
+public InetAddress getLocalAddress(){
      if(server_mode) return super.getLocalAddress();
      return relayIP;
    }
@@ -284,7 +288,8 @@ public class Socks5DatagramSocket extends DatagramSocket{
    /**
     * Closes datagram socket, and proxy connection.
     */
-   public void close(){
+   @Override
+public void close(){
       if(!server_mode) proxy.endSession();
       super.close();
    }

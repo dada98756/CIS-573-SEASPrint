@@ -112,7 +112,8 @@ public class Socks5Proxy extends Proxy implements Cloneable{
    /**
     Creates a clone of this Proxy.
    */
-   @SuppressWarnings("unchecked")
+   @Override
+@SuppressWarnings("unchecked")
 public Object clone(){
       Socks5Proxy newProxy = new Socks5Proxy(proxyIP,proxyPort);
       newProxy.authMethods = (Hashtable<Integer, Authentication>) this.authMethods.clone();
@@ -128,7 +129,8 @@ public Object clone(){
 //Protected Methods
 //=================
 
-   protected Proxy copy(){
+   @Override
+protected Proxy copy(){
        Socks5Proxy copy = new Socks5Proxy(proxyIP,proxyPort);
        copy.authMethods = this.authMethods; //same Hash, no copy
        copy.chainProxy = this.chainProxy;
@@ -139,7 +141,8 @@ public Object clone(){
     *
     *
     */
-   protected void startSession()throws SocksException{
+   @Override
+protected void startSession()throws SocksException{
       super.startSession();
       Authentication auth;
       Socket ps = proxySocket; //The name is too long
@@ -155,7 +158,7 @@ public Object clone(){
 
          Enumeration<Integer> ids = authMethods.keys();
          while(ids.hasMoreElements())
-            buf[i++] = (byte)((Integer)ids.nextElement()).intValue();
+            buf[i++] = (byte)ids.nextElement().intValue();
 
          out.write(buf);
          out.flush();
@@ -212,17 +215,20 @@ public Object clone(){
       }
    }
 
-   protected ProxyMessage formMessage(int cmd,InetAddress ip,int port){
+   @Override
+protected ProxyMessage formMessage(int cmd,InetAddress ip,int port){
        return new Socks5Message(cmd,ip,port);
    }
-   protected ProxyMessage formMessage(int cmd,String host,int port)
+   @Override
+protected ProxyMessage formMessage(int cmd,String host,int port)
              throws UnknownHostException{
        if(resolveAddrLocally)
           return formMessage(cmd,InetAddress.getByName(host),port);
        else
           return new Socks5Message(cmd,host,port);
    }
-   protected ProxyMessage formMessage(InputStream in)
+   @Override
+protected ProxyMessage formMessage(InputStream in)
              throws SocksException,
                     IOException{
        return new Socks5Message(in);

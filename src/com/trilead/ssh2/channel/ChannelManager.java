@@ -1659,6 +1659,7 @@ public class ChannelManager implements MessageHandler
 			log.log(80, "Got SSH_MSG_REQUEST_FAILURE");
 	}
 
+	@Override
 	public void handleMessage(byte[] msg, int msglen) throws IOException
 	{
 		if (msg == null)

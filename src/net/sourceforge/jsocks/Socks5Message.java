@@ -132,7 +132,8 @@ public class Socks5Message extends ProxyMessage{
      if any error with protocol occurs.
      @throws IOException If any error happens with I/O.
    */
-   public void read(InputStream in) throws SocksException,
+   @Override
+public void read(InputStream in) throws SocksException,
                                            IOException{
        read(in,true);
    }
@@ -148,7 +149,8 @@ public class Socks5Message extends ProxyMessage{
      reading in client mode, or if any error with protocol occurs.
      @throws IOException If any error happens with I/O.
    */
-   public void read(InputStream in,boolean clientMode) throws SocksException,
+   @Override
+public void read(InputStream in,boolean clientMode) throws SocksException,
                                            IOException{
       data = null;
       ip = null;
@@ -201,7 +203,8 @@ public class Socks5Message extends ProxyMessage{
     Writes the message to the stream.
     @param out Output stream to which message should be written.
    */
-   public void write(OutputStream out)throws SocksException,
+   @Override
+public void write(OutputStream out)throws SocksException,
                                              IOException{
      if(data == null){
        Socks5Message msg;
@@ -229,7 +232,8 @@ public class Socks5Message extends ProxyMessage{
     which might fail.
     @throws UnknownHostException if host can't be resolved.
    */
-   public InetAddress getInetAddress() throws UnknownHostException{
+   @Override
+public InetAddress getInetAddress() throws UnknownHostException{
      if(ip!=null) return ip;
 
      return (ip=InetAddress.getByName(host));
@@ -238,7 +242,8 @@ public class Socks5Message extends ProxyMessage{
    /**
      Returns string representation of the message.
    */
-   public String toString(){
+   @Override
+public String toString(){
       String s=
         "Socks5Message:"+"\n"+
         "VN   "+version+"\n"+

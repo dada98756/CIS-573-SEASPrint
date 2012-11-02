@@ -207,6 +207,7 @@ public class AuthAgentForwardThread extends Thread implements IChannelWorkerThre
 		}
 	}
 
+	@Override
 	public void stopWorking() {
 		try
 		{

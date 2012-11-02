@@ -173,6 +173,7 @@ public final class MD5 implements Digest
 		state3 += d;
 	}
 
+	@Override
 	public final void reset()
 	{
 		count = 0;
@@ -188,6 +189,7 @@ public final class MD5 implements Digest
 			x[i] = 0;
 	}
 
+	@Override
 	public final void update(byte b)
 	{
 		final int space = 64 - ((int) (count & 0x3f));
@@ -200,6 +202,7 @@ public final class MD5 implements Digest
 			transform(block, 0);
 	}
 
+	@Override
 	public final void update(byte[] buff, int pos, int len)
 	{
 		int space = 64 - ((int) (count & 0x3f));
@@ -230,11 +233,13 @@ public final class MD5 implements Digest
 		}
 	}
 
+	@Override
 	public final void update(byte[] b)
 	{
 		update(b, 0, b.length);
 	}
 
+	@Override
 	public final void digest(byte[] dst, int pos)
 	{
 		byte[] bits = new byte[8];
@@ -256,11 +261,13 @@ public final class MD5 implements Digest
 		reset();
 	}
 
+	@Override
 	public final void digest(byte[] dst)
 	{
 		digest(dst, 0);
 	}
 
+	@Override
 	public final int getDigestLength()
 	{
 		return 16;

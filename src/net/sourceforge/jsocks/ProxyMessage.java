@@ -81,7 +81,8 @@ public abstract class ProxyMessage{
     Get string representaion of this message.
     @return string representation of this message.
    */
-   public String toString(){
+   @Override
+public String toString(){
       return 
       "Proxy Message:\n"+
       "Version:"+ version+"\n"+

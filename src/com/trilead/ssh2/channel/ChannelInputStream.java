@@ -24,6 +24,7 @@ public final class ChannelInputStream extends InputStream
 		this.extendedFlag = isExtended;
 	}
 
+	@Override
 	public int available() throws IOException
 	{
 		if (isEOF)
@@ -36,11 +37,13 @@ public final class ChannelInputStream extends InputStream
 		return (avail > 0) ? avail : 0;
 	}
 
+	@Override
 	public void close() throws IOException
 	{
 		isClosed = true;
 	}
 
+	@Override
 	public int read(byte[] b, int off, int len) throws IOException
 	{
 		if (b == null)
@@ -65,11 +68,13 @@ public final class ChannelInputStream extends InputStream
 		return ret;
 	}
 
+	@Override
 	public int read(byte[] b) throws IOException
 	{
 		return read(b, 0, b.length);
 	}
 
+	@Override
 	public int read() throws IOException
 	{
 		/* Yes, this stream is pure and unbuffered, a single byte read() is slow */

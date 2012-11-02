@@ -169,6 +169,7 @@ public class Connection
 	 *             disappear in future builds.
 	 * 
 	 */
+	@Deprecated
 	public synchronized boolean authenticateWithDSA(String user, String pem, String password) throws IOException
 	{
 		if (tm == null)
@@ -782,6 +783,7 @@ public class Connection
 			{
 				final Runnable timeoutHandler = new Runnable()
 				{
+					@Override
 					public void run()
 					{
 						synchronized (state)
@@ -1582,6 +1584,7 @@ public class Connection
 				logger = new DebugLogger()
 				{
 
+					@Override
 					public void log(int level, String className, String message)
 					{
 						long now = System.currentTimeMillis();

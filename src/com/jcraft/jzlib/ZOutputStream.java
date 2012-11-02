@@ -63,12 +63,14 @@ public class ZOutputStream extends OutputStream {
     compress=true;
   }
 
-  public void write(int b) throws IOException {
+  @Override
+public void write(int b) throws IOException {
     buf1[0]=(byte)b;
     write(buf1, 0, 1);
   }
 
-  public void write(byte b[], int off, int len) throws IOException {
+  @Override
+public void write(byte b[], int off, int len) throws IOException {
     if(len==0)
       return;
     int err;
@@ -123,7 +125,8 @@ public class ZOutputStream extends OutputStream {
     z.free();
     z=null;
   }
-  public void close() throws IOException {
+  @Override
+public void close() throws IOException {
     try{
       try{finish();}
       catch (IOException ignored) {}
@@ -149,7 +152,8 @@ public class ZOutputStream extends OutputStream {
     return z.total_out;
   }
 
-  public void flush() throws IOException {
+  @Override
+public void flush() throws IOException {
     out.flush();
   }
 

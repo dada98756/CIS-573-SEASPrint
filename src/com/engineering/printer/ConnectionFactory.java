@@ -1,9 +1,6 @@
 package com.engineering.printer;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
-
-import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 import com.trilead.ssh2.Connection;

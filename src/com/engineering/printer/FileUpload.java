@@ -1,11 +1,9 @@
 package com.engineering.printer;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import android.app.AlertDialog;
 import android.util.Log;
 
 import com.trilead.ssh2.Connection;
@@ -80,7 +78,8 @@ public class FileUpload implements Runnable {
         
     }
     
-    public void run() {
+    @Override
+	public void run() {
         try {
             String home = mConn.execWithReturn("echo ~");
             String tmpfile = mConn.execWithReturn("echo `mktemp " + home  + "/tmp.XXXXXXXX`");
