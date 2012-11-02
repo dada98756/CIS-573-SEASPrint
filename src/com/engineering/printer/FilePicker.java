@@ -139,6 +139,7 @@ public class FilePicker extends Activity {
 
 			    System.out.println("Getting data");
 			    Document.loadFile(currentFile);
+			    Document.setDeFile(currentFile.getPath());
 			    //Document.setDescriptor(getIntent().getData());
 			     // EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
 			     // EngineeringPrinter.type = getIntent().getType();

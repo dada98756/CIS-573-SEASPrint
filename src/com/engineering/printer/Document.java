@@ -40,4 +40,12 @@ public class Document {
             descriptor="content";
         Log.i("Connection", descriptor);
     }
+    
+    public static void setDeFile(String path){
+    	if(path.substring(0, 4).equals("file"))
+            descriptor=path.substring(path.lastIndexOf("/"), path.length());
+        else
+            descriptor="content";
+        Log.i("Connection", descriptor);
+    }
 }

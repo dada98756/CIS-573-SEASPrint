@@ -219,6 +219,7 @@
             android:name=".FilePicker"
             android:label="@string/title_activity_file_picker" >
         </activity> 
+        <activity android:name = ".ControlPanelScreen"></activity>
     </application>
 
 </manifest>
