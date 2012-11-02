@@ -9,3 +9,4 @@ UPDATE: This app is now managed and modified by CIS-573(2012 fall) so as to add 
 
 Team member: Xin Dong; Mingfei Shao; Tao Mo; Siyong Liang.
 
+Random Character.
