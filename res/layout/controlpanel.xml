@@ -5,10 +5,10 @@
     android:layout_height="fill_parent"
     android:background="#ffffff"
     >
-
+     
  <TableRow
-     android:paddingTop="20dp"
-     android:paddingBottom="20dp"
+     android:paddingTop="60dp"
+     android:paddingBottom="30dp"
      android:paddingLeft="15dp"
      android:paddingRight="15dp"
      >
@@ -20,11 +20,9 @@
     android:text="File Picker"
     android:textColor="#111"
     android:gravity="center"
-    android:paddingTop="15dp"
-    android:paddingLeft="10dp"
-    android:paddingBottom="15dp"
-    android:paddingRight="10dp"
     android:background="#f0f0f0"
+    android:padding="12dp"
+    android:layout_marginRight="5dp"
  />
  <Button
     android:id="@+id/cloud_browser_button"
@@ -34,15 +32,13 @@
     android:text="Cloud Browser"
     android:textColor="#111"
     android:gravity="center"
-    android:paddingTop="15dp"
-    android:paddingLeft="10dp"
-    android:paddingBottom="15dp"
-    android:paddingRight="10dp"
     android:background="#f0f0f0"
+    android:padding="12dp"
+    android:layout_marginLeft="5dp"
  />
  </TableRow>
  <TableRow
-     android:paddingTop="20dp"
+     android:paddingTop="30dp"
      android:paddingBottom="20dp"
      android:paddingLeft="15dp"
      android:paddingRight="15dp">
@@ -54,11 +50,9 @@
     android:text="Settings"
     android:textColor="#111"
     android:gravity="center"
-    android:paddingTop="15dp"
-    android:paddingLeft="10dp"
-    android:paddingBottom="15dp"
-    android:paddingRight="10dp"
     android:background="#f0f0f0"
+    android:padding="12dp"
+    android:layout_marginRight="5dp"
  />
  
  <Button
@@ -69,11 +63,9 @@
     android:text="Print History"
     android:textColor="#111"
     android:gravity="center"
-    android:paddingTop="15dp"
-    android:paddingLeft="10dp"
-    android:paddingBottom="15dp"
-    android:paddingRight="10dp"
     android:background="#f0f0f0"
+    android:padding="12dp"
+    android:layout_marginLeft="5dp"
  />
  </TableRow>
       
