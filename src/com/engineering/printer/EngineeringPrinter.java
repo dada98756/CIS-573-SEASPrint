@@ -108,12 +108,12 @@ public class EngineeringPrinter extends Activity {
         setContentView(R.layout.main);
         
     	TextView printing = (TextView) findViewById(R.id.printing);
-    	TextView microsoft = (TextView) findViewById(R.id.microsoft);
+//    	TextView microsoft = (TextView) findViewById(R.id.microsoft);
 
     	printing.setText(Document.descriptor);
     	
     	//microsoft.setText(type + " " +(Microsoft  ? "Microsoft" : "Not Microsoft") );
-    	microsoft.setText("Please Log in");
+//    	microsoft.setText("Please Log in");
     	//connect.close();
         connect=null;
         /*try {
@@ -203,7 +203,7 @@ public class EngineeringPrinter extends Activity {
             			return;
             		}
             		//Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
-            		Intent myIntent = new Intent(v.getContext(), FilePicker.class);
+            		Intent myIntent = new Intent(v.getContext(), ControlPanelScreen.class);
                     startActivityForResult(myIntent, 0);
             	};
 

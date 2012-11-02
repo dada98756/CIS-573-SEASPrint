@@ -1,6 +1,8 @@
 package com.engineering.printer;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -130,6 +133,15 @@ public class FilePicker extends Activity {
 
 	public void onSelectBtnClick(View v) {
 		if (currentFile != null) {
+			InputStream is = null;
+	        
+	        System.out.println("Try to get data");
+
+			    System.out.println("Getting data");
+			    Document.loadFile(currentFile);
+			    //Document.setDescriptor(getIntent().getData());
+			     // EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
+			     // EngineeringPrinter.type = getIntent().getType();
 			Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
             startActivityForResult(myIntent, 0);
 		}

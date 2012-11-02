@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    >
+
+ <TableRow
+     android:paddingTop="20dp"
+     android:paddingBottom="20dp"
+     android:paddingLeft="15dp"
+     android:paddingRight="15dp"
+     >
+ <Button
+    android:id="@+id/file_browser_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:drawableTop="@drawable/filebrowser"
+    android:text="File Picker"
+    android:textColor="#111"
+    android:gravity="center"
+    android:paddingTop="15dp"
+    android:paddingLeft="10dp"
+    android:paddingBottom="15dp"
+    android:paddingRight="10dp"
+    android:background="#f0f0f0"
+ />
+ <Button
+    android:id="@+id/cloud_browser_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:drawableTop="@drawable/cloudbrowser"
+    android:text="Cloud Browser"
+    android:textColor="#111"
+    android:gravity="center"
+    android:paddingTop="15dp"
+    android:paddingLeft="10dp"
+    android:paddingBottom="15dp"
+    android:paddingRight="10dp"
+    android:background="#f0f0f0"
+ />
+ </TableRow>
+ <TableRow
+     android:paddingTop="20dp"
+     android:paddingBottom="20dp"
+     android:paddingLeft="15dp"
+     android:paddingRight="15dp">
+<Button
+    android:id="@+id/print_setting_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:drawableTop="@drawable/setting"
+    android:text="Settings"
+    android:textColor="#111"
+    android:gravity="center"
+    android:paddingTop="15dp"
+    android:paddingLeft="10dp"
+    android:paddingBottom="15dp"
+    android:paddingRight="10dp"
+    android:background="#f0f0f0"
+ />
+ 
+ <Button
+    android:id="@+id/print_history_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:drawableTop="@drawable/history"
+    android:text="Print History"
+    android:textColor="#111"
+    android:gravity="center"
+    android:paddingTop="15dp"
+    android:paddingLeft="10dp"
+    android:paddingBottom="15dp"
+    android:paddingRight="10dp"
+    android:background="#f0f0f0"
+ />
+ </TableRow>
+      
+</TableLayout>

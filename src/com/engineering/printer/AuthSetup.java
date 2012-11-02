@@ -20,7 +20,7 @@ public class AuthSetup {
 		mPort = port;
 	}
 
-	public String keyGen() {
+	public String keyGen() throws IOException{
 		try {
 			Connection conn =(new ConnectionFactory()).MakeConnection(mUsername, mPassword,mHost, mPort);
 			CommandConnection cc = new CommandConnection(conn);
@@ -33,7 +33,7 @@ public class AuthSetup {
 			return str;
 		}
 		catch (IOException e) {
-			throw new RuntimeException(e.fillInStackTrace());
+			throw new IOException(e.fillInStackTrace());
 		}
 	}
 	
