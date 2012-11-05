@@ -216,10 +216,18 @@
         <activity android:name=".LoadingStatusScreen" >
         </activity>
          <activity
-            android:name=".FilePicker"
+            android:name=".EniacFilePicker"
             android:label="@string/title_activity_file_picker" >
         </activity> 
         <activity android:name = ".ControlPanelScreen"></activity>
+        <activity
+            android:name="io.filepicker.FilePicker"
+            android:label="@string/title_activity_file_picker" >
+        </activity>
+        <activity
+            android:name="io.filepicker.AuthActivity"
+            android:label="@string/title_activity_file_picker_auth" >
+        </activity>
     </application>
 
 </manifest>
