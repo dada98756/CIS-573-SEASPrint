@@ -7,24 +7,20 @@
     >
 
  <TableRow
-     android:paddingTop="20dp"
-     android:paddingBottom="20dp"
-     android:paddingLeft="15dp"
-     android:paddingRight="15dp"
+    android:layout_marginTop="25dp"
+    android:layout_marginBottom="25dp"
+    android:layout_marginLeft="14dp"
+    android:layout_marginRight="15dp"
      >
  <Button
     android:id="@+id/file_browser_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:drawableTop="@drawable/filebrowser"
-    android:text="File Picker"
+    android:text="Eniac Browser"
     android:textColor="#111"
     android:gravity="center"
-    android:paddingTop="15dp"
-    android:paddingLeft="10dp"
-    android:paddingBottom="15dp"
-    android:paddingRight="10dp"
-    android:background="#f0f0f0"
+     android:layout_margin="5dp"
     android:onClick="onBrowserBtnClick"
  />
  <Button
@@ -32,22 +28,19 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:drawableTop="@drawable/cloudbrowser"
-    android:text="Cloud Browser"
+    android:text="File Picker"
     android:textColor="#111"
     android:gravity="center"
-    android:paddingTop="15dp"
-    android:paddingLeft="10dp"
-    android:paddingBottom="15dp"
-    android:paddingRight="10dp"
-    android:background="#f0f0f0"
+    android:layout_margin="5dp"
     android:onClick="onCloudBtnClick"
  />
  </TableRow>
  <TableRow
-     android:paddingTop="20dp"
-     android:paddingBottom="20dp"
-     android:paddingLeft="15dp"
-     android:paddingRight="15dp">
+    android:layout_marginTop="25dp"
+    android:layout_marginBottom="25dp"
+    android:layout_marginLeft="14dp"
+    android:layout_marginRight="15dp"
+         >
 <Button
     android:id="@+id/print_setting_button"
     android:layout_width="wrap_content"
@@ -56,11 +49,7 @@
     android:text="Settings"
     android:textColor="#111"
     android:gravity="center"
-    android:paddingTop="15dp"
-    android:paddingLeft="10dp"
-    android:paddingBottom="15dp"
-    android:paddingRight="10dp"
-    android:background="#f0f0f0"
+    android:layout_margin="5dp"
     android:onClick="onPrintBtnClick"
  />
  
@@ -72,11 +61,7 @@
     android:text="Print History"
     android:textColor="#111"
     android:gravity="center"
-    android:paddingTop="15dp"
-    android:paddingLeft="10dp"
-    android:paddingBottom="15dp"
-    android:paddingRight="10dp"
-    android:background="#f0f0f0"
+    android:layout_margin="5dp"
     android:onClick="onHistoryBtnClick"
  />
  </TableRow>
