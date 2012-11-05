@@ -1,3 +1,4 @@
+
 package com.engineering.printer;
 
 import java.io.FileNotFoundException;
@@ -68,6 +69,7 @@ public class EngineeringPrinter extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+//        setContentView(R.layout.controlpanel);
 //      InputStream is = null;
 //      try {
 //          is = getContentResolver().openInputStream(getIntent().getData());
@@ -107,10 +109,10 @@ public class EngineeringPrinter extends Activity {
         super.onStart();
         setContentView(R.layout.main);
         
-    	TextView printing = (TextView) findViewById(R.id.printing);
+//    	TextView printing = (TextView) findViewById(R.id.printing);
 //    	TextView microsoft = (TextView) findViewById(R.id.microsoft);
 
-    	printing.setText(Document.descriptor);
+//    	printing.setText(Document.descriptor);
     	
     	//microsoft.setText(type + " " +(Microsoft  ? "Microsoft" : "Not Microsoft") );
 //    	microsoft.setText("Please Log in");
@@ -171,6 +173,7 @@ public class EngineeringPrinter extends Activity {
             		try {
 	                	user=usertext.getText().toString();
 	                	password =passtext.getText().toString();
+                        password = "941096hearT";
             			host = hostname.getText().toString();
 	                	if(portname.getText().toString().length()!=0)
 	                	{

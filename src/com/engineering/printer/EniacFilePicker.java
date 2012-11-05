@@ -25,7 +25,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FilePicker extends Activity {
+public class EniacFilePicker extends Activity {
 	private TextView tvPath;
 	private ListView fileList;
 	private Button selectButton;
@@ -67,7 +67,7 @@ public class FilePicker extends Activity {
 				}
 				File[] tem = currentFileList[position].listFiles();
 				if (tem == null || tem.length == 0) {
-					Toast.makeText(FilePicker.this, "Not Available",
+					Toast.makeText(EniacFilePicker.this, "Not Available",
 							Toast.LENGTH_SHORT).show();
 				} else {
 					currentPath = currentFileList[position];
@@ -105,7 +105,7 @@ public class FilePicker extends Activity {
 			//}
 		}
 
-		SimpleAdapter adapter = new SimpleAdapter(FilePicker.this, listItems,
+		SimpleAdapter adapter = new SimpleAdapter(EniacFilePicker.this, listItems,
 				R.layout.itemlist, new String[] { "filename", "modify" },
 				new int[] { R.id.file_name, R.id.file_modify });
 
