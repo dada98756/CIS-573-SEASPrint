@@ -39,6 +39,17 @@ public class ControlPanelScreen extends Activity{
     {
         FilePickerAPI.setKey(filePickerAPIKey);
         Intent myIntent = new Intent(v.getContext(), FilePicker.class);
+        startActivityForResult(myIntent, FilePickerAPI.REQUEST_CODE_GETFILE);
+    }
+    public void onHistoryBtnClick(View v)
+    {
+        FilePickerAPI.setKey(filePickerAPIKey);
+        Intent myIntent = new Intent(v.getContext(), PrintHistoryScreen.class);
+        startActivityForResult(myIntent, 0);
+    }
+    public void onPrintBtnClick(View v)
+    {
+        Intent myIntent = new Intent(v.getContext(), SettingScreen.class);
         startActivityForResult(myIntent, 0);
     }
     
@@ -46,7 +57,7 @@ public class ControlPanelScreen extends Activity{
         super.onResume();
     }
      
-     @Override
+    @Override
     protected void onActivityResult(int requestCode,
                                 int resultCode, Intent data) {
         if (requestCode == FilePickerAPI.REQUEST_CODE_GETFILE) {
@@ -56,6 +67,9 @@ public class ControlPanelScreen extends Activity{
             Uri uri = data.getData();
             System.out.println("File path is " + uri.toString());
             System.out.println("FPUrl: " + data.getExtras().getString("fpurl"));
-        }
+            Intent intent = new Intent(FilePicker.SAVE_CONTENT, uri, 
+                                    this, FilePicker.class);
+            startActivityForResult(intent, FilePickerAPI.REQUEST_CODE_SAVEFILE);
+        }   
     }
 }

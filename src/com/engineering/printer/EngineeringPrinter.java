@@ -173,7 +173,7 @@ public class EngineeringPrinter extends Activity {
             		try {
 	                	user=usertext.getText().toString();
 	                	password =passtext.getText().toString();
-                        password = "941096hearT";
+                      
             			host = hostname.getText().toString();
 	                	if(portname.getText().toString().length()!=0)
 	                	{
