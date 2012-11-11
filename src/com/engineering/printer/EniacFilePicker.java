@@ -81,40 +81,31 @@ public class EniacFilePicker extends Activity {
 		fileList.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
-//				if (currentFileList[position].isFile()) {
-//					currentFile = currentFileList[position];
-//					selectButton.setEnabled(true);
-//					return;
-//				}
-//				File[] tem = currentFileList[position].listFiles();
-//				if (tem == null || tem.length == 0) {
-//					Toast.makeText(EniacFilePicker.this, "Not Available",
-//							Toast.LENGTH_SHORT).show();
-//				} else {
-//					currentPath = currentFileList[position];
-//					currentFileList = tem;
-//					inflateListView(currentFileList);
-//				}
 				if(!isDirectory(ecurrentFilList[position])){
-					ecurrentFile = ecurrentFilList[position];
+					ecurrentFile = ecurrentPath+ecurrentFilList[position];
 					selectButton.setEnabled(true);
 					return;
 				}
 				selectButton.setEnabled(false);
 				try {
-					Log.d("tesd","about to cd to "+ecurrentFilList[position]);
-					ecurrentPath = eroot+"/"+ecurrentFilList[position];
-					c.execWithReturn("cd "+ecurrentFilList[position]);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				try {
-					String returnString = c.execWithReturn("ls -l "+ecurrentFilList[position]);
+					//ecurrentPath = c.execWithReturn("pwd");
+					ecurrentPath = ecurrentPath+"/"+ecurrentFilList[position];
+					//c.execWithReturn("cd "+ecurrentFilList[position]);
+					Log.d("testFind","ls -l "+ecurrentPath+"| grep ^d");
+					String returnString = c.execWithReturn("ls -l "+ecurrentPath+"| grep ^d");
+					String[] ecurrenStrings = returnString.split("\\n");
+					dirs = new String[ecurrenStrings.length];
+					Log.d("testdd",""+ecurrenStrings.length);
+					String[] temp = null;
+					for(int i=0;i<ecurrenStrings.length;i++){
+						temp = ecurrenStrings[i].split(" ");
+						dirs[i] = temp[temp.length-1];
+						Log.d("testaa", dirs[i]+"    "+ecurrenStrings[i]);
+					}
+				    returnString = c.execWithReturn("ls -l "+ecurrentPath);
 					String[] fs = returnString.split("\\n");
 					einflateListView(fs);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -140,6 +131,7 @@ public class EniacFilePicker extends Activity {
 				R.layout.eitemlist, new String[] { "filename", "lastModi" },
 				new int[] { R.id.efile_name, R.id.efile_modify});
 		//fileList.setAdapter(adapter);
+		
 		fileList.setAdapter(eadapter);
 		try {
 			etvPath.setText(ecurrentPath);
@@ -163,6 +155,17 @@ public class EniacFilePicker extends Activity {
 			//c.execWithReturn("cd ~/");
 			returnString = c.execWithReturn("ls -l");
 			ecurrentFilList = returnString.split("\\n");
+			Log.d("testFind","ls -l "+eroot+"| grep ^d");
+			String returnString1 = c.execWithReturn("ls -l "+eroot+"| grep ^d");
+			String[] ecurrenStrings = returnString1.split("\\n");
+			dirs = new String[ecurrenStrings.length];
+			Log.d("testdd",""+ecurrenStrings.length);
+			String[] temp = null;
+			for(int i=0;i<ecurrenStrings.length;i++){
+				temp = ecurrenStrings[i].split(" ");
+				dirs[i] = temp[temp.length-1];
+				Log.d("testaa", dirs[i]+"    "+ecurrenStrings[i]);
+			}
 			ecurrentPath = eroot;
 			einflateListView(ecurrentFilList);
 		}catch(Exception ex){
@@ -185,6 +188,33 @@ public class EniacFilePicker extends Activity {
 	public void onQuitBtnClick(View v) {
 		finish();
 	}
+	
+	public void onSelectBtnClick(View v) {
+//		if(currentFile.isDirectory()){
+//			new AlertDialog.Builder(v.getContext()).setMessage("This is a directory!").create().show();
+//		}
+//		else if (currentFile != null) {
+//			InputStream is = null;
+//	        
+//	        System.out.println("Try to get data");
+//
+//			    System.out.println("Getting data");
+//			    Document.loadFile(currentFile);
+//			    Document.setDeFile(currentFile.getPath());
+//			    //Document.setDescriptor(getIntent().getData());
+//			     // EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
+//			     // EngineeringPrinter.type = getIntent().getType();
+//			Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
+//            startActivityForResult(myIntent, 0);
+//		}
+		if(ecurrentFile!=null){
+			Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
+			myIntent.putExtra("filePath", ecurrentFile);
+			myIntent.putExtra("eniac", true);
+			startActivity(myIntent);
+		}
+	}
+	
 	private boolean isDirectory(String path){
 		boolean toR = false;
 		for(int i=0;i<dirs.length;i++){

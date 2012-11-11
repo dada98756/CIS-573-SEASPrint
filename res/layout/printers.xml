@@ -12,7 +12,13 @@
     android:text="@string/printer_prompt"
  	android:padding="10dp"
     />
-
+<TextView
+    android:layout_width="fill_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="wrap_content"
+    android:id="@+id/select_file_name"
+    android:padding="10dp"
+    />
 <Spinner 
         android:id="@+id/printer_spinner"
         android:gravity="center_horizontal"

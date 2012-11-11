@@ -1,6 +1,7 @@
 package com.engineering.printer;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,6 +39,8 @@ public class PrinterSelectScreen extends Activity{
 	private Button mPrintbutton;
 	private NumberPicker mNumberPicker;
 	private ArrayAdapter<CharSequence> mAdapter;
+	private boolean eniac = false;
+	private String filePath = null;
 	
 	//public static Integer pps;
 	
@@ -64,6 +67,10 @@ public class PrinterSelectScreen extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        System.out.println("In onCreate of PrinterSelectScreen");
+	        Intent mt = getIntent();
+	        eniac = mt.getBooleanExtra("eniac", false);
+	        filePath = mt.getStringExtra("filePath");
+	        System.out.println("eniac? "+eniac);
 //	        InputStream is = null;
 //	        try {
 //	        	if (null != getIntent().getData()) {
@@ -184,7 +191,9 @@ public class PrinterSelectScreen extends Activity{
 	        mNumberPicker= (NumberPicker) findViewById(R.id.number_picker);
 	        TextView t1 = (TextView) findViewById(R.id.duplex_label);
 	        TextView t2 = (TextView) findViewById(R.id.number_label);
-	        
+	        TextView t3 = (TextView) findViewById(R.id.select_file_name);
+	        Document.addToHistory(Document.descriptor.startsWith
+	        		("/")?Document.descriptor.substring(1):Document.descriptor+"   "+Calendar.getInstance().getTime());
 	        //final NumberPicker ppspicker= (NumberPicker) findViewById(R.id.pps_picker);
 	        
 	        if (EngineeringPrinter.Microsoft) {
@@ -208,7 +217,10 @@ public class PrinterSelectScreen extends Activity{
 	            	 
 	            	 //PRINT
 	            	 Intent myIntent = new Intent(v.getContext(), LoadingStatusScreen.class);
-                  startActivityForResult(myIntent, 0);
+	            	 myIntent.putExtra("eniac", eniac);
+	            	 myIntent.putExtra("filePath", filePath);
+	            	 startActivityForResult(myIntent, 0);
+	            	 
 	             }
 	         });
 		 

@@ -42,19 +42,6 @@ public class LocalFilePicker extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.filepicker);
-		String[] fs = null;
-		try {
-			c = new CommandConnection(EngineeringPrinter.connect);
-			String returnString = c.execWithReturn("ls");
-			Log.d("testaa", returnString);
-			fs = returnString.split("\\n");
-			Log.d("testdd",""+fs.length);
-			for(int i=0;i<fs.length;i++){
-				Log.d("testaa", fs[i]);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		sdCardStatue = Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED);
@@ -166,7 +153,9 @@ public class LocalFilePicker extends Activity {
 			     // EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
 			     // EngineeringPrinter.type = getIntent().getType();
 			Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
-            startActivityForResult(myIntent, 0);
+			myIntent.putExtra("eniac", false);
+			startActivityForResult(myIntent, 0);
+            
 		}
 	}
 

@@ -4,11 +4,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#ffffff"
+    android:id="@+id/print_history_list"
     >
     <TextView  
 	android:id="@+id/printing"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
-    android:text="This is for print history"
+    android:text="File Name/Data"
     />
 </LinearLayout>

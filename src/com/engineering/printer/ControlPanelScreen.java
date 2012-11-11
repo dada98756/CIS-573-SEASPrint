@@ -1,5 +1,11 @@
 package com.engineering.printer;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.logging.Level;
+
+import com.trilead.ssh2.log.Logger;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -65,11 +71,17 @@ public class ControlPanelScreen extends Activity{
             //Result was cancelled by the user or there was an error
                     return;
             Uri uri = data.getData();
-            System.out.println("File path is " + uri.toString());
-            System.out.println("FPUrl: " + data.getExtras().getString("fpurl"));
-            Intent intent = new Intent(FilePicker.SAVE_CONTENT, uri, 
-                                    this, FilePicker.class);
-            startActivityForResult(intent, FilePickerAPI.REQUEST_CODE_SAVEFILE);
-        }   
+            InputStream is = null;
+            try{
+            	is = getContentResolver().openInputStream(uri);
+        	}catch (FileNotFoundException ex){
+//        		Logger.getLogger(ControlPanelScreen.class.getName()).log(Level.SEVERE,null,ex);
+        	}
+            Document.load(is);
+            Document.setDescriptor(uri);
+            data.setClass(this, PrinterSelectScreen.class);
+            startActivityForResult(data,0);
+    	}
+            
     }
 }

@@ -3,6 +3,9 @@ package com.engineering.printer;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.apache.commons.io.FileUtils;
 import android.net.Uri;
 import android.util.Log;
@@ -10,6 +13,7 @@ import android.util.Log;
 public class Document {
     public static byte [] data;
     public static String descriptor;
+    public static List<String> history = new LinkedList<String>();
     
     public static void load(InputStream datain) {
         try {
@@ -48,4 +52,15 @@ public class Document {
             descriptor="content";
         Log.i("Connection", descriptor);
     }
+    
+    public static void addToHistory(String item)
+    {
+    	history.add(item);
+    }
+    
+    public static List<String> getHistory()
+    {
+    	return history;
+    }
+    
 }

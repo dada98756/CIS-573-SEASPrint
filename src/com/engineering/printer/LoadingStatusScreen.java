@@ -3,6 +3,7 @@ package com.engineering.printer;
 import java.io.IOException;
 import com.engineering.printer.PrinterSelectScreen.MyOnItemSelectedListener;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -18,6 +19,7 @@ public class LoadingStatusScreen extends Activity {
 	public String printer = MyOnItemSelectedListener.printer;
 	public boolean duplex = PrinterSelectScreen.duplex;
 	public Integer number = PrinterSelectScreen.number;
+	
 	//public Integer pps = PrinterSelectScreen.pps;
 	
 	public FileUpload.Future upload = EngineeringPrinter.upload;
@@ -27,11 +29,17 @@ public class LoadingStatusScreen extends Activity {
     private TextView mConstantLoading;
     private int mProgressStatus = 0;
     private Handler mHandler = new Handler();
+    private boolean eniac = false;
+    private String filename = null;
 
     @Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loadingstatus);
+        Intent mt = getIntent();
+        eniac = mt.getBooleanExtra("eniac", false);
+        filename = mt.getStringExtra("filePath");
+        Log.d("LoadingStatus",eniac+" "+filename);
         
     }
     
@@ -46,23 +54,34 @@ public class LoadingStatusScreen extends Activity {
 	        
 	           mConstantLoading = (TextView) findViewById(R.id.loading_constant);
 	            mConstantLoading.setText("Initializing upload.");
-	        
-            try {
-                FileUpload fu = new FileUpload(EngineeringPrinter.connect);
-                upload  = fu.startUpload(Document.data,  EngineeringPrinter.eb);
-            }
-            catch (IOException ioe){
-                //ALERT DIALOG
-                Log.e("Connection", "Failed to connect or send");
-            }
-	        
+	        if(!eniac){
+	            try {
+	                FileUpload fu = new FileUpload(EngineeringPrinter.connect);
+	                upload  = fu.startUpload(Document.data,  EngineeringPrinter.eb);
+	            }
+	            catch (IOException ioe){
+	                //ALERT DIALOG
+	                Log.e("Connection", "Failed to connect or send");
+	            }
+	        }
+	        else{
+	        	try{
+		        	//CommandConnection cc = new CommandConnection(EngineeringPrinter.connect);
+	   	         	//new PrintCaller(cc).printFile(filename, printer, number, duplex);
+	        	}catch(Exception ex){
+	        		ex.printStackTrace();
+	        		//finish();
+	        	}
+	        	//finish();
+	        }
             final Handler handle = new Handler();
 	        //Toast.makeText(LoadingStatusScreen.this, user + " "+ password + " "+ printer + " " + duplex + " "+ number + " "+ pps, Toast.LENGTH_LONG).show();
 	         // Start lengthy operation in a background thread
             new Thread( new Runnable() {
                  @Override
 				public void run() {
-        	        while (mProgressStatus < 100) {
+                  if(!eniac){
+                	 while (mProgressStatus < 100) {
                     	 //DO STUFF
                          try {
                             Thread.sleep(100);
@@ -81,14 +100,45 @@ public class LoadingStatusScreen extends Activity {
                             }
                         });
                      }
-        	        final String filename = upload.GetResult();
-        	        handle.post(new Runnable() {
-        	            @Override
-						public void run() {
-        	                UploadComplete(filename);
-        	            }
-        	        });
+        	        
+	        	        final String filename = upload.GetResult();
+	        	        Document.addToHistory(filename);
+	        	        handle.post(new Runnable() {
+	        	            @Override
+							public void run() {
+	        	                UploadComplete(filename);
+	        	            }
+	        	        });
+        	        }
+                  else{
+                	  while (mProgressStatus < 100) {
+                     	 //DO STUFF
+                          try {
+                             Thread.sleep(100);
+                         } catch (InterruptedException e) {
+         
+                         }
+                          // Update the progress bar
+                         handle.post(new Runnable()  {
+                             @Override
+ 							public void run() {
+                                  int val = 100;
+                                  mProgressStatus = val;
+                                  mProgress.setProgress(val);
+                                  Log.i("Connection", "Percentage " + Integer.toString(val));
+                                  mUpdate.setText("100/100");
+                             }
+                         });
+                      }
+                	  handle.post(new Runnable() {
+	        	            @Override
+							public void run() {
+	        	                UploadComplete(filename);
+	        	            }
+	        	        });
+                  }
                  }
+                 
             }).start();
 	         //Log.i("Connection", "Temporary filename is " + filename);  
 	 }
@@ -108,7 +158,8 @@ public class LoadingStatusScreen extends Activity {
         	         int local_number = number;
                     CommandConnection cc = new CommandConnection(EngineeringPrinter.connect);
         	         new PrintCaller(cc).printFile(local_filename, local_printer, local_number, local_duplex);
-        	         cc.execWithReturn("rm " + local_filename);
+        	         if(!eniac)	
+        	         	cc.execWithReturn("rm " + local_filename);
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
