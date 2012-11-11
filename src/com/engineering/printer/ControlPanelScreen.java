@@ -31,7 +31,7 @@ public class ControlPanelScreen extends Activity{
     }
     
     public void onBrowserBtnClick(View v) {
-    	Intent myIntent = new Intent(v.getContext(), EniacFilePicker.class);
+    	Intent myIntent = new Intent(v.getContext(), LocalFilePicker.class);
         startActivityForResult(myIntent, 0);
 	}
     

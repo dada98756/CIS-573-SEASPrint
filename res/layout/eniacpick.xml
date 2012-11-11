@@ -5,15 +5,15 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/tvPath"
+        android:id="@+id/etvPath"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="#ff0000"
-        android:textSize="20dip" />
+        android:textSize="10dip" />
 
     <Button
-        android:id="@+id/rootBtn"
+        android:id="@+id/erootBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -21,28 +21,28 @@
         android:text="@string/root" />
 
     <ListView
-        android:id="@+id/fileList"
-        android:layout_width="fill_parent"
+        android:id="@+id/efileList"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1.16" >
     </ListView>
 
     <Button
-        android:id="@+id/selectBtn"
+        android:id="@+id/eselectBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="onSelectBtnClick"
         android:text="@string/select" />
 	<Button
-        android:id="@+id/c2eBtn"
+        android:id="@+id/e2cBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="onc2eBtnClick"
-        android:text="@string/c2e" />
+        android:text="@string/e2c" />
     <Button
-        android:id="@+id/quitBtn"
+        android:id="@+id/equitBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

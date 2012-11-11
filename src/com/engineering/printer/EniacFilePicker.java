@@ -2,9 +2,11 @@ package com.engineering.printer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.Map;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -26,103 +29,146 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class EniacFilePicker extends Activity {
-	private TextView tvPath;
+	private TextView etvPath;
 	private ListView fileList;
 	private Button selectButton;
 	private boolean sdCardStatue;
-
-	File currentPath;
-	File root;
-	File currentFile;
-	File[] currentFileList;
+	//used to tell eniac from sdCard access
+	private boolean eniac;
+	private CommandConnection c = null;
+	
+	private String ecurrentPath;
+	private String eroot;
+	private String ecurrentFile;
+	private String[] ecurrentFilList;
+	private String[] dirs;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.filepicker);
-
-		sdCardStatue = Environment.getExternalStorageState().equals(
-				android.os.Environment.MEDIA_MOUNTED);
-
-		fileList = (ListView) this.findViewById(R.id.fileList);
-		tvPath = (TextView) this.findViewById(R.id.tvPath);
-		selectButton = (Button) findViewById(R.id.selectBtn);
-		selectButton.setEnabled(false);
-
-		root = new File("/mnt/sdcard/");
-		if (sdCardStatue) {
-			currentPath = root;
-			currentFileList = root.listFiles();
-			inflateListView(currentFileList);
-
+		setContentView(R.layout.eniacpick);
+		String[] ecurrenStrings = null;
+		dirs = null;
+		String[] fs = null;
+		try {
+			c = new CommandConnection(EngineeringPrinter.connect);
+			String returnString = c.execWithReturn("ls -l | grep ^d");
+			//Log.d("testaa", returnString);
+			ecurrenStrings = returnString.split("\\n");
+			ecurrentPath = c.execWithReturn("pwd");
+			eroot = ecurrentPath;
+			dirs = new String[ecurrenStrings.length];
+			//Log.d("testdd",""+ecurrenStrings.length);
+			String[] temp = null;
+			for(int i=0;i<ecurrenStrings.length;i++){
+				temp = ecurrenStrings[i].split(" ");
+				dirs[i] = temp[temp.length-1];
+				Log.d("testaa", dirs[i]+"    "+ecurrenStrings[i]);
+			}
+			returnString = c.execWithReturn("ls -l");
+			fs = returnString.split("\\n");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
 
+		fileList = (ListView) this.findViewById(R.id.efileList);
+		etvPath = (TextView) this.findViewById(R.id.etvPath);
+		selectButton = (Button) findViewById(R.id.eselectBtn);
+		selectButton.setEnabled(false);
+		
+		einflateListView(fs);
 		fileList.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
-				if (currentFileList[position].isFile()) {
-					currentFile = currentFileList[position];
+//				if (currentFileList[position].isFile()) {
+//					currentFile = currentFileList[position];
+//					selectButton.setEnabled(true);
+//					return;
+//				}
+//				File[] tem = currentFileList[position].listFiles();
+//				if (tem == null || tem.length == 0) {
+//					Toast.makeText(EniacFilePicker.this, "Not Available",
+//							Toast.LENGTH_SHORT).show();
+//				} else {
+//					currentPath = currentFileList[position];
+//					currentFileList = tem;
+//					inflateListView(currentFileList);
+//				}
+				if(!isDirectory(ecurrentFilList[position])){
+					ecurrentFile = ecurrentFilList[position];
 					selectButton.setEnabled(true);
 					return;
 				}
-				File[] tem = currentFileList[position].listFiles();
-				if (tem == null || tem.length == 0) {
-					Toast.makeText(EniacFilePicker.this, "Not Available",
-							Toast.LENGTH_SHORT).show();
-				} else {
-					currentPath = currentFileList[position];
-					currentFileList = tem;
-					inflateListView(currentFileList);
+				selectButton.setEnabled(false);
+				try {
+					Log.d("tesd","about to cd to "+ecurrentFilList[position]);
+					ecurrentPath = eroot+"/"+ecurrentFilList[position];
+					c.execWithReturn("cd "+ecurrentFilList[position]);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					String returnString = c.execWithReturn("ls -l "+ecurrentFilList[position]);
+					String[] fs = returnString.split("\\n");
+					einflateListView(fs);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		});
 	}
 
-	private void inflateListView(File[] files) {
+	
+	private void einflateListView(String[] files) {
 		List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
-
+		String[] temp  =null;
+		ecurrentFilList = new String[files.length];
 		for (int i = 0; i < files.length; i++) {
 			Map<String, Object> listItem = new HashMap<String, Object>();
-			String filename = files[i].getName();
+			temp = files[i].split(" ");
+			String filename = temp[temp.length-1];
 			listItem.put("filename", filename);
-
-			//if (".txt".equalsIgnoreCase(filename.substring(filename
-				//	.lastIndexOf(".")))
-				//	|| ".doc".equalsIgnoreCase(filename.substring(filename
-				//			.lastIndexOf(".")))) {
-				File myFile = files[i];
-
-				long modTime = myFile.lastModified();
-				SimpleDateFormat dateFormat = new SimpleDateFormat(
-						"yyyy-MM-dd HH:mm:ss");
-				System.out.println(dateFormat.format(new Date(modTime)));
-
-				listItem.put(
-						"modify",
-						"Date Modified: "
-								+ dateFormat.format(new Date(modTime)));
-				listItems.add(listItem);
-			//}
+			ecurrentFilList[i] = filename;
+			listItem.put("lastModi", "");
+			listItems.add(listItem);
 		}
 
-		SimpleAdapter adapter = new SimpleAdapter(EniacFilePicker.this, listItems,
-				R.layout.itemlist, new String[] { "filename", "modify" },
-				new int[] { R.id.file_name, R.id.file_modify });
-
-		fileList.setAdapter(adapter);
-
+		SimpleAdapter eadapter = new SimpleAdapter(EniacFilePicker.this, listItems,
+				R.layout.eitemlist, new String[] { "filename", "lastModi" },
+				new int[] { R.id.efile_name, R.id.efile_modify});
+		//fileList.setAdapter(adapter);
+		fileList.setAdapter(eadapter);
 		try {
-			tvPath.setText(currentPath.getCanonicalPath());
+			etvPath.setText(ecurrentPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
-
+	public void one2cBtnClick(View v){
+		selectButton.setEnabled(false);
+		Intent myIntent = new Intent(v.getContext(), LocalFilePicker.class);
+        startActivity(myIntent);
+	}
 	public void onRootBtnClick(View v) {
-		currentPath = root;
-		currentFileList = root.listFiles();
-		inflateListView(currentFileList);
+		selectButton.setEnabled(false);
+		String returnString = null;
+//		currentPath = root;
+//		currentFileList = root.listFiles();
+//		inflateListView(currentFileList);
+		try{
+			//c.execWithReturn("cd ~/");
+			returnString = c.execWithReturn("ls -l");
+			ecurrentFilList = returnString.split("\\n");
+			ecurrentPath = eroot;
+			einflateListView(ecurrentFilList);
+		}catch(Exception ex){
+			ex.printStackTrace();
+			System.exit(-1);
+		}
 	}
 
 	@Override
@@ -130,25 +176,23 @@ public class EniacFilePicker extends Activity {
 		getMenuInflater().inflate(R.menu.filepicker, menu);
 		return true;
 	}
-
-	public void onSelectBtnClick(View v) {
-		if (currentFile != null) {
-			InputStream is = null;
-	        
-	        System.out.println("Try to get data");
-
-			    System.out.println("Getting data");
-			    Document.loadFile(currentFile);
-			    Document.setDeFile(currentFile.getPath());
-			    //Document.setDescriptor(getIntent().getData());
-			     // EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
-			     // EngineeringPrinter.type = getIntent().getType();
-			Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
-            startActivityForResult(myIntent, 0);
-		}
+	public void onc2eBtnClick(View v) {
+		//String cPath = c.execWithReturn("pwd");
+		finish();
 	}
+	
 
 	public void onQuitBtnClick(View v) {
 		finish();
+	}
+	private boolean isDirectory(String path){
+		boolean toR = false;
+		for(int i=0;i<dirs.length;i++){
+			if(dirs[i].equals(path)) {
+				toR =true;
+				break;
+			}
+		}
+		return toR;
 	}
 }

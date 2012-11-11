@@ -219,8 +219,12 @@
             
         
          <activity
-            android:name=".EniacFilePicker"
+            android:name=".LocalFilePicker"
             android:label="@string/title_activity_file_picker" >
+        </activity> 
+        <activity
+            android:name=".EniacFilePicker"
+            android:label="@string/title_activity_eniac_file_picker" >
         </activity> 
         <activity android:name = ".ControlPanelScreen"></activity>
         <activity
