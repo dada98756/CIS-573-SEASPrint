@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -34,13 +35,16 @@ public class PrinterSelectScreen extends Activity{
 	public static final String PRINTER_PREF = "SEASPrintingFavorite";
 	public static final String PRINTER_KEY = "printerpreference";
 	public static String mFavored;
+	public static boolean timedPrinting = false;
 	private ToggleButton mTogglebutton;
 	private Spinner mSpinner;
 	private Button mPrintbutton;
 	private NumberPicker mNumberPicker;
 	private ArrayAdapter<CharSequence> mAdapter;
+	private CheckBox mTimedPrinting;
 	private boolean eniac = false;
 	private String filePath = null;
+	
 	
 	//public static Integer pps;
 	
@@ -204,6 +208,8 @@ public class PrinterSelectScreen extends Activity{
 	            mTogglebutton.setVisibility(View.GONE);
 	        }
 	        
+	        mTimedPrinting = (CheckBox) findViewById(R.id.timed_printing);
+	        
 	        mPrintbutton = (Button) findViewById(R.id.print_button);
 	        mPrintbutton.setOnClickListener(new View.OnClickListener() {
 	             @Override
@@ -211,6 +217,7 @@ public class PrinterSelectScreen extends Activity{
 	            	 number=mNumberPicker.value;
 	            	// pps=ppspicker.value;
 	            	 duplex=dTemp;
+	            	 timedPrinting = mTimedPrinting.isChecked();
 	            	 
 	                 SharedPreferences settings = getSharedPreferences(PRINTER_PREF, 0);
 	                 SharedPreferences.Editor ed = settings.edit();
