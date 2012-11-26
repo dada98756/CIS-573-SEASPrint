@@ -1,6 +1,7 @@
 package com.engineering.printer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -65,5 +66,31 @@ public class PrintCaller {
 	public void setDefaultPrinter(String printer) {
 		DEFAULT_PRINTER = printer;
 	}
+
+	/*public void printFile(String local_filename, String local_printer,
+			int local_number, boolean local_duplex, boolean local_timedPrinting) {
+		if (!local_timedPrinting){
+			printFile(local_filename, local_printer, local_number, local_duplex, local_timedPrinting);
+		}else{ 
+			//timedPrinting. divide to 5 pages per chunk sent to printer. only work for PDFs and Microsoft office documents
+			ArrayList<PagePair> pageIndexes = calcPageIndexes(local_filename);
+		}
+		
+	}
+	
+	public ArrayList<PagePair> calcPageIndexes(String local_filename){
+		ArrayList<PagePair> pageIndexes = new ArrayList<PagePair>();
+		
+		return pageIndexes;
+	}*/
 	
 }
+
+/*class PagePair{
+	int pageFrom;
+	int pageTo;
+	public PagePair(int from, int to){
+		pageFrom = from;
+		pageTo = to;
+	}
+}*/
