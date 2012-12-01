@@ -31,8 +31,9 @@ public class TimedPrintingUtil {
 		String firstL = returnV.split(" ")[0];
 		//System.out.println(firstL.equals("No"));
 		if(firstL.equals("No")){
-			mConn.execWithReturnPty("screen "+SETUP_SH);
-			//mConn.execWithReturn(SETUP_SH);
+			mConn.execWithoutReturnPty("screen -i");
+			mConn.execWithReturnPty(SETUP_SH);
+			mConn.closeSession();
 		}
 	}
 	
