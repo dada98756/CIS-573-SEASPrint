@@ -11,6 +11,7 @@
     android:layout_height="wrap_content" 
     android:text="@string/printer_prompt"
  	android:padding="10dp"
+ 	android:textSize="15sp"
     />
 <TextView
     android:layout_width="fill_parent"
@@ -19,23 +20,23 @@
     android:id="@+id/select_file_name"
     android:padding="10dp"
     />
-<Spinner 
-        android:id="@+id/printer_spinner"
-        android:gravity="center_horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:prompt="@string/printer_prompt"
-        android:padding="5dp"
-    /> 
-    
 
+<Spinner
+    android:id="@+id/printer_spinner"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:gravity="center_horizontal"
+    android:padding="5dp"
+    android:prompt="@string/printer_prompt" />
         
 <TextView  
 	android:id = "@+id/number_label"
 	android:gravity="center_horizontal"
     android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
+    android:layout_height="50dp" 
     android:text="@string/number_prompt"
+	android:textSize="15sp"
+	android:paddingTop="15dp"
     />
     
   
@@ -43,33 +44,26 @@
 	android:gravity="center_horizontal"
    android:id="@+id/number_picker"
    android:orientation="horizontal"
-   android:layout_width="wrap_content"
-   android:layout_height="wrap_content"
-   /> 
-
-<TextView  android:id = "@+id/duplex_label"
-    android:layout_width="fill_parent" 
-    android:gravity="center_horizontal"
-    android:layout_height="wrap_content" 
-    android:text="@string/duplex_prompt"
-    />
+   android:layout_width="fill_parent"
+   android:layout_height="50dp"
+   />
 
 <CheckBox
     android:id="@+id/duplex_toggle_checkbox"
-    android:layout_width="250dp"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:text="Duplex Print" />
 
 		<CheckBox 
 		    android:id="@+id/timed_printing"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:text="Timed printing for SEAS rules" 
         />   
 
 	   <CheckBox
 	       android:id="@+id/save_print_options"
-	       android:layout_width="250dp"
+	       android:layout_width="fill_parent"
 	       android:layout_height="wrap_content"
 	       android:text="Save Print Options" />
 
