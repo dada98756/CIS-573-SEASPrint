@@ -3,32 +3,41 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#000"
+    android:background="#fff"
     >
-
+ <TextView
+     android:id="@+id/control_panel_header"
+     android:layout_width="fill_parent"
+   	 android:layout_height="50dp"  
+   	 android:text = "SEAS Print Control Panel"
+ 	 android:gravity="center"
+ 	 android:textColor="#fff"
+ 	 android:background="#111"
+ 	 android:textSize="18sp"
+ />
  <Button
     android:id="@+id/sd_browser_button"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"  
     android:text="SD Card Browser"
-    android:textColor="#eee"
+    android:textColor="#000"
     android:onClick="onSDBrowserBtnClick"
-    android:background="@android:color/transparent"
+    android:background="#fff"
     android:gravity="left"
     android:padding="18dp"
-    android:textSize="20sp"
+    android:textSize="15sp"
  />
  <Button
     android:id="@+id/cloud_browser_button"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:text="Cloud Browser"
-    android:textColor="#eee"
+    android:textColor="#000"
     android:onClick="onCloudBtnClick"
-    android:background="@android:color/transparent"
+    android:background="#fff"
     android:gravity="left"
     android:padding="18dp"
-    android:textSize="20sp"
+    android:textSize="15sp"
  />
  
  <Button
@@ -36,25 +45,32 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:text="Eniac Browser"
-    android:textColor="#eee"
+    android:textColor="#000"
     android:onClick="onEniacBtnClick"
-    android:background="@android:color/transparent"
+    android:background="#fff"
     android:gravity="left"
     android:padding="18dp"
-    android:textSize="20sp"
+    android:textSize="15sp"
  />
 
  <Button
      android:id="@+id/print_history_button"
      android:layout_width="fill_parent"
      android:layout_height="wrap_content"
-     android:background="@android:color/transparent"
+     android:background="#fff"
      android:gravity="left"
      android:onClick="onHistoryBtnClick"
      android:padding="18dp"
      android:text="Print History"
-     android:textColor="#eee"
-     android:textSize="20sp"
+     android:textColor="#000"
+     android:textSize="15sp"
+      />
+
+ <TextView
+     android:id="@+id/control_panel_bottom"
+     android:layout_alignParentBottom="true"
+     android:layout_width="fill_parent"
+     android:layout_height="20dp"
       />
 
 </LinearLayout>
