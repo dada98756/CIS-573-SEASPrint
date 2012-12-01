@@ -56,7 +56,7 @@ public final class R {
         public static final int byte_progress=0x7f0a001e;
         public static final int c2eBtn=0x7f0a0018;
         public static final int cloud_browser_button=0x7f0a0009;
-        public static final int connection_config=0x7f0a002f;
+        public static final int connection_config=0x7f0a0030;
         public static final int duplex_label=0x7f0a002a;
         public static final int duplex_togglebutton=0x7f0a002b;
         public static final int e2cBtn=0x7f0a0012;
@@ -77,14 +77,14 @@ public final class R {
         public static final int linearLayout1=0x7f0a0004;
         public static final int listView1=0x7f0a0000;
         public static final int loading_constant=0x7f0a001c;
-        public static final int menu_settings=0x7f0a002e;
+        public static final int menu_settings=0x7f0a002f;
         public static final int number_label=0x7f0a0028;
         public static final int number_picker=0x7f0a0029;
         public static final int passtext=0x7f0a0021;
         public static final int portname=0x7f0a0023;
-        public static final int print_button=0x7f0a002c;
+        public static final int print_button=0x7f0a002d;
         public static final int print_history_button=0x7f0a000b;
-        public static final int print_history_list=0x7f0a002d;
+        public static final int print_history_list=0x7f0a002e;
         public static final int print_setting_button=0x7f0a000a;
         public static final int printer_spinner=0x7f0a0027;
         public static final int printing=0x7f0a001f;
@@ -96,6 +96,7 @@ public final class R {
         public static final int selectBtn=0x7f0a0017;
         public static final int select_file_name=0x7f0a0026;
         public static final int textView1=0x7f0a0006;
+        public static final int timed_printing=0x7f0a002c;
         public static final int tvPath=0x7f0a0014;
         public static final int usertext=0x7f0a0020;
         public static final int webView1=0x7f0a0003;
