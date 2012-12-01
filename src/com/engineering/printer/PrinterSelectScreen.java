@@ -74,7 +74,7 @@ public class PrinterSelectScreen extends Activity{
 	        Intent mt = getIntent();
 	        eniac = mt.getBooleanExtra("eniac", false);
 	        filePath = mt.getStringExtra("filePath");
-	        System.out.println("eniac? "+eniac);
+	        System.out.println("eniac? "+eniac+"filePath: "+filePath);
 //	        InputStream is = null;
 //	        try {
 //	        	if (null != getIntent().getData()) {

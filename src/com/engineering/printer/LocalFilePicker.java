@@ -154,6 +154,7 @@ public class LocalFilePicker extends Activity {
 			     // EngineeringPrinter.type = getIntent().getType();
 			Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
 			myIntent.putExtra("eniac", false);
+			myIntent.putExtra("filePath", currentFile.toString());
 			startActivityForResult(myIntent, 0);
             
 		}
