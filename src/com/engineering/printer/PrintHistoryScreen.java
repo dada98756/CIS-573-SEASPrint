@@ -19,7 +19,8 @@ import android.widget.TextView;
  */
 public class PrintHistoryScreen extends Activity
 {
-    public void onCreate(Bundle savedInstanceState) 
+    @Override
+	public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.printhistory);  
@@ -35,7 +36,8 @@ public class PrintHistoryScreen extends Activity
         }
     }
     
-     public void onResume() 
+     @Override
+	public void onResume() 
      {
         super.onResume();
     }

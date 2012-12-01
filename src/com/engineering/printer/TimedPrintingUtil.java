@@ -26,8 +26,14 @@ public class TimedPrintingUtil {
 	}
 
 	private void setup() throws IOException{
-		mConn.execWithReturn("screen");
-		mConn.execWithReturn(SETUP_SH);
+		String returnV = mConn.execWithReturn("echo | screen -ls");
+		//System.out.println(returnV);
+		String firstL = returnV.split(" ")[0];
+		//System.out.println(firstL.equals("No"));
+		if(firstL.equals("No")){
+			mConn.execWithReturnPty("screen "+SETUP_SH);
+			//mConn.execWithReturn(SETUP_SH);
+		}
 	}
 	
 	public boolean addToPrintList(String filename){

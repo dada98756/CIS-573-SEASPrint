@@ -25,7 +25,8 @@ public class ControlPanelScreen extends Activity{
 	private Button printHistoryButton;
 	private String filePickerAPIKey = "ArYkjf8hmSpCG8cycKjmsz" ; 
     
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.controlpanel);  
         
@@ -65,7 +66,8 @@ public class ControlPanelScreen extends Activity{
         startActivityForResult(myIntent, 0);
     }
     
-    public void onResume() {
+    @Override
+	public void onResume() {
         super.onResume();
     }
      

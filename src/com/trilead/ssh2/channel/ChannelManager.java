@@ -816,7 +816,7 @@ public class ChannelManager implements MessageHandler
 				throw new IOException("Cannot execute command on this channel (" + c.getReasonClosed() + ")");
 
 			sm = new PacketSessionExecCommand(c.remoteID, true, cmd);
-
+			PacketSessionExecCommand smn = new PacketSessionExecCommand(c.remoteID, true, cmd);
 			c.successCounter = c.failedCounter = 0;
 		}
 
@@ -841,6 +841,40 @@ public class ChannelManager implements MessageHandler
 		}
 	}
 
+	public void requestExecCommandNR(Channel c, String cmd) throws IOException
+	{
+		PacketSessionExecCommand sm;
+
+		synchronized (c)
+		{
+			if (c.state != Channel.STATE_OPEN)
+				throw new IOException("Cannot execute command on this channel (" + c.getReasonClosed() + ")");
+
+			sm = new PacketSessionExecCommand(c.remoteID, false, cmd);
+			c.successCounter = c.failedCounter = 0;
+		}
+
+		synchronized (c.channelSendLock)
+		{
+			if (c.closeMessageSent)
+				throw new IOException("Cannot execute command on this channel (" + c.getReasonClosed() + ")");
+			tm.sendMessage(sm.getPayload());
+		}
+
+		if (log.isEnabled())
+			log.log(50, "Executing command (channel " + c.localID + ", '" + cmd + "')");
+
+		try
+		{
+			if (waitForChannelRequestResult(c) == false)
+				throw new IOException("The server denied the request.");
+		}
+		catch (IOException e)
+		{
+			throw (IOException) new IOException("The execute request failed.").initCause(e);
+		}
+	}
+	
 	public void requestShell(Channel c) throws IOException
 	{
 		PacketSessionStartShell sm;

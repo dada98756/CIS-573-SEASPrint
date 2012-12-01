@@ -59,6 +59,7 @@ public class SDFilePicker extends Activity {
 
 		}
 		fileList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
 				if (currentFileList[position].isFile()) {
