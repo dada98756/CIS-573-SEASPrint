@@ -120,6 +120,7 @@ public class NumberPicker extends LinearLayout {
 		increment = new Button( context );
 		increment.setTextSize( 25 );
 		increment.setText( "+" );
+		increment.setPadding(0, 0, 0, 0);
 		
 		// Increment once for a click
 		increment.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +160,8 @@ public class NumberPicker extends LinearLayout {
 		
 		valueText = new EditText( context );
 		valueText.setTextSize(25);
+		valueText.setPadding(0, 0, 0, 0);
+		valueText.setGravity(Gravity.CENTER);
 		
 		// Since we're a number that gets affected by the button, we need to be
 		// ready to change the numeric value with a simple ++/--, so whenever
@@ -200,6 +203,7 @@ public class NumberPicker extends LinearLayout {
 		decrement = new Button( context );
 		decrement.setTextSize( 25 );
 		decrement.setText( "-" );
+		decrement.setPadding(0, 0, 0, 0);
 		
 
 		// Decrement once for a click

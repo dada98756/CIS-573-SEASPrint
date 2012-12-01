@@ -23,9 +23,9 @@
         android:id="@+id/printer_spinner"
         android:gravity="center_horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:prompt="@string/printer_prompt"
-        android:padding="30dp"
+        android:padding="5dp"
     /> 
     
 
@@ -36,7 +36,6 @@
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:text="@string/number_prompt"
-    android:padding="10dp"
     />
     
   
@@ -46,7 +45,6 @@
    android:orientation="horizontal"
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
-   android:padding="10dp"
    /> 
 
 <TextView  android:id = "@+id/duplex_label"
@@ -54,22 +52,26 @@
     android:gravity="center_horizontal"
     android:layout_height="wrap_content" 
     android:text="@string/duplex_prompt"
-    android:padding="0dp"
     />
-        
-<ToggleButton android:id="@+id/duplex_togglebutton"
-	android:gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textOn="On"
-        android:textOff="Off"
-        android:padding="30dp"
-        android:verticalSpacing= "20dp"
-        />
-<CheckBox android:id="@+id/timed_printing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Timed printing for SEAS rules" />   
+
+<CheckBox
+    android:id="@+id/duplex_toggle_checkbox"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:text="Duplex Print" />
+
+		<CheckBox 
+		    android:id="@+id/timed_printing"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Timed printing for SEAS rules" 
+        />   
+
+	   <CheckBox
+	       android:id="@+id/save_print_options"
+	       android:layout_width="250dp"
+	       android:layout_height="wrap_content"
+	       android:text="Save Print Options" />
 
 <!--<TextView  -->
 <!--	android:gravity="center_horizontal"-->
@@ -89,9 +91,8 @@
 <Button android:id="@+id/print_button"
             android:gravity="center_horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="80dp"
+            android:layout_height="50dp"
             android:text="Print" 
-            android:padding="30dp"
             
             />    
             

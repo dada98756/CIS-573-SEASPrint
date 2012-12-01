@@ -36,12 +36,13 @@ public class PrinterSelectScreen extends Activity{
 	public static final String PRINTER_KEY = "printerpreference";
 	public static String mFavored;
 	public static boolean timedPrinting = false;
-	private ToggleButton mTogglebutton;
+	private CheckBox mDuplexCheckbox;
 	private Spinner mSpinner;
 	private Button mPrintbutton;
 	private NumberPicker mNumberPicker;
 	private ArrayAdapter<CharSequence> mAdapter;
 	private CheckBox mTimedPrinting;
+	private CheckBox mSavePrintOptions;
 	private boolean eniac = false;
 	private String filePath = null;
 	
@@ -149,88 +150,119 @@ public class PrinterSelectScreen extends Activity{
 		 setContentView(R.layout.printers);
 		 
 		 
-	        
-		   mSpinner = (Spinner) findViewById(R.id.printer_spinner);
-	        String printers[] = null;
-	        boolean has_favored = false;
-	        try {
-	        	Log.d("Connection", "Start Connecting");
-	            PrintCaller pc = new PrintCaller(new CommandConnection(EngineeringPrinter.connect));
-	            List<String> ps = pc.getPrinters();
-	            printers = new String[ps.size()];
-	            // yes I know this is stupid and could be done much easier but ps.toArray was trippin ballz
-	            int i = 0;
-	            for(Iterator<String> iter = ps.iterator(); iter.hasNext(); i++) {
-	            	printers[i] = iter.next();
-	            }
-	            has_favored = ps.contains(mFavored);
-	        }
-	        catch (IOException ioe){
-	            new AlertDialog.Builder(getApplicationContext()).setMessage("Could not connect to server! Verify login information and network status.").create().show();
-	            Log.d("Connection", "Failed to connect or send");
-	        }
-	        mAdapter = new ArrayAdapter(
-	                this, android.R.layout.simple_spinner_item, printers);
-	        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	        mSpinner.setAdapter(mAdapter);
-	           if (has_favored) {
-	                int pos = mAdapter.getPosition(mFavored);
-	                mSpinner.setSelection(pos);
-	            }
-	        mSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
-	        
-	        mTogglebutton = (ToggleButton) findViewById(R.id.duplex_togglebutton);
-	        mTogglebutton.setOnClickListener(new OnClickListener() {
-	            @Override
-				public void onClick(View v) {
-	                // Perform action on clicks
-	                if (mTogglebutton.isChecked()) {
-	                    dTemp=true;
-	                } else {
-	                    dTemp=false;
-	                }
-	            }
-	        });
-	        
-	        mNumberPicker= (NumberPicker) findViewById(R.id.number_picker);
-	        TextView t1 = (TextView) findViewById(R.id.duplex_label);
-	        TextView t2 = (TextView) findViewById(R.id.number_label);
-	        TextView t3 = (TextView) findViewById(R.id.select_file_name);
-            Document.descriptor = filePath;	       
-	        Document.addToHistory(Document.descriptor.startsWith
-	        		("/")?Document.descriptor.substring(1):Document.descriptor+"   "+Calendar.getInstance().getTime());
-	        //final NumberPicker ppspicker= (NumberPicker) findViewById(R.id.pps_picker);
-	        
-	        if (EngineeringPrinter.Microsoft) {
-	            t1.setVisibility(View.GONE);
-	            t2.setVisibility(View.GONE);
-	            mNumberPicker.setVisibility(View.GONE);
-	            mTogglebutton.setVisibility(View.GONE);
-	        }
-	        
-	        mTimedPrinting = (CheckBox) findViewById(R.id.timed_printing);
-	        
-	        mPrintbutton = (Button) findViewById(R.id.print_button);
-	        mPrintbutton.setOnClickListener(new View.OnClickListener() {
-	             @Override
-				public void onClick(View v) {
-	            	 number=mNumberPicker.value;
-	            	// pps=ppspicker.value;
-	            	 duplex=dTemp;
-	            	 timedPrinting = mTimedPrinting.isChecked();
-	            	 
-	                 SharedPreferences settings = getSharedPreferences(PRINTER_PREF, 0);
-	                 SharedPreferences.Editor ed = settings.edit();
-	                 ed.putString(PRINTER_KEY, mFavored);
-	            	 
-	            	 //PRINT
-	            	 Intent myIntent = new Intent(v.getContext(), LoadingStatusScreen.class);
-	            	 myIntent.putExtra("eniac", eniac);
-	            	 myIntent.putExtra("filePath", filePath);
-	            	 startActivityForResult(myIntent, 0);
-	            	 
-	             }
-	         });
+		 SharedPreferences settings = getSharedPreferences(PRINTER_PREF, 0);
+	    
+		 //set printer dropdown list.
+		 mFavored = settings.getString(PRINTER_KEY, null);
+	     if (mFavored == null) {
+	         mFavored = "169";
+	     }	     
+	   	mSpinner = (Spinner) findViewById(R.id.printer_spinner);
+        String printers[] = null;
+        boolean has_favored = false;
+        try {
+        	Log.d("Connection", "Start Connecting");
+            PrintCaller pc = new PrintCaller(new CommandConnection(EngineeringPrinter.connect));
+            List<String> ps = pc.getPrinters();
+            printers = new String[ps.size()];
+            // yes I know this is stupid and could be done much easier but ps.toArray was trippin ballz
+            int i = 0;
+            for(Iterator<String> iter = ps.iterator(); iter.hasNext(); i++) {
+            	printers[i] = iter.next();
+            }
+            has_favored = ps.contains(mFavored);
+        }
+        
+        catch (IOException ioe){
+            new AlertDialog.Builder(getApplicationContext()).setMessage("Could not connect to server! Verify login information and network status.").create().show();
+            Log.d("Connection", "Failed to connect or send");
+        }
+        mAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, printers);
+        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(mAdapter);
+       if (has_favored) {
+            int pos = mAdapter.getPosition(mFavored);
+            mSpinner.setSelection(pos);
+        }
+        mSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
+        
+        
+        boolean mDuplex = settings.getBoolean("DUPLEX_KEY", false);
+        mDuplexCheckbox = (CheckBox) findViewById(R.id.duplex_toggle_checkbox);
+        if(mDuplex)
+        {
+        	dTemp=true;
+        	mDuplexCheckbox.setChecked(true);
+        }
+        mDuplexCheckbox.setOnClickListener(new OnClickListener() {
+            @Override
+			public void onClick(View v) {
+                // Perform action on clicks
+                if (mDuplexCheckbox.isChecked()) {
+                    dTemp=true;
+                } else {
+                    dTemp=false;
+                }
+            }
+        });
+        
+        mTimedPrinting = (CheckBox) findViewById(R.id.timed_printing);
+        boolean mTimePrinting = settings.getBoolean("TIMEPRINT_KEY", false);
+        if(mTimePrinting)
+        {
+        	mTimedPrinting.setChecked(true);
+        }
+        
+        mNumberPicker= (NumberPicker) findViewById(R.id.number_picker);
+        int mNumber = settings.getInt("NUMBER_PICKER",1);
+        mNumberPicker.setValue(mNumber);
+        
+        TextView t1 = (TextView) findViewById(R.id.duplex_label);
+        TextView t2 = (TextView) findViewById(R.id.number_label);
+        TextView t3 = (TextView) findViewById(R.id.select_file_name);
+        Document.descriptor = filePath;	       
+        Document.addToHistory(Document.descriptor.startsWith
+        		("/")?Document.descriptor.substring(1):Document.descriptor+"   "+Calendar.getInstance().getTime());
+        //final NumberPicker ppspicker= (NumberPicker) findViewById(R.id.pps_picker);
+        
+        if (EngineeringPrinter.Microsoft) {
+            t1.setVisibility(View.GONE);
+            t2.setVisibility(View.GONE);
+            mNumberPicker.setVisibility(View.GONE);
+            mDuplexCheckbox.setVisibility(View.GONE);
+        }
+        
+        
+        mSavePrintOptions = (CheckBox)findViewById(R.id.save_print_options);
+        mSavePrintOptions.setChecked(true);
+        mPrintbutton = (Button) findViewById(R.id.print_button);
+        mPrintbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+			public void onClick(View v) {
+            	 number=mNumberPicker.value;
+            	// pps=ppspicker.value;
+            	 duplex=dTemp;
+            	 timedPrinting = mTimedPrinting.isChecked();       	 
+                 
+            	 if(mSavePrintOptions.isChecked())
+            	 {
+            		 SharedPreferences settings = getSharedPreferences(PRINTER_PREF, 0);
+                     SharedPreferences.Editor ed = settings.edit();
+                     ed.putBoolean("TIMEPRINT_KEY", timedPrinting);
+                     ed.putBoolean("DUPLEX_KEY", duplex);
+                     ed.putString(PRINTER_KEY, (String)mSpinner.getSelectedItem());
+                     ed.putInt("NUMBER_PICKER", number);
+                     ed.commit();
+            		 
+            	 }
+            	 //PRINT
+            	 Intent myIntent = new Intent(v.getContext(), LoadingStatusScreen.class);
+            	 myIntent.putExtra("eniac", eniac);
+            	 myIntent.putExtra("filePath", filePath);
+            	 startActivityForResult(myIntent, 0);
+            	 
+             }
+         });
 		 
 	 }
 	 
