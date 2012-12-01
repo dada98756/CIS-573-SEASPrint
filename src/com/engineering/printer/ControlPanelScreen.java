@@ -86,7 +86,6 @@ public class ControlPanelScreen extends Activity{
             Document.load(is);
             Document.setDescriptor(uri);
             data.setClass(this, PrinterSelectScreen.class);
-            data.putExtra("filePath", uri.toString());
             startActivityForResult(data,0);
     	};
             
