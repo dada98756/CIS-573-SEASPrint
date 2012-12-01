@@ -1,69 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ffffff"
+    android:background="#000"
     >
 
- <TableRow
-    android:layout_marginTop="25dp"
-    android:layout_marginBottom="25dp"
-    android:layout_marginLeft="14dp"
-    android:layout_marginRight="15dp"
-     >
  <Button
-    android:id="@+id/file_browser_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:drawableTop="@drawable/filebrowser"
-    android:text="File Browser"
-    android:textColor="#111"
-    android:gravity="center"
-     android:layout_margin="5dp"
-    android:onClick="onBrowserBtnClick"
+    android:id="@+id/sd_browser_button"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"  
+    android:text="SD Card Browser"
+    android:textColor="#eee"
+    android:onClick="onSDBrowserBtnClick"
+    android:background="@android:color/transparent"
+    android:gravity="left"
+    android:padding="18dp"
+    android:textSize="20sp"
  />
  <Button
     android:id="@+id/cloud_browser_button"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:drawableTop="@drawable/cloudbrowser"
     android:text="Cloud Browser"
-    android:textColor="#111"
-    android:gravity="center"
-    android:layout_margin="5dp"
+    android:textColor="#eee"
     android:onClick="onCloudBtnClick"
- />
- </TableRow>
- <TableRow
-    android:layout_marginTop="25dp"
-    android:layout_marginBottom="25dp"
-    android:layout_marginLeft="14dp"
-    android:layout_marginRight="15dp"
-         >
-<Button
-    android:id="@+id/print_setting_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:drawableTop="@drawable/setting"
-    android:text="Settings"
-    android:textColor="#111"
-    android:gravity="center"
-    android:layout_margin="5dp"
-    android:onClick="onPrintBtnClick"
+    android:background="@android:color/transparent"
+    android:gravity="left"
+    android:padding="18dp"
+    android:textSize="20sp"
  />
  
  <Button
-    android:id="@+id/print_history_button"
-    android:layout_width="wrap_content"
+    android:id="@+id/eniac_browser_button"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:drawableTop="@drawable/history"
-    android:text="Print History"
-    android:textColor="#111"
-    android:gravity="center"
-    android:layout_margin="5dp"
-    android:onClick="onHistoryBtnClick"
+    android:text="Eniac Browser"
+    android:textColor="#eee"
+    android:onClick="onEniacBtnClick"
+    android:background="@android:color/transparent"
+    android:gravity="left"
+    android:padding="18dp"
+    android:textSize="20sp"
  />
- </TableRow>
-      
-</TableLayout>
+
+ <Button
+     android:id="@+id/print_history_button"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:background="@android:color/transparent"
+     android:gravity="left"
+     android:onClick="onHistoryBtnClick"
+     android:padding="18dp"
+     android:text="Print History"
+     android:textColor="#eee"
+     android:textSize="20sp"
+      />
+
+</LinearLayout>

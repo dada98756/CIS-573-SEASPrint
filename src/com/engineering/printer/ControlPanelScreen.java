@@ -19,25 +19,31 @@ import io.filepicker.FilePickerAPI;
  * @author Siyong Liang
  */
 public class ControlPanelScreen extends Activity{
-	private Button browserButton;
+	private Button sdButton;
 	private Button cloudButton;
-	//private Button printButton;
-	//private Button historytButton;
+	private Button eniacButton;
+	private Button printHistoryButton;
 	private String filePickerAPIKey = "ArYkjf8hmSpCG8cycKjmsz" ; 
     
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.controlpanel);  
         
-        browserButton = (Button) findViewById(R.id.file_browser_button);
-        browserButton.setEnabled(true);
+        sdButton = (Button) findViewById(R.id.sd_browser_button);
+        sdButton.setEnabled(true);
         
         cloudButton = (Button)findViewById(R.id.cloud_browser_button);
         cloudButton.setEnabled(true);
+        
+        eniacButton = (Button)findViewById(R.id.eniac_browser_button);
+        eniacButton.setEnabled(true);
+        
+        printHistoryButton = (Button)findViewById(R.id.cloud_browser_button);
+        eniacButton.setEnabled(true);
     }
     
-    public void onBrowserBtnClick(View v) {
-    	Intent myIntent = new Intent(v.getContext(), LocalFilePicker.class);
+    public void onSDBrowserBtnClick(View v) {
+    	Intent myIntent = new Intent(v.getContext(), SDFilePicker.class);
         startActivityForResult(myIntent, 0);
 	}
     
@@ -53,9 +59,9 @@ public class ControlPanelScreen extends Activity{
         Intent myIntent = new Intent(v.getContext(), PrintHistoryScreen.class);
         startActivityForResult(myIntent, 0);
     }
-    public void onPrintBtnClick(View v)
+    public void onEniacBtnClick(View v)
     {
-        Intent myIntent = new Intent(v.getContext(), SettingScreen.class);
+        Intent myIntent = new Intent(v.getContext(), EniacFilePicker.class);
         startActivityForResult(myIntent, 0);
     }
     
@@ -81,7 +87,7 @@ public class ControlPanelScreen extends Activity{
             Document.setDescriptor(uri);
             data.setClass(this, PrinterSelectScreen.class);
             startActivityForResult(data,0);
-    	}
+    	};
             
     }
 }

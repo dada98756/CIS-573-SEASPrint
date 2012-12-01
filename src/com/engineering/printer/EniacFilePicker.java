@@ -142,7 +142,7 @@ public class EniacFilePicker extends Activity {
 	}
 	public void one2cBtnClick(View v){
 		selectButton.setEnabled(false);
-		Intent myIntent = new Intent(v.getContext(), LocalFilePicker.class);
+		Intent myIntent = new Intent(v.getContext(), SDFilePicker.class);
         startActivity(myIntent);
 	}
 	public void onRootBtnClick(View v) {

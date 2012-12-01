@@ -27,7 +27,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LocalFilePicker extends Activity {
+public class SDFilePicker extends Activity {
 	private TextView tvPath;
 	private ListView fileList;
 	private Button selectButton;
@@ -68,7 +68,7 @@ public class LocalFilePicker extends Activity {
 				}
 				File[] tem = currentFileList[position].listFiles();
 				if (tem == null || tem.length == 0) {
-					Toast.makeText(LocalFilePicker.this, "Not Available",
+					Toast.makeText(SDFilePicker.this, "Not Available",
 							Toast.LENGTH_SHORT).show();
 				} else {
 					currentPath = currentFileList[position];
@@ -106,7 +106,7 @@ public class LocalFilePicker extends Activity {
 			//}
 		}
 
-		SimpleAdapter adapter = new SimpleAdapter(LocalFilePicker.this, listItems,
+		SimpleAdapter adapter = new SimpleAdapter(SDFilePicker.this, listItems,
 				R.layout.itemlist, new String[] { "filename", "modify" },
 				new int[] { R.id.file_name, R.id.file_modify });
 
@@ -154,7 +154,7 @@ public class LocalFilePicker extends Activity {
 			     // EngineeringPrinter.type = getIntent().getType();
 			Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
 			myIntent.putExtra("eniac", false);
-			myIntent.putExtra("filePath", currentFile.toString());
+                        myIntent.putExtra("filePath", currentFile.toString());
 			startActivityForResult(myIntent, 0);
             
 		}
