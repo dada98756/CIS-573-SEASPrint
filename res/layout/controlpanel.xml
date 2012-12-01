@@ -22,10 +22,11 @@
     android:text="SD Card Browser"
     android:textColor="#000"
     android:onClick="onSDBrowserBtnClick"
-    android:background="#fff"
+    android:background="@drawable/buttonsetting"
     android:gravity="left"
     android:padding="18dp"
     android:textSize="15sp"
+    android:focusable="true"
  />
  <Button
     android:id="@+id/cloud_browser_button"
@@ -34,10 +35,11 @@
     android:text="Cloud Browser"
     android:textColor="#000"
     android:onClick="onCloudBtnClick"
-    android:background="#fff"
+    android:background="@drawable/buttonsetting"
     android:gravity="left"
     android:padding="18dp"
     android:textSize="15sp"
+    android:focusable="true"
  />
  
  <Button
@@ -47,23 +49,25 @@
     android:text="Eniac Browser"
     android:textColor="#000"
     android:onClick="onEniacBtnClick"
-    android:background="#fff"
+    android:background="@drawable/buttonsetting"
     android:gravity="left"
     android:padding="18dp"
     android:textSize="15sp"
+    android:focusable="true"
  />
 
  <Button
      android:id="@+id/print_history_button"
      android:layout_width="fill_parent"
      android:layout_height="wrap_content"
-     android:background="#fff"
+     android:background="@drawable/buttonsetting"
      android:gravity="left"
      android:onClick="onHistoryBtnClick"
      android:padding="18dp"
      android:text="Print History"
      android:textColor="#000"
      android:textSize="15sp"
+     android:focusable="true"
       />
 
  <TextView
@@ -71,6 +75,6 @@
      android:layout_alignParentBottom="true"
      android:layout_width="fill_parent"
      android:layout_height="20dp"
-      />
+  />
 
 </LinearLayout>
