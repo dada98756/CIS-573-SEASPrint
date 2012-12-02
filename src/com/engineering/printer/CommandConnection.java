@@ -75,6 +75,7 @@ public class CommandConnection {
         return sb.toString().trim();
     }
     public void closeSession(){
+    		System.out.println("About to close session");
     		myss.close();
     }
     public void execWithoutReturnPty(String cmd) throws IOException {

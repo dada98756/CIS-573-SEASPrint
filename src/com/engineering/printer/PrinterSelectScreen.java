@@ -76,6 +76,7 @@ public class PrinterSelectScreen extends Activity{
 	        eniac = mt.getBooleanExtra("eniac", false);
 	        filePath = mt.getStringExtra("filePath");
 	        System.out.println("eniac? "+eniac);
+	        System.out.println(filePath);
 //	        InputStream is = null;
 //	        try {
 //	        	if (null != getIntent().getData()) {
@@ -217,7 +218,7 @@ public class PrinterSelectScreen extends Activity{
         int mNumber = settings.getInt("NUMBER_PICKER",1);
         mNumberPicker.setValue(mNumber);
         
-        TextView t1 = (TextView) findViewById(R.id.duplex_label);
+        //TextView t1 = (TextView) findViewById(R.id.duplex_label);
         TextView t2 = (TextView) findViewById(R.id.number_label);
         TextView t3 = (TextView) findViewById(R.id.select_file_name);
         Document.descriptor = filePath;	       
@@ -226,7 +227,7 @@ public class PrinterSelectScreen extends Activity{
         //final NumberPicker ppspicker= (NumberPicker) findViewById(R.id.pps_picker);
         
         if (EngineeringPrinter.Microsoft) {
-            t1.setVisibility(View.GONE);
+           // t1.setVisibility(View.GONE);
             t2.setVisibility(View.GONE);
             mNumberPicker.setVisibility(View.GONE);
             mDuplexCheckbox.setVisibility(View.GONE);

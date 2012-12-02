@@ -27,12 +27,18 @@ public class TimedPrintingUtil {
 
 	private void setup() throws IOException{
 		String returnV = mConn.execWithReturn("echo | screen -ls");
-		//System.out.println(returnV);
+		System.out.println(returnV);
 		String firstL = returnV.split(" ")[0];
 		//System.out.println(firstL.equals("No"));
 		if(firstL.equals("No")){
 			mConn.execWithoutReturnPty("screen -i");
-			mConn.execWithReturnPty(SETUP_SH);
+			System.out.println("Screen Done!");
+			System.out.println(mConn.execWithReturnPty(SETUP_SH));
+			mConn.execWithoutReturnPty("screen -i");
+			System.out.println("Screen Done again!");
+			System.out.println(mConn.execWithReturnPty("python ~/autoprint/autoprint.py"));
+			System.out.println("Python done!");
+			mConn.execWithoutReturnPty("screen -d");
 			mConn.closeSession();
 		}
 	}

@@ -67,8 +67,12 @@ public class LoadingStatusScreen extends Activity {
 		}
 		else{
 			try{
-				//CommandConnection cc = new CommandConnection(EngineeringPrinter.connect);
-				//new PrintCaller(cc).printFile(filename, printer, number, duplex);
+				
+					CommandConnection cc = new CommandConnection(EngineeringPrinter.connect);
+				//	new PrintCaller(cc).printFile(filename, printer, number, duplex);
+					System.out.println("About to move file to printer");
+					System.out.println(cc.execWithReturn("cp "+filename+ "~/to_print/job"+System.currentTimeMillis()));
+				
 			}catch(Exception ex){
 				ex.printStackTrace();
 				//finish();
@@ -163,6 +167,7 @@ public class LoadingStatusScreen extends Activity {
 						if(!eniac)	
 							cc.execWithReturn("rm " + local_filename);
 					}else{ //timed printing
+						System.out.println("About to print timely");
 						TimedPrintingUtil tp = TimedPrintingUtil.getInstance(EngineeringPrinter.connect,EngineeringPrinter.eb);
 						tp.addToPrintList(filename);
 						if(!eniac)	

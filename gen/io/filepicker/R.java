@@ -15,9 +15,20 @@ public final class R {
         public static final int right_slide_out_back=0x7f040003;
     }
     public static final class array {
-        public static final int planets_array=0x7f080000;
+        public static final int planets_array=0x7f090000;
     }
     public static final class attr {
+    }
+    public static final class color {
+        public static final int blue2=0x7f080004;
+        public static final int blue25=0x7f080005;
+        public static final int grey05=0x7f080006;
+        public static final int orange4=0x7f080002;
+        public static final int orange5=0x7f080003;
+        public static final int white1=0x7f080007;
+        public static final int white2=0x7f080008;
+        public static final int yellow1=0x7f080000;
+        public static final int yellow2=0x7f080001;
     }
     public static final class dimen {
         public static final int padding_large=0x7f050002;
@@ -25,83 +36,84 @@ public final class R {
         public static final int padding_small=0x7f050000;
     }
     public static final class drawable {
-        public static final int cloudbrowser=0x7f020000;
-        public static final int filebrowser=0x7f020001;
-        public static final int footer=0x7f020002;
-        public static final int gdrive=0x7f020003;
-        public static final int glyphicons_008_film=0x7f020004;
-        public static final int glyphicons_011_camera=0x7f020005;
-        public static final int glyphicons_036_file=0x7f020006;
-        public static final int glyphicons_144_folder_open=0x7f020007;
-        public static final int glyphicons_154_show_big_thumbnails=0x7f020008;
-        public static final int glyphicons_361_dropbox=0x7f020009;
-        public static final int glyphicons_366_picasa=0x7f02000a;
-        public static final int glyphicons_381_github=0x7f02000b;
-        public static final int glyphicons_390_facebook=0x7f02000c;
-        public static final int glyphicons_395_flickr=0x7f02000d;
-        public static final int glyphicons_399_email=0x7f02000e;
-        public static final int history=0x7f02000f;
-        public static final int ic_action_search=0x7f020010;
-        public static final int ic_launcher=0x7f020011;
-        public static final int icon=0x7f020012;
-        public static final int instagram=0x7f020013;
-        public static final int select=0x7f020014;
-        public static final int setting=0x7f020015;
-        public static final int spinner=0x7f020016;
-        public static final int tf3_icon=0x7f020017;
+        public static final int buttonsetting=0x7f020000;
+        public static final int cloudbrowser=0x7f020001;
+        public static final int filebrowser=0x7f020002;
+        public static final int footer=0x7f020003;
+        public static final int gdrive=0x7f020004;
+        public static final int glyphicons_008_film=0x7f020005;
+        public static final int glyphicons_011_camera=0x7f020006;
+        public static final int glyphicons_036_file=0x7f020007;
+        public static final int glyphicons_144_folder_open=0x7f020008;
+        public static final int glyphicons_154_show_big_thumbnails=0x7f020009;
+        public static final int glyphicons_361_dropbox=0x7f02000a;
+        public static final int glyphicons_366_picasa=0x7f02000b;
+        public static final int glyphicons_381_github=0x7f02000c;
+        public static final int glyphicons_390_facebook=0x7f02000d;
+        public static final int glyphicons_395_flickr=0x7f02000e;
+        public static final int glyphicons_399_email=0x7f02000f;
+        public static final int history=0x7f020010;
+        public static final int ic_action_search=0x7f020011;
+        public static final int ic_launcher=0x7f020012;
+        public static final int icon=0x7f020013;
+        public static final int instagram=0x7f020014;
+        public static final int select=0x7f020015;
+        public static final int setting=0x7f020016;
+        public static final int spinner=0x7f020017;
+        public static final int tf3_icon=0x7f020018;
     }
     public static final class id {
-        public static final int button=0x7f0a0027;
-        public static final int button1=0x7f0a0007;
-        public static final int byte_progress=0x7f0a0020;
-        public static final int c2eBtn=0x7f0a001a;
-        public static final int cloud_browser_button=0x7f0a000a;
-        public static final int connection_config=0x7f0a0032;
-        public static final int control_panel_bottom=0x7f0a000d;
-        public static final int control_panel_header=0x7f0a0008;
-        public static final int duplex_toggle_checkbox=0x7f0a002c;
-        public static final int e2cBtn=0x7f0a0014;
-        public static final int editText1=0x7f0a0005;
-        public static final int efileList=0x7f0a0012;
-        public static final int efile_modify=0x7f0a000f;
-        public static final int efile_name=0x7f0a000e;
-        public static final int eniac_browser_button=0x7f0a000b;
-        public static final int equitBtn=0x7f0a0015;
-        public static final int erootBtn=0x7f0a0011;
-        public static final int eselectBtn=0x7f0a0013;
-        public static final int etvPath=0x7f0a0010;
-        public static final int fileList=0x7f0a0018;
-        public static final int file_modify=0x7f0a001d;
-        public static final int file_name=0x7f0a001c;
-        public static final int gridView1=0x7f0a0001;
-        public static final int hostname=0x7f0a0024;
-        public static final int linearLayout1=0x7f0a0004;
-        public static final int listView1=0x7f0a0000;
-        public static final int loading_constant=0x7f0a001e;
-        public static final int menu_settings=0x7f0a0031;
-        public static final int number_label=0x7f0a002a;
-        public static final int number_picker=0x7f0a002b;
-        public static final int passtext=0x7f0a0023;
-        public static final int portname=0x7f0a0025;
-        public static final int print_button=0x7f0a002f;
-        public static final int print_history_button=0x7f0a000c;
-        public static final int print_history_list=0x7f0a0030;
-        public static final int printer_spinner=0x7f0a0029;
-        public static final int printing=0x7f0a0021;
-        public static final int progressBar1=0x7f0a0002;
-        public static final int progress_bar=0x7f0a001f;
-        public static final int quitBtn=0x7f0a001b;
-        public static final int rootBtn=0x7f0a0017;
-        public static final int save=0x7f0a0026;
-        public static final int save_print_options=0x7f0a002e;
-        public static final int sd_browser_button=0x7f0a0009;
-        public static final int selectBtn=0x7f0a0019;
-        public static final int select_file_name=0x7f0a0028;
-        public static final int textView1=0x7f0a0006;
-        public static final int timed_printing=0x7f0a002d;
-        public static final int tvPath=0x7f0a0016;
-        public static final int usertext=0x7f0a0022;
-        public static final int webView1=0x7f0a0003;
+        public static final int button=0x7f0b0027;
+        public static final int button1=0x7f0b0007;
+        public static final int byte_progress=0x7f0b0020;
+        public static final int c2eBtn=0x7f0b001a;
+        public static final int cloud_browser_button=0x7f0b000a;
+        public static final int connection_config=0x7f0b0032;
+        public static final int control_panel_bottom=0x7f0b000d;
+        public static final int control_panel_header=0x7f0b0008;
+        public static final int duplex_toggle_checkbox=0x7f0b002c;
+        public static final int e2cBtn=0x7f0b0014;
+        public static final int editText1=0x7f0b0005;
+        public static final int efileList=0x7f0b0012;
+        public static final int efile_modify=0x7f0b000f;
+        public static final int efile_name=0x7f0b000e;
+        public static final int eniac_browser_button=0x7f0b000b;
+        public static final int equitBtn=0x7f0b0015;
+        public static final int erootBtn=0x7f0b0011;
+        public static final int eselectBtn=0x7f0b0013;
+        public static final int etvPath=0x7f0b0010;
+        public static final int fileList=0x7f0b0018;
+        public static final int file_modify=0x7f0b001d;
+        public static final int file_name=0x7f0b001c;
+        public static final int gridView1=0x7f0b0001;
+        public static final int hostname=0x7f0b0024;
+        public static final int linearLayout1=0x7f0b0004;
+        public static final int listView1=0x7f0b0000;
+        public static final int loading_constant=0x7f0b001e;
+        public static final int menu_settings=0x7f0b0031;
+        public static final int number_label=0x7f0b002a;
+        public static final int number_picker=0x7f0b002b;
+        public static final int passtext=0x7f0b0023;
+        public static final int portname=0x7f0b0025;
+        public static final int print_button=0x7f0b002f;
+        public static final int print_history_button=0x7f0b000c;
+        public static final int print_history_list=0x7f0b0030;
+        public static final int printer_spinner=0x7f0b0029;
+        public static final int printing=0x7f0b0021;
+        public static final int progressBar1=0x7f0b0002;
+        public static final int progress_bar=0x7f0b001f;
+        public static final int quitBtn=0x7f0b001b;
+        public static final int rootBtn=0x7f0b0017;
+        public static final int save=0x7f0b0026;
+        public static final int save_print_options=0x7f0b002e;
+        public static final int sd_browser_button=0x7f0b0009;
+        public static final int selectBtn=0x7f0b0019;
+        public static final int select_file_name=0x7f0b0028;
+        public static final int textView1=0x7f0b0006;
+        public static final int timed_printing=0x7f0b002d;
+        public static final int tvPath=0x7f0b0016;
+        public static final int usertext=0x7f0b0022;
+        public static final int webView1=0x7f0b0003;
     }
     public static final class layout {
         public static final int activity_file_picker=0x7f030000;
@@ -119,8 +131,8 @@ public final class R {
         public static final int setting=0x7f03000c;
     }
     public static final class menu {
-        public static final int filepicker=0x7f090000;
-        public static final int menu=0x7f090001;
+        public static final int filepicker=0x7f0a0000;
+        public static final int menu=0x7f0a0001;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
