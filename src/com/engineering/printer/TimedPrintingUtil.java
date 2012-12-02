@@ -31,11 +31,11 @@ public class TimedPrintingUtil {
 		String firstL = returnV.split(" ")[0];
 		//System.out.println(firstL.equals("No"));
 		if(firstL.equals("No")){
+			mConn.execWithoutReturnPty("cd ~");
+			mConn.execWithoutReturnPty("mkdir to_print");
+			System.out.println(mConn.execWithReturnPty("git clone https://github.com/emish/cets_autoprint.git autoprint"));
 			mConn.execWithoutReturnPty("screen -i");
 			System.out.println("Screen Done!");
-			System.out.println(mConn.execWithReturnPty(SETUP_SH));
-			mConn.execWithoutReturnPty("screen -i");
-			System.out.println("Screen Done again!");
 			System.out.println(mConn.execWithReturnPty("python ~/autoprint/autoprint.py"));
 			System.out.println("Python done!");
 			mConn.execWithoutReturnPty("screen -d");
