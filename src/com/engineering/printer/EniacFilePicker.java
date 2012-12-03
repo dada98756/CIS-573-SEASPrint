@@ -19,6 +19,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -177,7 +178,19 @@ public class EniacFilePicker extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.filepicker, menu);
+		super.onCreateOptionsMenu(menu);
+		menu.add(0, 0, 0, "Quit");
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case 0:
+			finish();
+			break;
+		}
 		return true;
 	}
 	public void onc2eBtnClick(View v) {

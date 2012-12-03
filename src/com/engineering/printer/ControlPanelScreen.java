@@ -10,6 +10,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import io.filepicker.FilePicker;
@@ -65,6 +67,24 @@ public class ControlPanelScreen extends Activity{
         Intent myIntent = new Intent(v.getContext(), EniacFilePicker.class);
         startActivityForResult(myIntent, 0);
     }
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		menu.add(0, 0, 0, "Quit");
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case 0:
+			finish();
+			break;
+		}
+		return true;
+	}
     
     @Override
 	public void onResume() {
