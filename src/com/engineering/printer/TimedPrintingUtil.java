@@ -26,7 +26,7 @@ public class TimedPrintingUtil {
 	}
 
 	private void setup() throws IOException{
-		String returnV = mConn.execWithReturn("echo | screen -ls");
+		String returnV = mConn.execWithReturnPty("echo | screen -ls");
 		System.out.println(returnV);
 		String firstL = returnV.split(" ")[0];
 		//System.out.println(firstL.equals("No"));
@@ -34,12 +34,14 @@ public class TimedPrintingUtil {
 			mConn.execWithoutReturnPty("cd ~");
 			mConn.execWithoutReturnPty("mkdir to_print");
 			System.out.println(mConn.execWithReturnPty("git clone https://github.com/emish/cets_autoprint.git autoprint"));
+			
 			mConn.execWithoutReturnPty("screen -i");
 			System.out.println("Screen Done!");
 
 			System.out.println(mConn.execWithReturnPty(SETUP_SH));
-			mConn.execWithoutReturnPty("screen -i");
+			mConn.execWithoutReturnPty("screen -r");
 			System.out.println("Screen Done again!");
+			mConn.execWithoutReturnPty("echo I came, I saw, I counqured");
 			mConn.execWithoutReturnPty("python ~/autoprint/autoprint.py");
 
 			System.out.println(mConn.execWithReturnPty("python ~/autoprint/autoprint.py"));

@@ -47,8 +47,11 @@ public class CommandConnection {
     }
     
     public String execWithReturnPty(String cmd) throws IOException {
-        myss = mConn.openSession();
-        myss.requestPTY("xterm");
+       // if(myss==null){
+    			myss = mConn.openSession();
+    			myss.requestPTY("xterm");
+       // }
+        
         myss.execCommand(cmd);
         InputStream rs = myss.getStdout();
         BufferedReader rd = new BufferedReader(new InputStreamReader(rs));
@@ -77,34 +80,16 @@ public class CommandConnection {
     public void closeSession(){
     		System.out.println("About to close session");
     		myss.close();
+    		myss=null;
     }
     public void execWithoutReturnPty(String cmd) throws IOException {
-        myss = mConn.openSession();
-        myss.requestPTY("xterm");
+    		//if(myss==null){
+			myss = mConn.openSession();
+			myss.requestPTY("xterm");
+    		//}
+       
         myss.execCommand(cmd);
-       // InputStream rs = myss.getStdout();
-       // BufferedReader rd = new BufferedReader(new InputStreamReader(rs));
-        //String str = null;
-       // StringBuilder sb = new StringBuilder();
-//        while ((str = rd.readLine()) != null) {
-//            sb.append(str);
-//            sb.append("\n");
-//        }
-        
-//        InputStream es = myss.getStderr();
-//        BufferedReader er = new BufferedReader(new InputStreamReader(es));
-//        StringBuilder eb = new StringBuilder();
-//        String estr =null;
-//        while ((estr = rd.readLine()) != null) {
-//            eb.append(estr);
-//            eb.append("\n");
-//        }
-//        String error = eb.toString().trim();
-//        if (error.length() > 0) {
-//            Log.e("Connection", error);
-//        }
-        //sess.close();
-        //return sb.toString().trim();
+
     }
 
     
