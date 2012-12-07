@@ -1,7 +1,10 @@
 package com.engineering.printer;
 
 import java.io.File;
+<<<<<<< HEAD
 import java.io.InputStream;
+=======
+>>>>>>> 1c6587d9af342575900a7072ffe041aaae137100
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +33,6 @@ public class SDFilePicker extends Activity {
 	private ListView fileList;
 	private Button selectButton;
 	private boolean sdCardStatue;
-	private CommandConnection c = null;
 	File currentPath;
 	File root;
 	File currentFile;
@@ -40,7 +42,10 @@ public class SDFilePicker extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.filepicker);
-
+		
+		/*
+		 * check if the SD card is mounted
+		 */
 		sdCardStatue = Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED);
 
@@ -48,14 +53,20 @@ public class SDFilePicker extends Activity {
 		tvPath = (TextView) this.findViewById(R.id.tvPath);
 		selectButton = (Button) findViewById(R.id.selectBtn);
 		selectButton.setEnabled(false);
-
+		
+		/*
+		 * set root path and get file list in root
+		 */
 		root = new File("/mnt/sdcard/");
 		if (sdCardStatue) {
 			currentPath = root;
 			currentFileList = root.listFiles();
 			inflateListView(currentFileList);
-
 		}
+		
+		/*
+		 * when click on files
+		 */
 		fileList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
@@ -66,18 +77,21 @@ public class SDFilePicker extends Activity {
 					return;
 				}
 				File[] tem = currentFileList[position].listFiles();
-				if (tem == null || tem.length == 0) {
+				if (tem == null || tem.length == 0) {//if file cannot be open or is not a file
 					Toast.makeText(SDFilePicker.this, "Not Available",
 							Toast.LENGTH_SHORT).show();
 				} else {
-					currentPath = currentFileList[position];
+					currentPath = currentFileList[position];//re-inflate the list view
 					currentFileList = tem;
 					inflateListView(currentFileList);
 				}
 			}
 		});
 	}
-
+	
+	/*
+	 * update the file list
+	 */
 	private void inflateListView(File[] files) {
 		List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
 
@@ -91,7 +105,10 @@ public class SDFilePicker extends Activity {
 			// || ".doc".equalsIgnoreCase(filename.substring(filename
 			// .lastIndexOf(".")))) {
 			File myFile = files[i];
-
+			
+			/*
+			 * we also need to last modified time
+			 */
 			long modTime = myFile.lastModified();
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
 					"yyyy-MM-dd HH:mm:ss");
@@ -102,11 +119,13 @@ public class SDFilePicker extends Activity {
 			listItems.add(listItem);
 			// }
 		}
-
+		
+		/*
+		 * attach the updater to the list view
+		 */
 		SimpleAdapter adapter = new SimpleAdapter(SDFilePicker.this, listItems,
 				R.layout.itemlist, new String[] { "filename", "modify" },
 				new int[] { R.id.file_name, R.id.file_modify });
-
 		fileList.setAdapter(adapter);
 
 		try {
@@ -116,7 +135,10 @@ public class SDFilePicker extends Activity {
 		}
 
 	}
-
+	
+	/*
+	 * set back to root
+	 */
 	public void onRootBtnClick(View v) {
 		currentPath = root;
 		currentFileList = root.listFiles();
@@ -145,14 +167,15 @@ public class SDFilePicker extends Activity {
 		Intent myIntent = new Intent(v.getContext(), EniacFilePicker.class);
 		startActivity(myIntent);
 	}
-
+	
+	/*
+	 * if file is vaild, getting data
+	 */
 	public void onSelectBtnClick(View v) {
 		if (currentFile.isDirectory()) {
 			new AlertDialog.Builder(v.getContext())
 					.setMessage("This is a directory!").create().show();
 		} else if (currentFile != null) {
-			InputStream is = null;
-
 			System.out.println("Try to get data");
 
 			System.out.println("Getting data");
@@ -162,12 +185,14 @@ public class SDFilePicker extends Activity {
 			// EngineeringPrinter.Microsoft =
 			// MicrosoftSink.Filter(getIntent().getType());
 			// EngineeringPrinter.type = getIntent().getType();
+			/*
+			 * data is good, ready to be sent to remote printer
+			 */
 			Intent myIntent = new Intent(v.getContext(),
 					PrinterSelectScreen.class);
 			myIntent.putExtra("eniac", false);
 			myIntent.putExtra("filePath", currentFile.toString());
 			startActivityForResult(myIntent, 0);
-
 		}
 	}
 

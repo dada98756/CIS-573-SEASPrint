@@ -4,9 +4,21 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Handler;
 
+/**
+ * Error callback handlers.
+ * 
+ * @author SEASPrint
+ *
+ */
 public class ErrorCallback {
 
+	/**
+	 * The activity that raises the error.
+	 */
     private Activity mAct;
+    /**
+     * Handler For 
+     */
     private Handler mHand;
 
     public  ErrorCallback(Activity act) {
@@ -14,6 +26,9 @@ public class ErrorCallback {
         mHand = new Handler();
     }
     
+    /**
+     * Presents the error information with a popup.
+     */
     public void error() {
         Runnable r = new Runnable() {
             @Override
@@ -24,8 +39,6 @@ public class ErrorCallback {
             }
         };
         mHand.post( r);
-        //Intent myIntent = new Intent(mAct, EngineeringPrinter.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //mAct.startActivityForResult(myIntent, 0);
     }
     
 }
