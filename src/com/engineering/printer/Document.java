@@ -10,11 +10,30 @@ import org.apache.commons.io.FileUtils;
 import android.net.Uri;
 import android.util.Log;
 
+/**
+ * Document Stub.
+ * 
+ * @author SEASPrint
+ *
+ */
 public class Document {
+	/**
+	 * Document data.
+	 */
     public static byte [] data;
+    /**
+     * Document descriptor.
+     */
     public static String descriptor;
+    /**
+     * Prints History List.
+     */
     public static List<String> history = new LinkedList<String>();
     
+    /**
+     * Reads a input stream and transforms it into a document object.
+     * @param datain
+     */
     public static void load(InputStream datain) {
         try {
             int count = datain.available();
@@ -26,6 +45,10 @@ public class Document {
         }
     }
     
+    /**
+     * Loads a file and transforms it into an document object.
+     * @param f
+     */
     public static void loadFile(File f){
     	try {
 			data = FileUtils.readFileToByteArray(f);
@@ -35,9 +58,12 @@ public class Document {
 		}
     }
     
+    /**
+     * Sets the file descriptor for the document as an uri.
+     * @param uri
+     */
     public static void setDescriptor(Uri uri) {
         String intentData=uri.toString();
-        String fileName;
         if(intentData.substring(0, 4).equals("file"))
             descriptor=intentData.substring(intentData.lastIndexOf("/"), intentData.length());
         else
@@ -45,6 +71,10 @@ public class Document {
         Log.i("Connection", descriptor);
     }
     
+    /**
+     * Sets the file path as the descriptor for the document.
+     * @param path
+     */
     public static void setDeFile(String path){
     	if(path.substring(0, 4).equals("file"))
             descriptor=path.substring(path.lastIndexOf("/"), path.length());
@@ -53,11 +83,19 @@ public class Document {
         Log.i("Connection", descriptor);
     }
     
+    /**
+     * Adds a print history to the history list.
+     * @param item
+     */
     public static void addToHistory(String item)
     {
     	history.add(item);
     }
     
+    /**
+     * Gets the print history list.
+     * @return
+     */
     public static List<String> getHistory()
     {
     	return history;

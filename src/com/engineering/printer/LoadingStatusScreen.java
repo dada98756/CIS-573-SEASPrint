@@ -157,9 +157,9 @@ public class LoadingStatusScreen extends Activity {
 		mUpdate.setVisibility(View.GONE);
 		mConstantLoading.setVisibility(View.GONE);
 
-		new Thread( new Runnable() {
-			@Override
-			public void run() {
+		//new Thread( new Runnable() {
+			//@Override
+			//public void run() {
 				try {
 					if (!PrinterSelectScreen.timedPrinting){ //normal non-timed printing
 						String local_filename = filename;
@@ -182,10 +182,11 @@ public class LoadingStatusScreen extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-		}
-				).start();
+			//}
+		//}
+				//).start();
 		Toast.makeText(LoadingStatusScreen.this, "Success! File uploaded and sent to printer!", Toast.LENGTH_LONG).show();
+		System.out.println("Going to go back");
 		this.finish();
 	}
 

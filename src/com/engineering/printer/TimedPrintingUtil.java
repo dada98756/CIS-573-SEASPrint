@@ -29,37 +29,25 @@ public class TimedPrintingUtil {
 		String returnV = mConn.execWithReturnPty("echo | screen -ls");
 		System.out.println(returnV);
 		String firstL = returnV.split(" ")[0];
-		//System.out.println(firstL.equals("No"));
 		if(firstL.equals("No")){
-			mConn.execWithoutReturnPty("cd ~");
-			mConn.execWithoutReturnPty("mkdir to_print");
-			System.out.println(mConn.execWithReturnPty("git clone https://github.com/emish/cets_autoprint.git autoprint"));
+			mConn.execWithoutReturnPty("cd ~",false);
 			
-			mConn.execWithoutReturnPty("screen -i");
+			mConn.execWithoutReturnPty("screen -i;"+SETUP_SH, false);
 			System.out.println("Screen Done!");
 
-			System.out.println(mConn.execWithReturnPty(SETUP_SH));
-			mConn.execWithoutReturnPty("screen -r");
+			mConn.execWithoutReturnPty("screen -r", false);
 			System.out.println("Screen Done again!");
-			mConn.execWithoutReturnPty("echo I came, I saw, I counqured");
-			mConn.execWithoutReturnPty("python ~/autoprint/autoprint.py");
-
-			System.out.println(mConn.execWithReturnPty("python ~/autoprint/autoprint.py"));
+			mConn.execWithoutReturnPty("python ~/autoprint/autoprint.py;sreen -d", false);
 
 			System.out.println("Python done!");
-			System.out.println(mConn.execWithReturnPty("screen -d"));
-			//mConn.closeSession();
 		}
 	}
 	
 	public synchronized boolean addToPrintList(String filename){
 		try {
-			String home = mConn.execWithReturn("echo ~");
-			String target = home + "/" + TO_PRINT;
-			//String pdfFilename = filename + ".pdf";
-			//mConn.execWithReturn("unoconv -o " + pdfFilename + " " + filename);
+			String target = "~/" + TO_PRINT;
 			System.out.println("Going to cp"+ filename + " " + target);
-			mConn.execWithReturn("cp " + filename + " " + target);
+			mConn.execWithoutReturnPty("cp " + filename + " " + target,false);
 		} catch (IOException e) {
 			mCb.error();
 		}

@@ -1,28 +1,20 @@
 package com.engineering.printer;
 
-public class MicrosoftSink  {//extends Activity {
-//    
-//    public void onCreate() {
-//        super.onStart();
-//        InputStream is = null;
-//        try {
-//            is = getContentResolver().openInputStream(getIntent().getData());
-//        }
-//        catch  (FileNotFoundException fnf){
-//            Log.e("Connection","File Not Found");
-//        }
-//        Document.load(is);
-//        Document.setDescriptor(getIntent().getData());
-//             
-//       Intent myIntent =  new Intent(getApplicationContext(),EngineeringPrinter.class).putExtra("Microsoft", true);
-//        startActivityForResult(myIntent, 0);
-//    }
-//    
-//    public void onRestart() {
-//        super.onRestart();
-//        finish();
-//    }
-
+/**
+ * 
+ * A support class for Microsoft document.
+ * 
+ * @author SEASPrint
+ *
+ */
+public class MicrosoftSink  {
+	
+	/**
+	 * Tests if a type is a Microsoft document.
+	 * 
+	 * @param type
+	 * @return
+	 */
     public static boolean Filter(String type) {
         if (type.equals("application/vnd.ms-powerpoint") || 
                 type.equals("application/vnd.ms-excel")||
