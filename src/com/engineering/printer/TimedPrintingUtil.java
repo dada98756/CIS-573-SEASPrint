@@ -36,14 +36,14 @@ public class TimedPrintingUtil {
 			System.out.println(mConn.execWithReturnPty("git clone https://github.com/emish/cets_autoprint.git autoprint"));
 			mConn.execWithoutReturnPty("screen -i");
 			System.out.println("Screen Done!");
-<<<<<<< HEAD
+
 			System.out.println(mConn.execWithReturnPty(SETUP_SH));
 			mConn.execWithoutReturnPty("screen -i");
 			System.out.println("Screen Done again!");
 			mConn.execWithoutReturnPty("python ~/autoprint/autoprint.py");
-=======
+
 			System.out.println(mConn.execWithReturnPty("python ~/autoprint/autoprint.py"));
->>>>>>> 2281f6d44b9f63edfdf8fefda7f28d94aed29c22
+
 			System.out.println("Python done!");
 			System.out.println(mConn.execWithReturnPty("screen -d"));
 			//mConn.closeSession();

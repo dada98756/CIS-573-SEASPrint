@@ -68,7 +68,7 @@ public final class R {
         public static final int byte_progress=0x7f0b0020;
         public static final int c2eBtn=0x7f0b001a;
         public static final int cloud_browser_button=0x7f0b000a;
-        public static final int connection_config=0x7f0b0032;
+        public static final int connection_config=0x7f0b0031;
         public static final int control_panel_bottom=0x7f0b000d;
         public static final int control_panel_header=0x7f0b0008;
         public static final int duplex_toggle_checkbox=0x7f0b002c;
@@ -90,7 +90,6 @@ public final class R {
         public static final int linearLayout1=0x7f0b0004;
         public static final int listView1=0x7f0b0000;
         public static final int loading_constant=0x7f0b001e;
-        public static final int menu_settings=0x7f0b0031;
         public static final int number_label=0x7f0b002a;
         public static final int number_picker=0x7f0b002b;
         public static final int passtext=0x7f0b0023;
@@ -131,8 +130,7 @@ public final class R {
         public static final int setting=0x7f03000c;
     }
     public static final class menu {
-        public static final int filepicker=0x7f0a0000;
-        public static final int menu=0x7f0a0001;
+        public static final int menu=0x7f0a0000;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
@@ -142,7 +140,6 @@ public final class R {
         public static final int e2c=0x7f06000d;
         public static final int file_picker_animation_duration=0x7f060004;
         public static final int hello=0x7f060005;
-        public static final int hello_world=0x7f060010;
         public static final int menu_settings=0x7f060001;
         public static final int number_prompt=0x7f060008;
         public static final int pps_prompt=0x7f060009;
@@ -150,7 +147,7 @@ public final class R {
         public static final int quit=0x7f06000a;
         public static final int root=0x7f06000e;
         public static final int select=0x7f06000b;
-        public static final int title_activity_eniac_file_picker=0x7f060011;
+        public static final int title_activity_eniac_file_picker=0x7f060010;
         public static final int title_activity_file_picker=0x7f060002;
         public static final int title_activity_file_picker_auth=0x7f060003;
     }
