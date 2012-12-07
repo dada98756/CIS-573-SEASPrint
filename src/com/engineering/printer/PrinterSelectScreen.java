@@ -222,8 +222,8 @@ public class PrinterSelectScreen extends Activity{
         TextView t2 = (TextView) findViewById(R.id.number_label);
         TextView t3 = (TextView) findViewById(R.id.select_file_name);
         Document.descriptor = filePath;	       
-        Document.addToHistory(Document.descriptor.startsWith
-        		("/")?Document.descriptor.substring(1):Document.descriptor+"   "+Calendar.getInstance().getTime());
+        //Document.addToHistory(Document.descriptor.startsWith
+        		//("/")?Document.descriptor.substring(1):Document.descriptor+"   "+Calendar.getInstance().getTime());
         //final NumberPicker ppspicker= (NumberPicker) findViewById(R.id.pps_picker);
         
         if (EngineeringPrinter.Microsoft) {

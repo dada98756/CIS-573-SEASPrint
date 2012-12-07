@@ -1,6 +1,8 @@
 package com.engineering.printer;
 
 import java.io.IOException;
+import java.util.Calendar;
+
 import com.engineering.printer.PrinterSelectScreen.MyOnItemSelectedListener;
 import android.app.Activity;
 import android.content.Intent;
@@ -55,6 +57,8 @@ public class LoadingStatusScreen extends Activity {
 
 		mConstantLoading = (TextView) findViewById(R.id.loading_constant);
 		mConstantLoading.setText("Initializing upload.");
+		Document.addToHistory(Document.descriptor.startsWith
+				("/")?Document.descriptor.substring(1):Document.descriptor+"   "+Calendar.getInstance().getTime());
 		if(!eniac){
 			try {
 				FileUpload fu = new FileUpload(EngineeringPrinter.connect);
@@ -107,7 +111,7 @@ public class LoadingStatusScreen extends Activity {
 					}
 
 					final String filename = upload.GetResult();
-					Document.addToHistory(filename);
+					//Document.addToHistory(filename);
 					handle.post(new Runnable() {
 						@Override
 						public void run() {
