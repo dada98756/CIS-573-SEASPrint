@@ -50,20 +50,6 @@ public class EngineeringPrinter extends Activity {
 	public static boolean Microsoft;
 	public static String type;
 	
-	private static final char KEY = 1337;
-	
-	public String encryptPassword(String pw) {
-		char letters[] = pw.toCharArray();
-		for(int i = 0; i < letters.length; i++) letters[i] = (char)(KEY ^ pw.charAt(letters.length - i - 1));
-		return new String(letters);
-	}
-	
-	public String decryptPassword(String pw) {
-		char letters[] = pw.toCharArray();
-		for(int i = 0; i < letters.length; i++) letters[i] = (char)(KEY ^ pw.charAt(letters.length - i - 1));
-		return new String(letters);
-	}
-	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
