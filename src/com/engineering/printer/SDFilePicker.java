@@ -1,10 +1,7 @@
 package com.engineering.printer;
 
 import java.io.File;
-<<<<<<< HEAD
-import java.io.InputStream;
-=======
->>>>>>> 1c6587d9af342575900a7072ffe041aaae137100
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

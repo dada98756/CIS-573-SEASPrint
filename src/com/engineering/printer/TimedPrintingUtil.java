@@ -37,14 +37,14 @@ public class TimedPrintingUtil {
 		System.out.println(returnV);
 		String firstL = returnV.split(" ")[0];
 		if(firstL.equals("No")){
-			mConn.execWithoutReturnPty("cd ~",false);
+			mConn.execWithoutReturnPty("cd ~");
 			
-			mConn.execWithoutReturnPty("screen -i;"+SETUP_SH, false);
+			mConn.execWithoutReturnPty("screen -i;"+SETUP_SH);
 			System.out.println("Screen Done!");
 
-			mConn.execWithoutReturnPty("screen -r", false);
+			mConn.execWithoutReturnPty("screen -r");
 			System.out.println("Screen Done again!");
-			mConn.execWithoutReturnPty("python ~/autoprint/autoprint.py;sreen -d", false);
+			mConn.execWithoutReturnPty("python ~/autoprint/autoprint.py;sreen -d");
 
 			System.out.println("Python done!");
 		}
@@ -56,7 +56,7 @@ public class TimedPrintingUtil {
 		try {
 			String target = "~/" + TO_PRINT;
 			System.out.println("Going to cp"+ filename + " " + target);
-			mConn.execWithoutReturnPty("cp " + filename + " " + target,false);
+			mConn.execWithoutReturnPty("cp " + filename + " " + target);
 		} catch (IOException e) {
 			mCb.error();
 		}

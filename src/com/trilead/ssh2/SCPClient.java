@@ -140,7 +140,7 @@ public class SCPClient
 	    sendBytes(null,sess,data,fileName,mode);
 	}
 	
-	private void sendBytes(FileUpload.Future f, Session  sess, byte[] data, String fileName, String mode) throws IOException
+	private void sendBytes(FileUpload.UploadProgress f, Session  sess, byte[] data, String fileName, String mode) throws IOException
 	{
 		OutputStream os = sess.getStdin();
 		InputStream is = new BufferedInputStream(sess.getStdout(), 512);
@@ -492,7 +492,7 @@ public class SCPClient
 	 * @throws IOException
 	 */
 
-	public void put(FileUpload.Future mF, byte[] data, String remoteFileName, String remoteTargetDirectory) throws IOException
+	public void put(FileUpload.UploadProgress mF, byte[] data, String remoteFileName, String remoteTargetDirectory) throws IOException
 	{
 		put(mF, data, remoteFileName, remoteTargetDirectory, "0600");
 	}
@@ -514,7 +514,7 @@ public class SCPClient
 	 *            a four digit string (e.g., 0644, see "man chmod", "man open")
 	 * @throws IOException
 	 */
-	public void put(FileUpload.Future f, byte[] data, String remoteFileName, String remoteTargetDirectory, String mode) throws IOException
+	public void put(FileUpload.UploadProgress f, byte[] data, String remoteFileName, String remoteTargetDirectory, String mode) throws IOException
 	{
 		Session sess = null;
 

@@ -24,7 +24,7 @@ public class LoadingStatusScreen extends Activity {
 	public boolean timedPrinting = PrinterSelectScreen.timedPrinting;
 
 
-	public FileUpload.Future upload = EngineeringPrinter.upload;
+	public FileUpload.UploadProgress upload = EngineeringPrinter.upload;
 
 	private ProgressBar mProgress;
 	private TextView mUpdate;
@@ -97,11 +97,11 @@ public class LoadingStatusScreen extends Activity {
 						handle.post(new Runnable()  {
 							@Override
 							public void run() {
-								int val = upload.PercentComplete();
+								int val = upload.getPercentComplete();
 								mProgressStatus = val;
 								mProgress.setProgress(val);
 								Log.i("Connection", "Percentage " + Integer.toString(val));
-								mUpdate.setText(PrepareStatus(upload.BytesWritten(), upload.TotalBytes()));
+								mUpdate.setText(PrepareStatus(upload.getBytesWritten(), upload.getTotalBytes()));
 							}
 						});
 					}
