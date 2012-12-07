@@ -2,10 +2,6 @@ package com.engineering.printer;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.logging.Level;
-
-import com.trilead.ssh2.log.Logger;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;

@@ -1,21 +1,13 @@
 package com.engineering.printer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -26,7 +18,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class EniacFilePicker extends Activity {
 	private TextView etvPath;
@@ -44,6 +35,10 @@ public class EniacFilePicker extends Activity {
 	private String[] dirs;
 
 	@Override
+	/*
+	 * Entrence of the eniac picker
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.eniacpick);
@@ -78,6 +73,9 @@ public class EniacFilePicker extends Activity {
 		selectButton.setEnabled(false);
 		
 		einflateListView(fs);
+		/*
+		 * Load the file system on Eniac to local
+		 */
 		fileList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
@@ -89,9 +87,7 @@ public class EniacFilePicker extends Activity {
 				}
 				selectButton.setEnabled(false);
 				try {
-					//ecurrentPath = c.execWithReturn("pwd");
 					ecurrentPath = ecurrentPath+"/"+ecurrentFilList[position];
-					//c.execWithReturn("cd "+ecurrentFilList[position]);
 					Log.d("testFind","ls -l "+ecurrentPath+"| grep ^d");
 					String returnString = c.execWithReturn("ls -l "+ecurrentPath+"| grep ^d");
 					String[] ecurrenStrings = returnString.split("\\n");
@@ -113,7 +109,10 @@ public class EniacFilePicker extends Activity {
 		});
 	}
 
-	
+	/*
+	 * Generate and fill in the list with proper data
+	 * @param String[] files the file names from Eniac
+	 */
 	private void einflateListView(String[] files) {
 		List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
 		String[] temp  =null;
@@ -141,11 +140,16 @@ public class EniacFilePicker extends Activity {
 		}
 
 	}
+	
 	public void one2cBtnClick(View v){
 		selectButton.setEnabled(false);
 		Intent myIntent = new Intent(v.getContext(), SDFilePicker.class);
         startActivity(myIntent);
 	}
+	/*
+	 * Used to change the current directory to the root directory
+	 * @param View v
+	 */
 	public void onRootBtnClick(View v) {
 		selectButton.setEnabled(false);
 		String returnString = null;

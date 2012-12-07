@@ -25,5 +25,6 @@
     <string name="title_activity_file_picker">SdCard FilePicker</string>
     <string name="title_activity_eniac_file_picker">Eniac FilePicker</string>
     <string name="title_activity_file_picker_auth">FilePicker_auth</string> 
+    <string name="exits">Exit</string> 
 
 </resources>

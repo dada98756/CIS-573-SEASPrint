@@ -23,7 +23,6 @@ public class LoadingStatusScreen extends Activity {
 	public Integer number = PrinterSelectScreen.number;
 	public boolean timedPrinting = PrinterSelectScreen.timedPrinting;
 
-	//public Integer pps = PrinterSelectScreen.pps;
 
 	public FileUpload.Future upload = EngineeringPrinter.upload;
 
@@ -57,6 +56,7 @@ public class LoadingStatusScreen extends Activity {
 
 		mConstantLoading = (TextView) findViewById(R.id.loading_constant);
 		mConstantLoading.setText("Initializing upload.");
+		//add this file name to the history list.
 		Document.addToHistory(Document.descriptor.startsWith
 				("/")?Document.descriptor.substring(1):Document.descriptor+"   "+Calendar.getInstance().getTime());
 		if(!eniac){
@@ -72,10 +72,7 @@ public class LoadingStatusScreen extends Activity {
 		else{
 			try{
 				
-					//CommandConnection cc = new CommandConnection(EngineeringPrinter.connect);
-				//	new PrintCaller(cc).printFile(filename, printer, number, duplex);
-					//System.out.println("About to move file to printer");
-					//System.out.println(cc.execWithReturn("cp "+filename+ "~/to_print/job"+System.currentTimeMillis()));
+					//not uploading file here, will do later.
 				
 			}catch(Exception ex){
 				ex.printStackTrace();
@@ -84,7 +81,6 @@ public class LoadingStatusScreen extends Activity {
 			//finish();
 		}
 		final Handler handle = new Handler();
-		//Toast.makeText(LoadingStatusScreen.this, user + " "+ password + " "+ printer + " " + duplex + " "+ number + " "+ pps, Toast.LENGTH_LONG).show();
 		// Start lengthy operation in a background thread
 		new Thread( new Runnable() {
 			@Override
@@ -111,7 +107,6 @@ public class LoadingStatusScreen extends Activity {
 					}
 
 					final String filename = upload.GetResult();
-					//Document.addToHistory(filename);
 					handle.post(new Runnable() {
 						@Override
 						public void run() {
@@ -151,7 +146,9 @@ public class LoadingStatusScreen extends Activity {
 		}).start();
 		//Log.i("Connection", "Temporary filename is " + filename);  
 	}
-
+	/*
+	 * @param String filename the file that just has been uploaded to the server, and this name is the *local* name on server, not the original name
+	 */
 	private void UploadComplete(final String filename) {
 		mProgress.setVisibility(View.GONE);
 		mUpdate.setVisibility(View.GONE);
@@ -190,7 +187,9 @@ public class LoadingStatusScreen extends Activity {
 		this.finish();
 	}
 
-
+    /*
+     * @param String filenmae the file just processed
+     */
 	private String ContentProcessing(String filename) {
 		return filename;
 	}

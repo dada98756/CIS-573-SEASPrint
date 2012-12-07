@@ -11,20 +11,27 @@ public class TimedPrintingUtil {
 	private static ErrorCallback mCb;
 	private static final String TO_PRINT = "to_print";
 	private static final String SETUP_SH = "curl -L https://raw.github.com/emish/cets_autoprint/master/setup.sh | sh";
-
+	/*
+	 * Singleton Pattern
+	 */
 	public synchronized static TimedPrintingUtil getInstance(Connection conn,ErrorCallback cb) throws IOException{
 		if (instance == null || conn != connection){
 			instance = new TimedPrintingUtil(conn);
 		}
-		instance.mCb = cb;
+		TimedPrintingUtil.mCb = cb;
 		return instance;
 	}
-
+	/*
+	 * Singleton Pattern
+	 * @param Connection conn the connection used to set up
+	 */
 	private TimedPrintingUtil(Connection conn) throws IOException{
 		mConn = new CommandConnection(conn);
 		setup();
 	}
-
+	/*
+	 * Setup the auto-print script, if we haven't yet.
+	 */
 	private void setup() throws IOException{
 		String returnV = mConn.execWithReturnPty("echo | screen -ls");
 		System.out.println(returnV);
@@ -42,7 +49,9 @@ public class TimedPrintingUtil {
 			System.out.println("Python done!");
 		}
 	}
-	
+	/*
+	 * @param String filename the file that we are going to print
+	 */
 	public synchronized boolean addToPrintList(String filename){
 		try {
 			String target = "~/" + TO_PRINT;

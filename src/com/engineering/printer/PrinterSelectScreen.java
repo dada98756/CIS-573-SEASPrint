@@ -1,7 +1,6 @@
 package com.engineering.printer;
 
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,7 +22,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 public class PrinterSelectScreen extends Activity{
 	
@@ -59,9 +57,10 @@ public class PrinterSelectScreen extends Activity{
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
-		if (item.getItemId() == R.id.connection_config) {
-       	 Intent myIntent = new Intent(this, EngineeringPrinter.class);
-         startActivityForResult(myIntent, 0);
+		if (item.getItemId() == R.id.exit) {
+       	 //Intent myIntent = new Intent(this, EngineeringPrinter.class);
+         //startActivityForResult(myIntent, 0);
+			System.exit(0);
 		return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -77,65 +76,6 @@ public class PrinterSelectScreen extends Activity{
 	        filePath = mt.getStringExtra("filePath");
 	        System.out.println("eniac? "+eniac);
 	        System.out.println(filePath);
-//	        InputStream is = null;
-//	        try {
-//	        	if (null != getIntent().getData()) {
-//		            is = getContentResolver().openInputStream(getIntent().getData());
-//			        Document.load(is);
-//			        Document.setDescriptor(getIntent().getData());
-//			          EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
-//			          EngineeringPrinter.type = getIntent().getType();
-//	        	}
-//
-//	        }
-//	        catch  (FileNotFoundException fnf){
-//	            Log.e("Connection","File Not Found");
-//	        }
-
-	        
-//	       SharedPreferences settings = getSharedPreferences(PRINTER_PREF, 0);
-//	       mFavored = settings.getString(PRINTER_KEY, null);
-//	       if (mFavored == null) {
-//	           mFavored = "169";
-//	       }
-//	       
-//	       SharedPreferences conn_set = getSharedPreferences(EngineeringPrinter.PREFS_NAME, MODE_PRIVATE);
-//	        if (conn_set.contains(EngineeringPrinter.PASSWORD_KEY)) {
-//	        	System.out.println("Password_key exists");
-//	        	if (conn_set.contains(EngineeringPrinter.KEY_KEY) &&
-//	 	    		conn_set.contains(EngineeringPrinter.HOST_KEY) &&
-//		    		conn_set.contains(EngineeringPrinter.PORT_KEY)) {
-//	        			String key = (new AuthSetup(conn_set.getString(EngineeringPrinter.USER_KEY, ""),
-//	    			   conn_set.getString(EngineeringPrinter.PASSWORD_KEY, ""), 
-//	    			   conn_set.getString(EngineeringPrinter.HOST_KEY, ""), 
-//	    			   Integer.valueOf(conn_set.getString(EngineeringPrinter.PORT_KEY,EngineeringPrinter.PORT_FAIL)))).keyGen();
-//	        			Log.d("key", key);
-//	        			conn_set.edit().putString(EngineeringPrinter.KEY_KEY, key).commit();
-//	        	}
-//	        	conn_set.edit().remove(EngineeringPrinter.PASSWORD_KEY).commit();
-//	        }
-//	       if (!conn_set.contains(EngineeringPrinter.USER_KEY) ||
-//	    		   !conn_set.contains(EngineeringPrinter.KEY_KEY) || 
-//	    		   !conn_set.contains(EngineeringPrinter.HOST_KEY) ||
-//	    		   !conn_set.contains(EngineeringPrinter.PORT_KEY)){
-//	    	   System.out.println("Going to take input");
-//	         	 Intent myIntent = new Intent(this, EngineeringPrinter.class);
-//	             startActivity(myIntent);
-//	       }
-//	       else {
-//	    	   try {
-//	    	   EngineeringPrinter.connect = (new ConnectionFactory()).MakeConnectionKey(
-//	    			   conn_set.getString(EngineeringPrinter.USER_KEY, ""),
-//	    			   conn_set.getString(EngineeringPrinter.KEY_KEY, ""), 
-//	    			   conn_set.getString(EngineeringPrinter.HOST_KEY, ""), 
-//	    			   Integer.valueOf(conn_set.getString(EngineeringPrinter.PORT_KEY,EngineeringPrinter.PORT_FAIL)));
-//	    	   System.out.println("12134");
-//	    	   }
-//	    	   catch (IOException e) {
-//		         	 Intent myIntent = new Intent(this, EngineeringPrinter.class);
-//		             startActivityForResult(myIntent, 0);
-//	    	   }
-//	       }
 	 }
 	 
 	 @Override
@@ -221,11 +161,7 @@ public class PrinterSelectScreen extends Activity{
         //TextView t1 = (TextView) findViewById(R.id.duplex_label);
         TextView t2 = (TextView) findViewById(R.id.number_label);
         TextView t3 = (TextView) findViewById(R.id.select_file_name);
-        Document.descriptor = filePath;	       
-        //Document.addToHistory(Document.descriptor.startsWith
-        		//("/")?Document.descriptor.substring(1):Document.descriptor+"   "+Calendar.getInstance().getTime());
-        //final NumberPicker ppspicker= (NumberPicker) findViewById(R.id.pps_picker);
-        
+        Document.descriptor = filePath;	              
         if (EngineeringPrinter.Microsoft) {
            // t1.setVisibility(View.GONE);
             t2.setVisibility(View.GONE);
@@ -267,7 +203,9 @@ public class PrinterSelectScreen extends Activity{
 		 
 	 }
 	 
-	 
+	 /*
+	  * generate the new printer list
+	  */
 	 public static class MyOnItemSelectedListener implements OnItemSelectedListener {
 		 public static String printer;
 		 	

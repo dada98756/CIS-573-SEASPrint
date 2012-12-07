@@ -76,7 +76,6 @@ public final class R {
         public static final int byte_progress=0x7f0b0020;
         public static final int c2eBtn=0x7f0b001a;
         public static final int cloud_browser_button=0x7f0b000a;
-        public static final int connection_config=0x7f0b0031;
         public static final int control_panel_bottom=0x7f0b000d;
         public static final int control_panel_header=0x7f0b0008;
         public static final int duplex_toggle_checkbox=0x7f0b002c;
@@ -90,6 +89,7 @@ public final class R {
         public static final int erootBtn=0x7f0b0011;
         public static final int eselectBtn=0x7f0b0013;
         public static final int etvPath=0x7f0b0010;
+        public static final int exit=0x7f0b0031;
         public static final int fileList=0x7f0b0018;
         public static final int file_modify=0x7f0b001d;
         public static final int file_name=0x7f0b001c;
@@ -146,6 +146,7 @@ public final class R {
         public static final int connection_menuitem=0x7f06000f;
         public static final int duplex_prompt=0x7f060007;
         public static final int e2c=0x7f06000d;
+        public static final int exits=0x7f060011;
         public static final int file_picker_animation_duration=0x7f060004;
         public static final int hello=0x7f060005;
         public static final int menu_settings=0x7f060001;
