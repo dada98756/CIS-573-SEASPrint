@@ -191,23 +191,6 @@ public class EniacFilePicker extends Activity {
 	}
 	
 	public void onSelectBtnClick(View v) {
-//		if(currentFile.isDirectory()){
-//			new AlertDialog.Builder(v.getContext()).setMessage("This is a directory!").create().show();
-//		}
-//		else if (currentFile != null) {
-//			InputStream is = null;
-//	        
-//	        System.out.println("Try to get data");
-//
-//			    System.out.println("Getting data");
-//			    Document.loadFile(currentFile);
-//			    Document.setDeFile(currentFile.getPath());
-//			    //Document.setDescriptor(getIntent().getData());
-//			     // EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
-//			     // EngineeringPrinter.type = getIntent().getType();
-//			Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
-//            startActivityForResult(myIntent, 0);
-//		}
 		if(ecurrentFile!=null){
 			Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
 			myIntent.putExtra("filePath", ecurrentFile);

@@ -74,7 +74,7 @@ public class CommandConnection {
         if (error.length() > 0) {
             Log.e("Connection", error);
         }
-        //sess.close();
+        //myss.close();
         return sb.toString().trim();
     }
     public void closeSession(){
@@ -82,14 +82,14 @@ public class CommandConnection {
     		myss.close();
     		myss=null;
     }
-    public void execWithoutReturnPty(String cmd) throws IOException {
-    		//if(myss==null){
+    public void execWithoutReturnPty(String cmd, boolean same) throws IOException {
+    		if(!same){
 			myss = mConn.openSession();
 			myss.requestPTY("xterm");
-    		//}
+    		}
        
         myss.execCommand(cmd);
-
+        //myss.close();
     }
 
     
