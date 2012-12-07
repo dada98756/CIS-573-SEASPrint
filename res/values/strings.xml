@@ -22,8 +22,6 @@
     </string-array>
 
     <string name="connection_menuitem">Connection</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
     <string name="title_activity_file_picker">SdCard FilePicker</string>
     <string name="title_activity_eniac_file_picker">Eniac FilePicker</string>
     <string name="title_activity_file_picker_auth">FilePicker_auth</string> 

@@ -177,7 +177,7 @@ public class EniacFilePicker extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.filepicker, menu);
+		//getMenuInflater().inflate(R.menu.filepicker, menu);
 		return true;
 	}
 	public void onc2eBtnClick(View v) {
