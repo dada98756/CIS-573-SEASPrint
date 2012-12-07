@@ -92,6 +92,11 @@ public class NumberPicker extends LinearLayout {
 		}
 	}
 	
+	/**
+	 * Constructs the number picker.
+	 * @param context
+	 * @param attributeSet
+	 */
 	public NumberPicker( Context context, AttributeSet attributeSet ) {
 		super(context, attributeSet);
 		
@@ -116,6 +121,11 @@ public class NumberPicker extends LinearLayout {
 		}
 	}
 	
+	/**
+	 * Initializes the increment button.
+	 * 
+	 * @param context
+	 */
 	private void initIncrementButton( Context context){
 		increment = new Button( context );
 		increment.setTextSize( 25 );
@@ -154,6 +164,11 @@ public class NumberPicker extends LinearLayout {
 		});
 	}
 	
+	/**
+	 * Initializes the init text.
+	 * 
+	 * @param context
+	 */
 	private void initValueEditText( Context context){
 		
 		value = new Integer( 1 );
@@ -239,6 +254,9 @@ public class NumberPicker extends LinearLayout {
 		});
 	}
 	
+	/**
+	 * Increments the number picker.
+	 */
 	public void increment(){
 		if( value < MAXIMUM ){
 			value = value + 1;
@@ -246,6 +264,9 @@ public class NumberPicker extends LinearLayout {
 		}
 	}
 
+	/**
+	 * Decrements the number picker.
+	 */
 	public void decrement(){
 		if( value > MINIMUM ){
 			value = value - 1;
@@ -253,10 +274,18 @@ public class NumberPicker extends LinearLayout {
 		}
 	}
 	
+	/**
+	 * Gets the value of the number picker.
+	 * @return
+	 */
 	public int getValue(){
 		return value;
 	}
 	
+	/**
+	 * Sets the value of the number picker.
+	 * @param value
+	 */
 	public void setValue( int value ){
 		if( value > MAXIMUM ) value = MAXIMUM;
 		if( value >= 0 ){

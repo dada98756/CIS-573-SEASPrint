@@ -9,10 +9,17 @@ import android.util.Log;
 import com.trilead.ssh2.Connection;
 import com.trilead.ssh2.SCPClient;
 
+/**
+ * 
+ * File Uploader.
+ * 
+ * @author SEASPrint
+ *
+ */
 public class FileUpload implements Runnable {
     
     private SCPClient mSCP;
-    private Future mF;
+    private UploadProgress mF;
     private CommandConnection mConn;
     private byte [] mData;
     
@@ -21,9 +28,16 @@ public class FileUpload implements Runnable {
         mConn = new CommandConnection(conn);
     }
     
-    public class Future {
+    /**
+     * 
+     * Upload progress information wrapper.
+     * 
+     * @author SEASPrint
+     *
+     */
+    public class UploadProgress {
         
-        public Future(int totalbytes) {
+        public UploadProgress(int totalbytes) {
             mFinish = new Semaphore(0);
             mTotalBytes = totalbytes;
             mBytesWritten = new AtomicInteger();
@@ -40,20 +54,40 @@ public class FileUpload implements Runnable {
         private String mTarget;
         private boolean mPassed;
         
+        /**
+         * Advances the upload progress.
+         * 
+         * @param additional_bytes_written
+         */
         public void IncrementProgress(int additional_bytes_written) {
             int val = mBytesWritten.addAndGet(additional_bytes_written);
             Log.i("Connection", val + " bytes written!");
         }
         
-        public int BytesWritten() {
+        /**
+         * Gets the bytes that have been written.
+         * 
+         * @return
+         */
+        public int getBytesWritten() {
             return mBytesWritten.get();
         }
         
-        public int TotalBytes() {
+        /**
+         * Gets the total number of bytes.
+         * 
+         * @return
+         */
+        public int getTotalBytes() {
             return mTotalBytes;
         }
         
-        public int PercentComplete() {
+        /**
+         * Gets the progress percentage.
+         * 
+         * @return
+         */
+        public int getPercentComplete() {
             return( (100)*mBytesWritten.get()) / mTotalBytes;
         }
         
@@ -72,26 +106,27 @@ public class FileUpload implements Runnable {
                 }
                 mPassed = true;
             }
-            return mTarget;
-            
+            return mTarget;            
         }
         
     }
     
+    /**
+     * Uploads the file.
+     */
     @Override
 	public void run() {
         try {
             String home = mConn.execWithReturn("echo ~");
+            //creates a temporary file at the remote machine.
             String tmpfile = mConn.execWithReturn("echo `mktemp " + home  + "/tmp.XXXXXXXX`");
-            //String tmpfile = "/home1/j/jmccaf/tmpprint.pdf"; 
             String [] toks = tmpfile.split("/");
             String rebuild = "";
             for (int i = 0 ; i < toks.length - 1;i++) {
                 rebuild = rebuild + "/" + toks[i];
             }
             String remoteTargetDirectory = rebuild;
-            String remoteFileName = toks[toks.length - 1];
-    
+            String remoteFileName = toks[toks.length - 1];   
             Log.i("Connection", tmpfile);
             mSCP.put(mF,mData, remoteFileName, remoteTargetDirectory);
             mF.SignalCompletion(tmpfile);
@@ -104,11 +139,18 @@ public class FileUpload implements Runnable {
     
     private ErrorCallback mCb;
     
-    public Future startUpload(byte [] data, ErrorCallback cb) throws IOException {
+    /**
+     * Creates a thread to upload the file.
+     * @param data
+     * @param cb
+     * @return
+     * @throws IOException
+     */
+    public UploadProgress startUpload(byte [] data, ErrorCallback cb) throws IOException {
         
         mCb = cb;
         mData = data;
-        mF = new Future(data.length);
+        mF = new UploadProgress(data.length);
         Thread thr = new Thread(this);
         thr.start();
         return mF;

@@ -16,18 +16,40 @@ import android.view.View;
 import android.widget.Button;
 import io.filepicker.FilePicker;
 import io.filepicker.FilePickerAPI;
+
+
 /**
+ * Control Panel Screen  Stubs.
+ * 
+ * @author SEASPrint
  *
- * @author Siyong Liang
  */
 public class ControlPanelScreen extends Activity{
+	/**
+	 * SD Card Button.
+	 */
 	private Button sdButton;
+	/**
+	 * Cloud Browser Button.
+	 */
 	private Button cloudButton;
+	/**
+	 * Eniac Browser Button.
+	 */
 	private Button eniacButton;
+	/**
+	 * Print History Button.
+	 */
 	private Button printHistoryButton;
+	/**
+	 * File Picker secret.
+	 */
 	private String filePickerAPIKey = "ArYkjf8hmSpCG8cycKjmsz" ; 
     
     @Override
+    /**
+     * Renders the buttons.
+     */
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.controlpanel);  
@@ -45,36 +67,57 @@ public class ControlPanelScreen extends Activity{
         eniacButton.setEnabled(true);
     }
     
+    /**
+     * Action listener for SD Card Browser.
+     * @param v
+     */
     public void onSDBrowserBtnClick(View v) {
     	Intent myIntent = new Intent(v.getContext(), SDFilePicker.class);
         startActivityForResult(myIntent, 0);
 	}
     
+    /**
+     * Action listener for Cloud Browser.
+     * @param v
+     */
     public void onCloudBtnClick(View v)
     {
         FilePickerAPI.setKey(filePickerAPIKey);
         Intent myIntent = new Intent(v.getContext(), FilePicker.class);
         startActivityForResult(myIntent, FilePickerAPI.REQUEST_CODE_GETFILE);
     }
+    
+    /**
+     * Action listener for Print History Button.
+     * @param v
+     */
     public void onHistoryBtnClick(View v)
     {
         FilePickerAPI.setKey(filePickerAPIKey);
         Intent myIntent = new Intent(v.getContext(), PrintHistoryScreen.class);
         startActivityForResult(myIntent, 0);
     }
+    
+    /**
+     * Action listener for Eniac Button.
+     * @param v
+     */
     public void onEniacBtnClick(View v)
     {
         Intent myIntent = new Intent(v.getContext(), EniacFilePicker.class);
         startActivityForResult(myIntent, 0);
     }
     
+    /**
+     * Registers the action for menu button.
+     */
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		menu.add(0, 0, 0, "Quit");
 		return true;
 	}
-
+    
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		super.onOptionsItemSelected(item);
@@ -91,6 +134,9 @@ public class ControlPanelScreen extends Activity{
         super.onResume();
     }
      
+    /**
+     * File Picker Open Button Listener.
+     */
     @Override
     protected void onActivityResult(int requestCode,
                                 int resultCode, Intent data) {
@@ -103,7 +149,6 @@ public class ControlPanelScreen extends Activity{
             try{
             	is = getContentResolver().openInputStream(uri);
         	}catch (FileNotFoundException ex){
-//        		Logger.getLogger(ControlPanelScreen.class.getName()).log(Level.SEVERE,null,ex);
         	}
             Document.load(is);
             Document.setDescriptor(uri);

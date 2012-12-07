@@ -26,6 +26,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * Engineering Printer Log in activity.
+ * 
+ * @author SEASPrint
+ *
+ */
 public class EngineeringPrinter extends Activity {
 	
 	public static final String PREFS_NAME = "PrintToEngineeringPrefs";
@@ -45,56 +51,47 @@ public class EngineeringPrinter extends Activity {
 	public static String privatekey;
 	public static int port;
 	public static Connection connect = null;
-	public static FileUpload.Future upload;
+	public static FileUpload.UploadProgress upload;
 	public static ErrorCallback eb;
 	public static boolean Microsoft;
 	public static String type;
 	
 	private static final char KEY = 1337;
 	
+	/**
+	 * Encrypts the password string.
+	 * 
+	 * @param pw
+	 * @return
+	 */
 	public String encryptPassword(String pw) {
 		char letters[] = pw.toCharArray();
 		for(int i = 0; i < letters.length; i++) letters[i] = (char)(KEY ^ pw.charAt(letters.length - i - 1));
 		return new String(letters);
 	}
 	
+	/**
+	 * Decrypts the password string.
+	 * @param pw
+	 * @return
+	 */
 	public String decryptPassword(String pw) {
 		char letters[] = pw.toCharArray();
 		for(int i = 0; i < letters.length; i++) letters[i] = (char)(KEY ^ pw.charAt(letters.length - i - 1));
 		return new String(letters);
 	}
 	
-    /** Called when the activity is first created. */
+    /** 
+     * Creates the activity.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-//        setContentView(R.layout.controlpanel);
-//      InputStream is = null;
-//      try {
-//          is = getContentResolver().openInputStream(getIntent().getData());
-//      }
-//      catch  (FileNotFoundException fnf){
-//          Log.e("Connection","File Not Found");
-//      }
-//      Document.load(is);
-//      Document.setDescriptor(getIntent().getData());
-//        Microsoft = MicrosoftSink.Filter(getIntent().getType());
-//        type = getIntent().getType();
-//        
-        InputStream is = null;
         
+        //Initializes the data.
         try {
-        	System.out.println("Try to get data initial");
-        	if (null != getIntent().getData()) {
-	            System.out.println("Getting data initial");
-        		is = getContentResolver().openInputStream(getIntent().getData());
-		        Document.load(is);
-		        Document.setDescriptor(getIntent().getData());
-		          EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
-		          EngineeringPrinter.type = getIntent().getType();
-        	}
-
+        	initializeDocument();
         }
         catch  (FileNotFoundException fnf){
             Log.e("Connection","File Not Found");
@@ -103,55 +100,29 @@ public class EngineeringPrinter extends Activity {
         
     }
     
-    /** Called when the activity is first created. */
+    /**
+     * Starts running the activity.
+     */
     @Override
     public void onStart() {
         super.onStart();
         setContentView(R.layout.main);
-        
-//    	TextView printing = (TextView) findViewById(R.id.printing);
-//    	TextView microsoft = (TextView) findViewById(R.id.microsoft);
-
-//    	printing.setText(Document.descriptor);
-    	
-    	//microsoft.setText(type + " " +(Microsoft  ? "Microsoft" : "Not Microsoft") );
-//    	microsoft.setText("Please Log in");
-    	//connect.close();
-        connect=null;
-        /*try {
-            InputStream is = getContentResolver().openInputStream(getIntent().getData());
-            ConnectionFactory cf = new ConnectionFactory();
-            Connection c = cf.MakeConnection();
-            FileUpload fu = new FileUpload(c);
-            String tempfile = fu.startUpload(is);
-            PrintCaller pc = new PrintCaller(new CommandConnection(c));
-            pc.printFile(tempfile, "grafix", 1, false);
-        
-        }
-        catch (IOException ioe){
-        	//ALERT DIALOG
-            Log.e("Connection", "Failed to connect or send");
-        }*/
-        
+        connect=null;        
         final SharedPreferences pref = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        if (pref.contains(PASSWORD_KEY)) {
+        if (pref.contains(PASSWORD_KEY)) 
+        {
         	pref.edit().remove(PASSWORD_KEY).commit();
         }
         user = pref.getString(USER_KEY, USER_FAIL);
-        //password = decryptPassword(pref.getString(PASSWORD_KEY, PASSWORD_FAIL));
-        //host = pref.getString(HOST_KEY, HOST_FAIL);
         host = "minus.seas.upenn.edu";
         String portStr = pref.getString(PORT_KEY, PORT_FAIL);
         
         //USERNAME TEXT BOX
-        final EditText usertext = (EditText) findViewById(R.id.usertext);
-        
+        final EditText usertext = (EditText) findViewById(R.id.usertext);        
         //PASSWORD TEXT BOX
-        final EditText passtext = (EditText) findViewById(R.id.passtext);
-        
+        final EditText passtext = (EditText) findViewById(R.id.passtext);        
         //HOST NAME TEXT BOX
-        final EditText hostname = (EditText) findViewById(R.id.hostname);
-        
+        final EditText hostname = (EditText) findViewById(R.id.hostname);        
         //Port TEXT BOX
         final EditText portname = (EditText) findViewById(R.id.portname);
         
@@ -159,6 +130,7 @@ public class EngineeringPrinter extends Activity {
         passtext.setText("");
         hostname.setText(host);
         portname.setText(portStr);
+        
         
         final CheckBox checkBox = (CheckBox) findViewById(R.id.save);
         checkBox.setChecked(pref.getBoolean(SAVED, false));
@@ -174,7 +146,7 @@ public class EngineeringPrinter extends Activity {
             		try {
 	                	user=usertext.getText().toString();
 	                	password =passtext.getText().toString();
-	                	           			host = hostname.getText().toString();
+	                	host = hostname.getText().toString();
 	                	if(portname.getText().toString().length()!=0)
 	                	{
 	                		String temp=portname.getText().toString();
@@ -209,77 +181,22 @@ public class EngineeringPrinter extends Activity {
             		Intent myIntent = new Intent(v.getContext(), ControlPanelScreen.class);
                     startActivityForResult(myIntent, 0);
             	};
-
-        
-       /* portname.setOnKeyListener(new OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                	if(connect == null) {
-                		// Perform action on key press
-                		try {
-		                	user=usertext.getText().toString();
-		                	password =passtext.getText().toString();
-                			host = hostname.getText().toString();
-		                	if(portname.getText().toString().length()!=0)
-		                	{
-		                		String temp=portname.getText().toString();
-		                		port = Integer.parseInt(temp);
-		                	}
-		                	else
-		                		port = 22;
-		                			             
-		                	ConnectionFactory cf = new ConnectionFactory();
-		                	Log.e("user",user);
-		                	Log.e("password",password);
-		                	Log.e("host",host);
-		                	Log.e("port",((Integer)(port)).toString());
-		                	connect = cf.MakeConnection(user, password, host, port);
-		                	if(checkBox.isChecked())
-		                	{
-			                	edit.putString(USER_KEY, user);
-			                	edit.putString(PASSWORD_KEY, encryptPassword(password));
-			                	edit.putString(HOST_KEY, host);
-			                	edit.putString(PORT_KEY, port+"");
-			                	edit.commit();
-		                	}
-		                	
-                		} catch(IOException e) {
-                			new AlertDialog.Builder(v.getContext()).setMessage("Could not connect to server! Verify login information and network status.").create().show();
-                			return false;
-                		}
-                	}
-                	//PreferenceManager.//getDefaultSharedPreferences(this);
-                	//prefs.edit().putString("user", user);
-                	//prefs.edit().putString("password", password);
-                	Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
-                    startActivityForResult(myIntent, 0);
-                  return true;
-                }
-                return false;
-            }
-        });*/
-        // Check if there is a key setup already
-        /*SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        String key = prefs.getString("key", KEY_FAIL);
-        user = prefs.getString("user", USER_FAIL);
-        if(key.equals(KEY_FAIL)) {
-        	if(user.equals(USER_FAIL)) { // need to login completely
-        		
-        	}
-        } else if(user.equals(USER_FAIL)){ // odd but okay I guess 	
-        	try {
-        		ConnectionFactory cf = new ConnectionFactory();
-				connect = cf.MakeConnectionKey(user, key);
-				passtext.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
-			} catch (IOException e) { // Connection Failed 
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }*/
-
             }
     	});
+    }
+    
+    private void initializeDocument() throws FileNotFoundException
+    {
+    	//Initializes the data.
+    	InputStream is = null;
+    	System.out.println("Try to get data initial");
+    	if (null != getIntent().getData()) {
+            System.out.println("Getting data initial");
+    		is = getContentResolver().openInputStream(getIntent().getData());
+	        Document.load(is);
+	        Document.setDescriptor(getIntent().getData());
+	        EngineeringPrinter.Microsoft = MicrosoftSink.Filter(getIntent().getType());
+	        EngineeringPrinter.type = getIntent().getType();
+    	}   
     }
 }

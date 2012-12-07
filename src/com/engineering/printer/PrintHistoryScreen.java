@@ -14,11 +14,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- *
+ * Print Hisotry Acitivty.
+ * 
  * @author Siyong Liang
  */
 public class PrintHistoryScreen extends Activity
 {
+	/**
+	 * Renders the print history screen.
+	 */
     @Override
 	public void onCreate(Bundle savedInstanceState) 
     {
