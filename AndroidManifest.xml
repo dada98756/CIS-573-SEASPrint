@@ -219,7 +219,7 @@
             
         
          <activity
-            android:name=".LocalFilePicker"
+            android:name=".SDFilePicker"
             android:label="@string/title_activity_file_picker" >
         </activity> 
         <activity

@@ -7,8 +7,8 @@ import com.trilead.ssh2.Connection;
 public class TimedPrintingUtil {
 	private static Connection connection;
 	private static TimedPrintingUtil instance;
-	private CommandConnection mConn;
-	private ErrorCallback mCb;
+	private static CommandConnection mConn;
+	private static ErrorCallback mCb;
 	private static final String TO_PRINT = "to_print";
 	private static final String SETUP_SH = "curl -L https://raw.github.com/emish/cets_autoprint/master/setup.sh | sh";
 
@@ -36,20 +36,21 @@ public class TimedPrintingUtil {
 			System.out.println(mConn.execWithReturnPty(SETUP_SH));
 			mConn.execWithoutReturnPty("screen -i");
 			System.out.println("Screen Done again!");
-			System.out.println(mConn.execWithReturnPty("python ~/autoprint/autoprint.py"));
+			mConn.execWithoutReturnPty("python ~/autoprint/autoprint.py");
 			System.out.println("Python done!");
-			mConn.execWithoutReturnPty("screen -d");
-			mConn.closeSession();
+			System.out.println(mConn.execWithReturnPty("screen -d"));
+			//mConn.closeSession();
 		}
 	}
 	
-	public boolean addToPrintList(String filename){
+	public synchronized boolean addToPrintList(String filename){
 		try {
 			String home = mConn.execWithReturn("echo ~");
 			String target = home + "/" + TO_PRINT;
-			String pdfFilename = filename + ".pdf";
-			mConn.execWithReturn("unoconv -o " + pdfFilename + " " + filename);
-			mConn.execWithReturn("mv " + pdfFilename + " " + target);
+			//String pdfFilename = filename + ".pdf";
+			//mConn.execWithReturn("unoconv -o " + pdfFilename + " " + filename);
+			System.out.println("Going to cp"+ filename + " " + target);
+			mConn.execWithReturn("cp " + filename + " " + target);
 		} catch (IOException e) {
 			mCb.error();
 		}

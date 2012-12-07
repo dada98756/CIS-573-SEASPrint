@@ -46,7 +46,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textVisiblePassword" 
-        android:text="eniac.seas.upenn.edu"/>
+        android:text="minus.seas.upenn.edu"/>
                     
  <TextView  
     android:layout_width="fill_parent" 

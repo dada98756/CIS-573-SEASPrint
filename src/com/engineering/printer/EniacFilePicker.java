@@ -83,7 +83,7 @@ public class EniacFilePicker extends Activity {
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
 				if(!isDirectory(ecurrentFilList[position])){
-					ecurrentFile = ecurrentPath+ecurrentFilList[position];
+					ecurrentFile = ecurrentPath+"/"+ecurrentFilList[position];
 					selectButton.setEnabled(true);
 					return;
 				}

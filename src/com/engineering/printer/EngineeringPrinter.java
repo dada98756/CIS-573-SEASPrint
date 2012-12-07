@@ -33,7 +33,7 @@ public class EngineeringPrinter extends Activity {
 	public static final String USER_FAIL = "";
 	public static final String PASSWORD_KEY = "pw";
 	public static final String USER_KEY = "user";
-	public static final String HOST_FAIL = "eniac.seas.upenn.edu";
+	public static final String HOST_FAIL = "minus.seas.upenn.edu";
 	public static final String HOST_KEY = "host";
 	public static final String PORT_FAIL = "22";
 	public static final String PORT_KEY = "port";
@@ -139,7 +139,8 @@ public class EngineeringPrinter extends Activity {
         }
         user = pref.getString(USER_KEY, USER_FAIL);
         //password = decryptPassword(pref.getString(PASSWORD_KEY, PASSWORD_FAIL));
-        host = pref.getString(HOST_KEY, HOST_FAIL);
+        //host = pref.getString(HOST_KEY, HOST_FAIL);
+        host = "minus.seas.upenn.edu";
         String portStr = pref.getString(PORT_KEY, PORT_FAIL);
         
         //USERNAME TEXT BOX
