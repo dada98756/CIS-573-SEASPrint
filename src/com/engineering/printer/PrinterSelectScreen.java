@@ -34,6 +34,9 @@ public class PrinterSelectScreen extends Activity{
 	public static final String PRINTER_KEY = "printerpreference";
 	public static String mFavored;
 	public static boolean timedPrinting = false;
+	public static Integer start = 0;
+	public static Integer end = 0;
+	
 	private CheckBox mDuplexCheckbox;
 	private Spinner mSpinner;
 	private Button mPrintbutton;
@@ -43,6 +46,7 @@ public class PrinterSelectScreen extends Activity{
 	private CheckBox mSavePrintOptions;
 	private boolean eniac = false;
 	private String filePath = null;
+	private boolean isPdf = true;
 	
 	
 	//public static Integer pps;
@@ -71,11 +75,6 @@ public class PrinterSelectScreen extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        System.out.println("In onCreate of PrinterSelectScreen");
-	        Intent mt = getIntent();
-	        eniac = mt.getBooleanExtra("eniac", false);
-	        filePath = mt.getStringExtra("filePath");
-	        System.out.println("eniac? "+eniac);
-	        System.out.println(filePath);
 	 }
 	 
 	 @Override
@@ -89,7 +88,12 @@ public class PrinterSelectScreen extends Activity{
 	 {
 		 super.onResume();
 		 setContentView(R.layout.printers);
-		 
+		 Intent mt = getIntent();
+	     eniac = mt.getBooleanExtra("eniac", false);
+	     filePath = mt.getStringExtra("filePath");
+	     isPdf = mt.getBooleanExtra("isPdf", true);
+	     System.out.println("eniac? "+eniac);
+	     System.out.println(filePath);
 		 
 		 SharedPreferences settings = getSharedPreferences(PRINTER_PREF, 0);
 	    
@@ -196,6 +200,7 @@ public class PrinterSelectScreen extends Activity{
             	 Intent myIntent = new Intent(v.getContext(), LoadingStatusScreen.class);
             	 myIntent.putExtra("eniac", eniac);
             	 myIntent.putExtra("filePath", filePath);
+            	 myIntent.putExtra("isPdf", isPdf);
             	 startActivityForResult(myIntent, 0);
             	 
              }

@@ -150,6 +150,7 @@ public class ControlPanelScreen extends Activity{
             Document.setDescriptor(uri);
             data.setClass(this, PrinterSelectScreen.class);
             data.putExtra("filePath", uri.toString());
+            data.putExtra("isPdf",uri.toString().trim().endsWith(".pdf"));
             startActivityForResult(data,0);
     	};
             

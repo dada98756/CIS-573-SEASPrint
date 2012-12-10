@@ -189,6 +189,7 @@ public class SDFilePicker extends Activity {
 					PrinterSelectScreen.class);
 			myIntent.putExtra("eniac", false);
 			myIntent.putExtra("filePath", currentFile.toString());
+			myIntent.putExtra("isPdf", currentFile.toString().trim().endsWith(".pdf"));
 			startActivityForResult(myIntent, 0);
 		}
 	}

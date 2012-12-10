@@ -199,6 +199,7 @@ public class EniacFilePicker extends Activity {
 			Intent myIntent = new Intent(v.getContext(), PrinterSelectScreen.class);
 			myIntent.putExtra("filePath", ecurrentFile);
 			myIntent.putExtra("eniac", true);
+			myIntent.putExtra("isPdf", ecurrentFile.endsWith(".pdf"));
 			startActivity(myIntent);
 		}
 	}

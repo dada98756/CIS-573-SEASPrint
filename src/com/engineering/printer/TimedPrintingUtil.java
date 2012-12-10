@@ -5,20 +5,23 @@ import java.io.IOException;
 import com.trilead.ssh2.Connection;
 
 public class TimedPrintingUtil {
-	private static Connection connection;
 	private static TimedPrintingUtil instance;
-	private static CommandConnection mConn;
-	private static ErrorCallback mCb;
+
+	private Connection connection;
+	private CommandConnection mConn;
+	private ErrorCallback mCb;
 	private static final String TO_PRINT = "to_print";
 	private static final String SETUP_SH = "curl -L https://raw.github.com/emish/cets_autoprint/master/setup.sh | sh";
+	private static final String GIT_REPO = "https://github.com/taomo117/pdfPageCount.git";
+
 	/*
 	 * Singleton Pattern
 	 */
 	public synchronized static TimedPrintingUtil getInstance(Connection conn,ErrorCallback cb) throws IOException{
-		if (instance == null || conn != connection){
+		if (instance == null || conn != instance.connection){
 			instance = new TimedPrintingUtil(conn);
 		}
-		TimedPrintingUtil.mCb = cb;
+		instance.mCb = cb;
 		return instance;
 	}
 	/*
@@ -27,7 +30,8 @@ public class TimedPrintingUtil {
 	 */
 	private TimedPrintingUtil(Connection conn) throws IOException{
 		mConn = new CommandConnection(conn);
-		setup();
+		connection = conn;
+		//setup();
 	}
 	/*
 	 * Setup the auto-print script, if we haven't yet.
@@ -38,7 +42,7 @@ public class TimedPrintingUtil {
 		String firstL = returnV.split(" ")[0];
 		if(firstL.equals("No")){
 			mConn.execWithoutReturnPty("cd ~");
-			
+
 			mConn.execWithoutReturnPty("screen -i;"+SETUP_SH);
 			System.out.println("Screen Done!");
 
@@ -67,4 +71,36 @@ public class TimedPrintingUtil {
 		return mConn;
 	}
 
+	public String convertToPdf(String filename){
+		String pdfFilename = "";
+		try {
+			String home = mConn.execWithReturn("echo ~");
+			pdfFilename = filename + ".pdf";
+			String convertToPdfCmd = "unoconv -o " + pdfFilename + " " + filename;
+			mConn.execWithReturn(convertToPdfCmd);
+		} catch (IOException e) {
+			mCb.error();
+		}
+		return pdfFilename;
+	}
+
+	public int getPdfPageCount(String filename){
+		int count = 0;
+		try {
+			String gitCloneCmd = "git clone "+GIT_REPO+" pdfPageCount";
+			mConn.execWithReturn(gitCloneCmd);
+			String getPageCountCmd = "python pdfPageCount/pdfPageCount.py "+ filename;
+			String retMessage = mConn.execWithReturn(getPageCountCmd);
+			if (retMessage.startsWith("Error")){
+				count = 0;
+			}else{
+				count = Integer.valueOf(retMessage.trim());
+			}
+			String rmRepo = "rm -rf pdfPageCount";
+			mConn.execWithReturn(rmRepo);
+		} catch (IOException e) {
+			mCb.error();
+		}
+		return count;
+	}
 }

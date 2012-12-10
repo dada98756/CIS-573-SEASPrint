@@ -6,20 +6,20 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class PrintCaller {
-    
-    private CommandConnection mConn;
-    
-    public PrintCaller(CommandConnection conn) {
-        mConn = conn;
-    }
-    
+
+	private CommandConnection mConn;
+
+	public PrintCaller(CommandConnection conn) {
+		mConn = conn;
+	}
+
 	private String DEFAULT_PRINTER = null;
-	
+
 	public String runCommand(String cmd) throws IOException{ 
 		String out = mConn.execWithReturn(cmd);
 		return out;
 	}
-	
+
 	@Override
 	public String toString() {
 		String out = "";
@@ -37,7 +37,7 @@ public class PrintCaller {
 		}
 		return printers;
 	}
-	
+
 	public List<String> getPrinters() throws IOException {
 		String out = runCommand("lpstat -a");
 		StringTokenizer st = new StringTokenizer(out, "\n");
@@ -48,20 +48,43 @@ public class PrintCaller {
 		}
 		return printers;
 	}
-	
+
 	public void printFile(String fileName, String printerName, int numCopies, boolean duplex) throws IOException {
-	    if (EngineeringPrinter.Microsoft) {
-    	    runCommand("ooffice -norestore -nofirststartwizard -nologo -headless -pt " + printerName + " " + fileName);
-    	}
-    	else {
-    	       runCommand("lpr -P" + printerName + " -# " + numCopies + (duplex ? " -o sides=two-sided-long-edge" : "") + " " + fileName);      
-    	}
+		if (EngineeringPrinter.Microsoft) {
+			runCommand("ooffice -norestore -nofirststartwizard -nologo -headless -pt " + printerName + " " + fileName);
+		}
+		else {
+			runCommand("lpr -P" + printerName + " -# " + numCopies + (duplex ? " -o sides=two-sided-long-edge" : "") + " " + fileName);      
+		}
 	}
-	
+	public void printFileAll(String fileName, String printerName, int numCopies, boolean duplex)throws IOException{
+		runCommand("lpr -P" + printerName + " -# " + numCopies + (duplex ? " -o sides=two-sided-long-edge" : "") + " " + fileName);
+	}
+
+	public void printFileWithPageRange(String fileName, String printerName, int numCopies, boolean duplex, int start, int end) throws IOException{
+
+		runCommand("lpr -P" + printerName 
+				+ " -# " + numCopies 
+				+ (duplex ? " -o sides=two-sided-long-edge" : "") 
+				+ " -o page-ranges="+start+"-"+end
+				+ " " + fileName);
+
+	}
+	public void printFileWithTime(String fileName, String printerName, int numCopies, boolean duplex, int start, int end,String time) throws IOException{
+
+		runCommand("lpr -P" + printerName 
+				+ " -# " + numCopies 
+				+ (duplex ? " -o sides=two-sided-long-edge" : "") 
+				+ " -o page-ranges="+start+"-"+end
+				+ " -o job-hold-until="+time
+				+ " " + fileName);
+
+	}
+
 	public String getDefaultPrinter() throws IOException {
 		return (DEFAULT_PRINTER == null) ? getPrinters().get(0): DEFAULT_PRINTER;
 	}
-	
+
 	public void setDefaultPrinter(String printer) {
 		DEFAULT_PRINTER = printer;
 	}
@@ -74,15 +97,15 @@ public class PrintCaller {
 			//timedPrinting. divide to 5 pages per chunk sent to printer. only work for PDFs and Microsoft office documents
 			ArrayList<PagePair> pageIndexes = calcPageIndexes(local_filename);
 		}
-		
+
 	}
-	
+
 	public ArrayList<PagePair> calcPageIndexes(String local_filename){
 		ArrayList<PagePair> pageIndexes = new ArrayList<PagePair>();
-		
+
 		return pageIndexes;
 	}*/
-	
+
 }
 
 /*class PagePair{
