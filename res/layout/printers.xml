@@ -103,7 +103,7 @@
       android:id="@+id/page_range_start"
       android:layout_width="40dp" 
       android:layout_height="30dp" 
-      android:text="0"
+      android:text="1"
       android:padding = "2dp"
       
       />
