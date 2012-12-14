@@ -20,6 +20,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -42,6 +43,8 @@ public class PrinterSelectScreen extends Activity{
 	private Button mPrintbutton;
 	private NumberPicker mNumberPicker;
 	private ArrayAdapter<CharSequence> mAdapter;
+	private EditText pageStart;
+	private EditText pageEnd;
 	private CheckBox mTimedPrinting;
 	private CheckBox mSavePrintOptions;
 	private boolean eniac = false;
@@ -173,6 +176,10 @@ public class PrinterSelectScreen extends Activity{
             mDuplexCheckbox.setVisibility(View.GONE);
         }
         
+        //set page range 
+        pageStart = (EditText)findViewById(R.id.page_range_start);
+        pageEnd   = (EditText)findViewById(R.id.page_range_end);
+        
         
         mSavePrintOptions = (CheckBox)findViewById(R.id.save_print_options);
         mSavePrintOptions.setChecked(true);
@@ -183,8 +190,16 @@ public class PrinterSelectScreen extends Activity{
             	 number=mNumberPicker.value;
             	// pps=ppspicker.value;
             	 duplex=dTemp;
-            	 timedPrinting = mTimedPrinting.isChecked();       	 
-                 
+            	 timedPrinting = mTimedPrinting.isChecked();    
+            	 try{
+            		 String startStr = pageStart.getText().toString();
+            		 String endStr   = pageEnd.getText().toString();
+	                 start = Integer.parseInt(startStr);
+	                 end   = Integer.parseInt(endStr);
+            	 }catch(Exception e){
+            		 start = 0;
+            		 end = 0;
+            	 }
             	 if(mSavePrintOptions.isChecked())
             	 {
             		 SharedPreferences settings = getSharedPreferences(PRINTER_PREF, 0);
