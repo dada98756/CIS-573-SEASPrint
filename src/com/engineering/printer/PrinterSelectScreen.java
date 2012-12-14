@@ -103,7 +103,7 @@ public class PrinterSelectScreen extends Activity{
 		 //set printer dropdown list.
 		 mFavored = settings.getString(PRINTER_KEY, null);
 	     if (mFavored == null) {
-	         mFavored = "169";
+	         mFavored = "CETS Printing Office";
 	     }	     
 	   	mSpinner = (Spinner) findViewById(R.id.printer_spinner);
         String printers[] = null;
@@ -116,9 +116,13 @@ public class PrinterSelectScreen extends Activity{
             // yes I know this is stupid and could be done much easier but ps.toArray was trippin ballz
             int i = 0;
             for(Iterator<String> iter = ps.iterator(); iter.hasNext(); i++) {
-            	printers[i] = iter.next();
+            	String tmp  = iter.next();
+            	if(tmp.equals("169")) tmp = "CETS Printing Office";
+            	printers[i] = tmp;
             }
-            has_favored = ps.contains(mFavored);
+            String tmpF = mFavored;
+            if(tmpF.equals("CETS Printing Office")) tmpF = "169";
+            has_favored = ps.contains(tmpF);
         }
         
         catch (IOException ioe){

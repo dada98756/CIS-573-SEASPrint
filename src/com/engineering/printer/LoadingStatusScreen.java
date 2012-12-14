@@ -185,6 +185,7 @@ public class LoadingStatusScreen extends Activity {
 		try {
 			String local_filename = filename;
 			String local_printer = printer;
+			if(local_printer.equals("CETS Printing Office")) local_printer = "169";
 			boolean local_duplex = duplex;
 			int local_number = number;
 			int local_start = start;
