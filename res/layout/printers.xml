@@ -82,6 +82,52 @@
 <!--   android:layout_height="wrap_content">-->
 <!--</com.engineering.printer.NumberPicker> -->
 
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp">
+<TextView  
+	android:gravity="center_horizontal"
+    android:layout_width="100dp" 
+    android:layout_height="wrap_content" 
+    android:text="Print Range"
+	android:textSize="15sp"
+	android:padding="5dp"
+    />
+
+      
+<EditText
+      android:id="@+id/page_range_start"
+      android:layout_width="40dp" 
+      android:layout_height="30dp" 
+      android:text="0"
+      android:padding = "2dp"
+      
+      />
+    
+<TextView  
+	android:gravity="center_horizontal"
+    android:layout_width="50dp" 
+    android:layout_height="wrap_content" 
+    android:text="To"
+	android:textSize="15sp"
+	android:padding="5dp"
+    />
+
+
+<EditText
+      android:id="@+id/page_range_end"
+      android:layout_width="40dp" 
+      android:layout_height="30dp" 
+      android:layout_marginLeft="0dp" 
+      android:text="all"
+      android:padding = "2dp"
+      />
+
+</LinearLayout>
 <Button android:id="@+id/print_button"
             android:gravity="center_horizontal"
             android:layout_width="fill_parent"
