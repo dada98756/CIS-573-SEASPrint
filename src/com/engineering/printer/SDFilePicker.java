@@ -39,7 +39,7 @@ public class SDFilePicker extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.filepicker);
-		
+
 		/*
 		 * check if the SD card is mounted
 		 */
@@ -50,7 +50,7 @@ public class SDFilePicker extends Activity {
 		tvPath = (TextView) this.findViewById(R.id.tvPath);
 		selectButton = (Button) findViewById(R.id.selectBtn);
 		selectButton.setEnabled(false);
-		
+
 		/*
 		 * set root path and get file list in root
 		 */
@@ -60,7 +60,7 @@ public class SDFilePicker extends Activity {
 			currentFileList = root.listFiles();
 			inflateListView(currentFileList);
 		}
-		
+
 		/*
 		 * when click on files
 		 */
@@ -72,20 +72,24 @@ public class SDFilePicker extends Activity {
 					currentFile = currentFileList[position];
 					selectButton.setEnabled(true);
 					return;
+				} else {
+					selectButton.setEnabled(false);
 				}
 				File[] tem = currentFileList[position].listFiles();
-				if (tem == null || tem.length == 0) {//if file cannot be open or is not a file
+				if (tem == null || tem.length == 0) {// if file cannot be open
+														// or is not a file
 					Toast.makeText(SDFilePicker.this, "Not Available",
 							Toast.LENGTH_SHORT).show();
 				} else {
-					currentPath = currentFileList[position];//re-inflate the list view
+					currentPath = currentFileList[position];// re-inflate the
+															// list view
 					currentFileList = tem;
 					inflateListView(currentFileList);
 				}
 			}
 		});
 	}
-	
+
 	/*
 	 * update the file list
 	 */
@@ -102,7 +106,7 @@ public class SDFilePicker extends Activity {
 			// || ".doc".equalsIgnoreCase(filename.substring(filename
 			// .lastIndexOf(".")))) {
 			File myFile = files[i];
-			
+
 			/*
 			 * we also need to last modified time
 			 */
@@ -116,7 +120,7 @@ public class SDFilePicker extends Activity {
 			listItems.add(listItem);
 			// }
 		}
-		
+
 		/*
 		 * attach the updater to the list view
 		 */
@@ -132,7 +136,7 @@ public class SDFilePicker extends Activity {
 		}
 
 	}
-	
+
 	/*
 	 * set back to root
 	 */
@@ -164,7 +168,7 @@ public class SDFilePicker extends Activity {
 		Intent myIntent = new Intent(v.getContext(), EniacFilePicker.class);
 		startActivity(myIntent);
 	}
-	
+
 	/*
 	 * if file is vaild, getting data
 	 */
@@ -189,7 +193,8 @@ public class SDFilePicker extends Activity {
 					PrinterSelectScreen.class);
 			myIntent.putExtra("eniac", false);
 			myIntent.putExtra("filePath", currentFile.toString());
-			myIntent.putExtra("isPdf", currentFile.toString().trim().endsWith(".pdf"));
+			myIntent.putExtra("isPdf",
+					currentFile.toString().trim().endsWith(".pdf"));
 			startActivityForResult(myIntent, 0);
 		}
 	}
